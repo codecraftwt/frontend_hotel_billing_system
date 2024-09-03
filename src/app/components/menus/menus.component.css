@@ -1,6 +1,6 @@
 .menu-container {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;background-color: #121315;}
 
-.food-menu {width: 65%;display: flex;flex-direction: colu}
+.food-menu {width: 65%;display: flex;flex-direction: column}
 .food-list-label {font-size: 1rem; /* Adjust the font size as needed */font-weight: bold; /* Makes the label bold */margin: 10px 0; /* Adds some space above and below the label */text-align: start; /* Centers the text horizontally */}
 
 .food-list {padding: 10px;width: 100%;height: 30%;display: flex;overflow-x: auto; /* Allow horizontal scrolling */white-space: nowrap; /* Prevent items from wrapping */align-items: center;justify-content: space-around;-ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */scrollbar-width: none;  /* Hide scrollbar for Firefox */}
