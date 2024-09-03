@@ -48,9 +48,16 @@ export class BillingSystemComponent implements OnInit {
     })
   }
 
-  update(data: any) {
+  update(data: any,qty:any) {
+    console.log(data,qty);
+    this.socketService.updateOrderQty(this.tableNo, data.foodItemId, qty).subscribe(res => {
+      console.log(res, 'test');
+
+    })
+  }
+  addNote(data: any) {
     console.log(data);
-    this.socketService.updateOrderQty(this.tableNo, data.foodItemId, data.quantity).subscribe(res => {
+    this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote).subscribe(res => {
       console.log(res, 'test');
 
     })
@@ -81,6 +88,18 @@ export class BillingSystemComponent implements OnInit {
       console.log(res, 'test');
      this.initialmethod()
 
+    })
+  }
+
+  confirmorder(){
+    this.socketService.updateOrderKotStatus(this.tableNo, 'confirmed').subscribe(res=>{
+     this.initialmethod()
+    })
+  }
+
+  paymentType(type:any){
+    this.socketService.updatePaymentType(this.tableNo,type).subscribe(res=>{
+      this.initialmethod()
     })
   }
 

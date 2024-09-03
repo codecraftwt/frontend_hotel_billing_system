@@ -163,6 +163,21 @@
     display: flex;
     align-items: center;
 }
+.btnqty{
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: transparent;
+    border: none;
+    border: 1px solid white;
+    color: white;
+}
+.btnpointer{
+    cursor:pointer;
+}
+.btnno-drop{
+    cursor:no-drop;
+}
 
 .qty {
     width: 60px;
@@ -173,6 +188,7 @@
     background-color: #2D2D2D;
     color: #DBDBDB;
     border: 1px solid #D0D0D0;
+    margin: 0px 5px;
 }
 
 .price {
@@ -329,6 +345,7 @@
     margin-bottom: 5px;
 }
 .food-list-item {
+    color: #2D2D2D;
     width: 200px;
     border: 2px solid #ddd; /* Slightly thicker border for a more defined look */
     height: 60px; /* Increased height for better visual balance */

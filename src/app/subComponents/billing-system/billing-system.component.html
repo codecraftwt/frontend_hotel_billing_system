@@ -29,14 +29,16 @@
             <p class="item-price">Price: {{data?.itemPrice | currency:'INR':'symbol':'1.2-2':'en-IN'}}</p>
           </div>
           <div class="qty-container">
-            <input class="qty" type="number" [(ngModel)]="data.quantity" (change)="update(data)">
+            <button class="btnqty btnpointer" (click)="update(data,data.quantity+1)">+</button>
+            <input class="qty" type="number" [(ngModel)]="data.quantity" >
+            <button [disabled]="data.quantity == 1" [class]="data.quantity == 1?'btnno-drop btnqty':'btnpointer btnqty'" (click)="update(data,data.quantity-1)">-</button>
           </div>
           <div class="price">
             {{data?.quantityWithPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
           </div>
         </div>
         <div class="bottom">
-          <input type="text" class="note" placeholder="Add a note...">
+          <input type="text" class="note" [(ngModel)]="data.orderNote" placeholder="Add a note..." (change)="addNote(data)">
           <button class="delete-button" (click)="removeItem(data)">Delete</button>
         </div>
       </div>
@@ -63,10 +65,10 @@
       <div class="payment-c">
         <h4 class="payment-lable">Payment Type</h4>
         <div class="payment-list-c">
-          <div class="food-list-item">Cash</div>
-          <div class="food-list-item">Card</div>
-          <div class="food-list-item">Due</div>
-          <div class="food-list-item">Online</div>
+          <div class="food-list-item" (click)="paymentType('Cash')">Cash</div>
+          <div class="food-list-item" (click)="paymentType('Card')">Card</div>
+          <div class="food-list-item" (click)="paymentType('Due')">Due</div>
+          <div class="food-list-item" (click)="paymentType('Online')">Online</div>
         </div>
       </div>
     <hr>
@@ -88,6 +90,7 @@
       <div class="billing-pay">
         <button (click)="printPage()">Print</button>
         <button (click)="changeOrderStatus()">Save</button>
+        <button (click)="confirmorder()">kot</button>
         <!-- <button (click)="pay()">save & Print</button>
         <button (click)="pay()">KOT</button>
         <button (click)="pay()">KOT & Print</button> -->

@@ -19,10 +19,13 @@ export class SocketService {
   private foodItemsapiUrl = `${this.Base_URL}/api/foodItems`;
   private ordersapiUrl = `${this.Base_URL}/api/orders`; //get api
   private updateapiUrl=`${this.Base_URL}/api/updateFoodItemQuantity`
+  private updateOrderNoteapiUrl=`${this.Base_URL}/api/updateOrderNote`
   private deleteapiUrl=`${this.Base_URL}/api/deleteFoodItem`
   private getallapiUrl=`${this.Base_URL}/api/getAllOrders`
   private getallOrderAminapiUrl=`${this.Base_URL}/api/getAllOrdersAdmin`
   private updateFoodItemStatusapiUrl=`${this.Base_URL}/api/updateFoodItemStatus`
+  private updateOrderKotStatusapiUrl=`${this.Base_URL}/api/updateOrderKotStatus`
+  private updatePaymentTypeapiUrl=`${this.Base_URL}/api/update-payment-type`
   private updateDiscountapiUrl=`${this.Base_URL}/api/update-discount`
   private addCustomerNameapiUrl=`${this.Base_URL}/api/add-customer-name`
   private updateOrderStatusapiUrl=`${this.Base_URL}/api/orders/updateStatus`
@@ -156,6 +159,13 @@ export class SocketService {
       quantity
     })
   }
+  updateOrderNote(tableNo:any,foodItemId:any,orderNote:any):Observable<any>{
+    return this.http.put(this.updateOrderNoteapiUrl,{
+      tableNo,
+      foodItemId,
+      orderNote
+    })
+  }
   deleteOrder(tableNo:any,foodItemId:any):Observable<any>{
     return this.http.put(this.deleteapiUrl,{
       tableNo,
@@ -167,6 +177,18 @@ export class SocketService {
       tableNo,
       foodItemId,
       status
+    })
+  }
+  updateOrderKotStatus(tableNo:any,newKotStatus:any):Observable<any>{
+    return this.http.patch<any>(this.updateOrderKotStatusapiUrl,{
+      tableNo,
+      newKotStatus
+    })
+  }
+  updatePaymentType(tableNo:any,paymentType:any):Observable<any>{
+    return this.http.patch<any>(this.updatePaymentTypeapiUrl,{
+      tableNo,
+      paymentType
     })
   }
   updateTableWithOrder(tableNo:any,orderId:any):void{
