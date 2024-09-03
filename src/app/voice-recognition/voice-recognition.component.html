@@ -1,0 +1,13 @@
+<div class="voice-recognition">
+    <button (click)="startListening()" [disabled]="isListening">Start Listening</button>
+    <button (click)="stopListening()" [disabled]="!isListening">Stop Listening</button>
+  
+    <div *ngIf="results.length > 0">
+      <h3>Results:</h3>
+      <div *ngFor="let item of results" class="result-item">
+        <strong>Name:</strong> {{ item.name }} <br>
+        <strong>Quantity:</strong> {{ item.quantity }}
+      </div>
+    </div>
+  </div>
+  

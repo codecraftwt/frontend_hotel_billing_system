@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+}
+/* html {
+    font-family: Lato;
+  } */
+  
+  app-print-page {
+    /* hide the printing component from @media screen */
+    display: none;
+  }
+  
+  @media print { 
+    /* invert the display (show/hide) properties of the main */
+    /* aplication component and the printing component       */
+    app-print-page {
+      display: block;
+    }
+  
+    #main {
+      display: none;
+    }
+    /* ##################################################### */
+  
+    html {
+    font-family: Lato;
+    }
+  
+    h1 {
+      font-size: 18pt;
+    }
+  
+    p {
+      font-size: 12pt;
+    }
+  
+  }

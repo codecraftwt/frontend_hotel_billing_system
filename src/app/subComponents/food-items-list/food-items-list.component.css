@@ -1,0 +1,69 @@
+.food-items-list {
+    width: 200px; /* Fixed width for the item */
+    height: 150px; /* Fixed height for the item */
+    border: 2px solid #ddd; /* Slightly thicker border for a more defined look */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* Light gray background for a modern look */
+    cursor: pointer;
+    border-radius: 12px; /* More rounded corners */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .food-item-card {
+    background-color: #2d2d2d;
+    width: 200px; /* Set your desired width here */
+    border: 1px solid #2d2d2d; /* Optional: adds a border for better visibility */
+    padding: 10px; /* Optional: adds some padding inside the card */
+    margin: 9px; /* Optional: adds some space around the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a card effect */
+    border-radius: 8px; /* Optional: rounds the corners of the card */
+    border-left:8px solid #C9CAEF;
+  }
+  .food-list-c{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .food-item-title{
+    color: #DBDBDB;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .food-item-price{
+    color: #D0D0D0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .food-item-type{
+    width: 50px;
+    color: #D0D0D0;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .food-item-img{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 0px;
+    top: 35px;
+  }
+  
+  /* Optional: Add some responsiveness */
+  @media (max-width: 768px) {
+      .food-items-list {
+          flex: 1 1 150px; /* Adjust base width for smaller screens */
+          height: 120px; /* Adjust height for smaller screens */
+      }
+  }
+  
+  @media (max-width: 480px) {
+      .food-items-list {
+          flex: 1 1 100px; /* Adjust base width for very small screens */
+          height: 100px; /* Adjust height for very small screens */
+      }
+  }

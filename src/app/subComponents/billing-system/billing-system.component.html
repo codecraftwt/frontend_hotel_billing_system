@@ -1,0 +1,96 @@
+<!-- <div class="billing-container"> -->
+    <!-- <div class="billing-header">
+      <h1>Billing System</h1>
+    </div> -->
+    <div class="customer-name">
+      <label for="customerName">Customer Name:</label>
+      <input type="text" id="customerName" [(ngModel)]="billingData.customerName" (change)="addCustomerName(billingData)">
+    </div>
+    <div class="card-header">
+      <p class="header-item">Name</p>
+      <p class="header-item">Quantity</p>
+      <p class="header-item">Price</p>
+    </div>
+    <!-- <div class="card-body-empty">
+        <p>
+            <img src="../../../assets/Group 51.png" alt="" srcset="">
+          </p>
+    </div> -->
+    <div class="card-body">
+      <div class="card-item" *ngFor="let data of billingData?.ordersList">
+        <div class="top">
+          <div class="img">
+            <img
+              src={{data.img}}
+              alt="Item Image">
+          </div>
+          <div class="item-details">
+            <p class="item-name">{{data?.foodItemName}}</p>
+            <p class="item-price">Price: {{data?.itemPrice | currency:'INR':'symbol':'1.2-2':'en-IN'}}</p>
+          </div>
+          <div class="qty-container">
+            <input class="qty" type="number" [(ngModel)]="data.quantity" (change)="update(data)">
+          </div>
+          <div class="price">
+            {{data?.quantityWithPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+          </div>
+        </div>
+        <div class="bottom">
+          <input type="text" class="note" placeholder="Add a note...">
+          <button class="delete-button" (click)="removeItem(data)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <!-- drawor -->
+    <div class="drawor" [ngClass]="{'expanded': isExpanded}">
+      <div class="btn-c">
+        <button class="toggle-btn " (click)="toggle()"><img
+            [src]="isExpanded?'.././../../assets/down-arrow.png':'.././../../assets/up-arrow.png'" alt="" srcset=""
+            width="100%" height="100%"></button>
+      </div>
+      <div class="billing-total">
+        <h3>Total: </h3>
+        <h3>{{billingData?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN'}}</h3>
+      </div>
+      <div class="billing-total">
+        <h3>Discount:</h3>
+        <div class="discount-section">
+          <p><input class="qty" type="number" [(ngModel)]="billingData.discountPercent" (change)="updateDiscount(billingData)">%=  </p>
+          <p>{{billingData?.afterDiscountPrice | currency:'INR':'symbol':'1.2-2':'en-IN'}}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="payment-c">
+        <h4 class="payment-lable">Payment Type</h4>
+        <div class="payment-list-c">
+          <div class="food-list-item">Cash</div>
+          <div class="food-list-item">Card</div>
+          <div class="food-list-item">Due</div>
+          <div class="food-list-item">Online</div>
+        </div>
+      </div>
+    <hr>
+      <div class="pay-ammount-c">
+        <div class="pay-field">
+          <h5 class="pay-field-lable">Customer pay amount</h5>
+          <input class="input-amount" type="number" [(ngModel)]="customerAmmount" (keyup)="ammount(customerAmmount)">
+        </div>-
+        <div class="pay-field">
+          <h5 class="pay-field-lable"> Totale  amount</h5>
+          <input class="input-amount" type="number" [(ngModel)]="billingData.afterDiscountPrice" >
+        </div>=
+        <div class="pay-field">
+          <h5 class="pay-field-lable">Remaing pay amount</h5>
+          <input class="input-amount" type="number" [(ngModel)]="remaingAmmount">
+        </div>
+      </div>
+      <hr>
+      <div class="billing-pay">
+        <button (click)="printPage()">Print</button>
+        <button (click)="changeOrderStatus()">Save</button>
+        <!-- <button (click)="pay()">save & Print</button>
+        <button (click)="pay()">KOT</button>
+        <button (click)="pay()">KOT & Print</button> -->
+      </div>
+    </div>
+  <!-- </div> -->

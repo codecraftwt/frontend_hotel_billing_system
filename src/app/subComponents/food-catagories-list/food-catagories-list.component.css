@@ -1,0 +1,35 @@
+.food-list-item {
+    width: 200px;
+    border: 2px solid #D0DEDB;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #D0DEDB;
+    cursor: pointer;
+    position: relative;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 13px;
+}
+
+.food-list-item:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover for emphasis */
+}
+
+.food-list-item:active {
+    background-color: #d0d0d0; /* Darker gray background on click */
+    transform: scale(0.98); /* Slightly shrink on click */
+}
+.catagory-name{
+    font-weight: bold;
+    font-size: 20px;
+    color: #313131;
+}
+.items{
+    color: #636363;
+    font-size: medium;
+}

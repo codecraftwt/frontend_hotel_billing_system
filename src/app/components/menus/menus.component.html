@@ -1,0 +1,33 @@
+<div class="menu-container">
+  <div class="food-menu">
+    <div class="food-list">
+      <app-food-catagories-list
+      *ngFor="let data of foodCatagoriesData" 
+      [data]="data" 
+      (itemClick)="getFoodList($event)"
+      >
+      </app-food-catagories-list>
+    </div>
+    <hr class="hr">
+    <div class="food-items" *ngIf="foodCatagoriesId!==null">
+      <app-food-items-list 
+      *ngFor="let data of foodItems" 
+      [data]="data" 
+      (itemClick)="getFoodItem($event)"
+      ></app-food-items-list>
+    </div>
+    <div class="food-items food-items-h" *ngIf="foodCatagoriesId==null">
+      <p>
+        <img src="../../../assets/Group 51.png" alt="" srcset="">
+      </p>
+    </div>
+  </div>
+  <!-- <div> -->
+  <div class="billing-container">
+    <app-billing-system></app-billing-system>
+  </div>
+
+
+
+  <!-- </div> -->
+</div>

@@ -1,0 +1,11 @@
+
+<div class="food-items-list food-item-card"  (click)="onClick()">
+    <div class="food-list-c">
+        <p class="food-item-title">{{data.name}}</p>
+        <p class="food-item-price">{{ data.price | currency:'INR':'symbol':'1.0-2' }}</p>
+        <p class="food-item-type">{{ data.type}}</p>
+        <div class="food-item-img">
+            <img src={{data.img}} width="100%" height="100%" alt="" srcset="">
+        </div>
+    </div>
+</div>

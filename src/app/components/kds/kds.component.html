@@ -1,0 +1,21 @@
+<div class="container-kds">
+  <div class="order-list-container">
+    <div class="colum" *ngFor="let item of data">
+      <div class="header">
+        <p>Table No.:{{item.tableNo}}</p>
+      </div>
+      <div class="body">
+        <div class="card" [ngClass]="subItem.status=='on hold'?'white':subItem.status=='working'?'yellow':'green'" *ngFor="let subItem of item.ordersList">
+          <div class="card-info">
+            <p>{{subItem.foodItemName}}</p>
+            <p>{{subItem.quantity}}</p>
+          </div>
+          <div class="btns">
+            <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'working')">Cooking..</button>
+            <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'ready')">Ready</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

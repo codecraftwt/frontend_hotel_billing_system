@@ -1,0 +1,41 @@
+<!-- order-summary.component.html -->
+<div class="order-print-container">
+  <h1 class="hotel-name">Hotel Walstar's Castle View</h1>
+  <p class="slogan">Explore the beauty of nature with comfortable stay at WALSTAR’S CASTLE VIEW !!</p> <!-- Updated slogan -->
+  <p class="contact-info">Contact Us: <strong>087881 92606</strong></p> <!-- Added phone number -->
+
+  <h2 class="title">Order Summary</h2>
+  <div class="order-details">
+      <p><strong>Table Number:</strong> {{ orderData.tableNo }}</p>
+      <p><strong>Customer Name:</strong> {{ orderData.customerName }}</p>
+
+      <h3>Ordered Items</h3>
+      <table class="order-table">
+          <thead>
+              <tr>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of orderData.ordersList">
+                  <td>{{ item.foodItemName }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.itemPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>
+                  <td>{{ item.quantityWithPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>
+                  <td>{{ item.status }}</td>
+              </tr>
+          </tbody>
+      </table>
+
+      <div class="total-section">
+          <p><strong>Total Price:</strong> {{ orderData.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+          <p *ngIf="orderData.discountPercent"><strong>Discount:</strong> {{ orderData.discountPercent }}%</p>
+          <p><strong>Price After Discount:</strong> {{ orderData.afterDiscountPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+          <p *ngIf="orderData.paymentType"><strong>Payment Type:</strong> {{ orderData.paymentType }}</p>
+      </div>
+  </div>
+</div>

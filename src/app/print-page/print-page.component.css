@@ -1,0 +1,92 @@
+/* order-summary.component.css */
+
+.order-print-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.hotel-name {
+  text-align: center;
+  font-size: 24px;
+  color: #4A4A4A;
+  margin-bottom: 5px;
+}
+
+.slogan {
+  text-align: center;
+  font-size: 16px;
+  color: #7D7D7D;
+  margin-bottom: 10px;
+}
+
+.contact-info {
+  text-align: center;
+  font-size: 16px;
+  color: #4A4A4A;
+  margin-bottom: 20px;
+}
+
+.title {
+  text-align: center;
+  color: #333;
+}
+
+.order-details {
+  margin: 20px 0;
+}
+
+.order-details p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.order-table th, .order-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.order-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.total-section {
+  border-top: 2px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.total-section p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Print styles */
+@media print {
+  body {
+      margin: 0;
+  }
+
+  .order-print-container {
+      border: none;
+      box-shadow: none;
+      width: 100%;
+      padding: 10px;
+  }
+
+  .order-table th, .order-table td {
+      padding: 5px;
+  }
+}
