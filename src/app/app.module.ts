@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -17,6 +17,7 @@ import { FoodItemsListComponent } from './subComponents/food-items-list/food-ite
 import { BillingSystemComponent } from './subComponents/billing-system/billing-system.component';
 import { PrintPageComponent } from './print-page/print-page.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,13 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right', // Customize position
+      timeOut: 3000, // Duration for which the toast is displayed
+      preventDuplicates: true // Prevent duplicate toasts
+    })
   ],
   providers: [TableService,MenuService],
   bootstrap: [AppComponent]

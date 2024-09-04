@@ -14,6 +14,11 @@ export class MenusComponent implements OnInit {
   foodCatagoriesId:any=null
   tableNo:any
 
+  data: any[] = [];
+  filteredData: any[] = [];
+  searchTerm: string = '';
+
+
   //billing
   customerName: string = '';
   billingData: any[] = [
@@ -54,10 +59,15 @@ export class MenusComponent implements OnInit {
     //   console.log(res,'res======');
       
     // })
-    // this.socketService.getFoodItems().subscribe(data => {
-    //   console.log(data,'data items');
+    this.socketService.getFoodItems().subscribe(data => {
+      console.log(data,'data items');
+      // console.log(JSON.stringify(data),'data items');
+      this.data = data;
+      // console.log(this.filteredData==[],'filteredData==[]');
       
-    // });
+      // this.filteredData = data;
+      
+    });
   }
 
   getFoodList(data:any){
@@ -98,5 +108,11 @@ export class MenusComponent implements OnInit {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onSearch(): void {
+    this.filteredData = this.socketService.searchData(this.data, this.searchTerm);
+    console.log(this.filteredData,'filteredData');
+    
   }
 }

@@ -10,6 +10,9 @@
             <p>{{subItem.foodItemName}}</p>
             <p>{{subItem.quantity}}</p>
           </div>
+          <div>
+            <p>{{subItem.orderNote}}</p>
+          </div>
           <div class="btns">
             <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'working')">Cooking..</button>
             <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'ready')">Ready</button>

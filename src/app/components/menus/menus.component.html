@@ -8,15 +8,32 @@
       >
       </app-food-catagories-list>
     </div>
-    <hr class="hr">
-    <div class="food-items" *ngIf="foodCatagoriesId!==null">
+    <!-- <hr class="hr"> -->
+    <div class="search-box">
+      <input class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search..." />
+      <div class="color-code-container">
+        <ul class="color_code">
+          <li class="codor-code-list"><div class="color-code-symbole-veg"></div><p>Vegetarian</p></li>
+          <li class="codor-code-list"><div class="color-code-symbole-non-veg"></div><p>Non-Vegetarian</p></li>
+          <li class="codor-code-list"><div class="color-code-symbole-soup"></div><p>Soup</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="food-items"  *ngIf="filteredData.length!==0">
+      <app-food-items-list 
+      *ngFor="let data of filteredData" 
+      [data]="data" 
+      (itemClick)="getFoodItem($event)"
+      ></app-food-items-list>
+    </div>
+    <div class="food-items" *ngIf="foodCatagoriesId!==null && filteredData.length==0">
       <app-food-items-list 
       *ngFor="let data of foodItems" 
       [data]="data" 
       (itemClick)="getFoodItem($event)"
       ></app-food-items-list>
     </div>
-    <div class="food-items food-items-h" *ngIf="foodCatagoriesId==null">
+    <div class="food-items food-items-h" *ngIf="foodCatagoriesId==null && filteredData.length==0">
       <p>
         <img src="../../../assets/Group 51.png" alt="" srcset="">
       </p>

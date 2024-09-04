@@ -13,8 +13,8 @@
 
 .food-list-item:active {background-color: #d0d0d0; /* Darker gray background on click */transform: scale(0.98); /* Slightly shrink on click */}
 .hr{width: 90%;margin: 0px 46px;background-color: #DBDBDB;height: 2px;border-radius: 67px;}
-.food-items {width: 100%;padding: 10px;display: flex;flex-wrap: wrap; /* Allow items to wrap onto multiple lines */gap: 16px; /* Space between items */overflow-y: auto; /* Enable vertical scrolling */overflow-x: hidden; /* Disable horizontal scrolling */-ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */scrollbar-width: none;  /* Hide scrollbar for Firefox */}
-.food-items-h{height: 68%;display: flex;justify-content: center;align-items: center;}
+.food-items {width: 100%;padding: 10px;display: flex;flex-wrap: wrap; /* Allow items to wrap onto multiple lines */gap: 16px; /* Space between items */overflow-y: auto; /* Enable vertical scrolling */overflow-x: hidden; /* Disable horizontal scrolling */-ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */scrollbar-width: none;  /* Hide scrollbar for Firefox */height: 800px;}
+.food-items-h{display: flex;justify-content: center;align-items: center;}
 
 /* Hide scrollbar for WebKit browsers */
 .food-items::-webkit-scrollbar {display: none; /* Safari and Chrome */}
@@ -103,3 +103,11 @@
   .pay-field{display: block;}
   .input-amount{width: 100px;height: 50px;border: none;border-radius: 10px;}
   .pay-field-lable{margin-bottom: 5px;}
+  .search-box{display: flex;justify-content: center;margin: 5px 0px;flex-direction: column;align-items: center;}
+  .search-input{padding: 20px;border: none;width: 95%;border-radius: 50px;background-color: #2d2d2d;color: #d0d0d0;}
+  .color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
+  .codor-code-list{display: flex;}
+  .color-code-symbole-veg{width: 20px;background-color: #48eb48;border-radius: 50px;margin-right: 5px;}
+  .color-code-symbole-non-veg{width: 20px;background-color:#ff2f2f;border-radius: 50px;margin-right: 5px;}
+  .color-code-symbole-soup{width: 20px;background-color: orange;border-radius: 50px;margin-right: 5px;}
+  .color-code-container{display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}

@@ -225,4 +225,16 @@ export class SocketService {
       newStatus
     })
   }
+
+  // Search data based on the search term
+  searchData(data: any[], searchTerm: string): any[] {
+    if (!searchTerm.trim()) {
+      return [];
+    }
+    return data.filter(item => 
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      item.shortcode.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
 }

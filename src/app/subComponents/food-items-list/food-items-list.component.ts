@@ -17,4 +17,17 @@ export class FoodItemsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getBorderColor(type: string): string {
+    switch(type) {
+      case 'Vegetarian':
+        return '8px solid #48eb48';
+      case 'Non-Vegetarian':
+        return '8px solid #ff2f2f';
+      case 'Soups':
+        return '8px solid orange';
+      default:
+        return '8px solid black';
+    }
+  }
+
 }

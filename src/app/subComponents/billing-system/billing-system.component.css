@@ -18,7 +18,7 @@
 }
 
 .customer-name {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -37,6 +37,13 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #2D2D2D;
+    color: white;
+}
+.tabelNO-NoOrder{
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+    justify-content: space-between;
     color: white;
 }
 
@@ -146,14 +153,14 @@
 }
 
 .item-name {
-    color: #DBDBDB;
+    /* color: #DBDBDB; */
     font-size: 20px;
     font-weight: bolder;
     margin: 0;
 }
 
 .item-price {
-    color: #DBDBDB;
+    /* color: #DBDBDB; */
     font-size: 15px;
     font-weight: bolder;
     margin: 0;
@@ -176,7 +183,7 @@
     cursor:pointer;
 }
 .btnno-drop{
-    cursor:no-drop;
+    cursor:no-drop !important;
 }
 
 .qty {
@@ -194,7 +201,7 @@
 .price {
     font-size: 1.2em;
     font-weight: bold;
-    color: #DBDBDB;
+    /* color: #DBDBDB; */
     display: flex;
     align-items: center;
 }
@@ -239,6 +246,16 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+}
+.billing-total-left{
+    display: flex;
+}
+.billing-total-right{
+    padding: 0px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3ba43b;
+    color: white;
 }
 
 .billing-pay {
@@ -371,3 +388,18 @@
     background-color: #d0d0d0; /* Darker gray background on click */
     transform: scale(0.98); /* Slightly shrink on click */
 }
+.pointer{
+    cursor: pointer;
+}
+.color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
+  .codor-code-list{display: flex;}
+  .color-code-symbole-veg{width: 20px;background-color: #74da74;border-radius: 50px;margin-right: 5px;}
+  .color-code-symbole-non-veg{width: 20px;background-color:#f4f456;border-radius: 50px;margin-right: 5px;}
+  .color-code-symbole-soup{width: 20px;background-color: #2d2d2d;border-radius: 50px;margin-right: 5px;}
+  .color-code-container{display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}
+  .empty-order{
+    display: flex;
+    justify-content: center;
+    height: 70%;
+    align-items: center;
+  }

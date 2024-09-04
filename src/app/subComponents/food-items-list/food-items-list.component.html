@@ -1,5 +1,5 @@
 
-<div class="food-items-list food-item-card"  (click)="onClick()">
+<div class="food-items-list food-item-card" [ngStyle]="{ 'border-left': getBorderColor(data.type) }"  (click)="onClick()">
     <div class="food-list-c">
         <p class="food-item-title">{{data.name}}</p>
         <p class="food-item-price">{{ data.price | currency:'INR':'symbol':'1.0-2' }}</p>
