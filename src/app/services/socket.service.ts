@@ -29,6 +29,7 @@ export class SocketService {
   private updateDiscountapiUrl=`${this.Base_URL}/api/update-discount`
   private addCustomerNameapiUrl=`${this.Base_URL}/api/add-customer-name`
   private updateOrderStatusapiUrl=`${this.Base_URL}/api/orders/updateStatus`
+  private updateTableStatusapiUrl=`${this.Base_URL}/api/tables/`
   private statusUrl=`${this.Base_URL}/api/status`
   private baseUrl = `${this.Base_URL}/api/foodItems`
 
@@ -223,6 +224,11 @@ export class SocketService {
     return this.http.patch<any>(this.updateOrderStatusapiUrl,{
       tableNo,
       newStatus
+    })
+  }
+  updateTableStatus(tableNo:any,status:any):Observable<any>{
+    return this.http.patch<any>(this.updateTableStatusapiUrl+tableNo+'/status',{
+      status
     })
   }
 

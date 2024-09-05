@@ -59,22 +59,51 @@ export class TablesComponent  {
     this.router.navigate(['/menus/'+data.tableNumber]);
   }
 
-  onMouseEnter(data: any) {
-    this.showMenu = true;
-    this.hoveredData = data;
-    // setTimeout(() => {
-      const tableElement = this.elRef.nativeElement.querySelector('.tableStructured');
-      const menuElement = this.elRef.nativeElement.querySelector('.custom-menu');
-      const tableRect = tableElement.getBoundingClientRect();
-      this.menuStyle = {
-        top: `${tableRect.top}px`,
-        left: `${tableRect.right + 10}px` // 10px offset from the right edge of the table
-      };
-    // }, 0);
+  // onMouseEnter(data: any) {
+  //   this.showMenu = true;
+  //   this.hoveredData = data;
+  //   // setTimeout(() => {
+  //     const tableElement = this.elRef.nativeElement.querySelector('.tableStructured');
+  //     const menuElement = this.elRef.nativeElement.querySelector('.custom-menu');
+  //     const tableRect = tableElement.getBoundingClientRect();
+  //     this.menuStyle = {
+  //       top: `${tableRect.top}px`,
+  //       left: `${tableRect.right + 10}px` // 10px offset from the right edge of the table
+  //     };
+  //   // }, 0);
+  // }
+
+  // onMouseLeave() {
+  //   this.showMenu = false;
+  //   this.hoveredData = null;
+  // }
+
+  hoveredTable: any = null;
+
+  onMouseEnter(table: any) {
+    console.log(table,'table');
+    
+    this.hoveredTable = table;
   }
 
   onMouseLeave() {
-    this.showMenu = false;
-    this.hoveredData = null;
+    this.hoveredTable = null;
+  }
+
+  orderStatus(data:any,status:any){
+    return data.filter((item:any) => item.status === status).length;
+  }
+  reserveTable(table: any, event: Event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+
+    if (table.status === 'blank table') {
+      console.log(table,'table');
+      this.socketService.updateTableStatus(table.tableNumber,'reserved table').subscribe(res=>{
+        // this.initialmethod()
+      })
+      // Implement your logic to reserve the table
+      // Example: this.tableService.updateStatus(table.tableNumber, 'reserved table')
+      // this.updateTableStatus(table, 'reserved table');
+    }
   }
 }

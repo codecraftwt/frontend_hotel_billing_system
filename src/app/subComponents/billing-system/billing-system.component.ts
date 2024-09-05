@@ -83,7 +83,10 @@ export class BillingSystemComponent implements OnInit {
   changeOrderStatus() {
     this.socketService.updateOrderStatus(this.tableNo, 'completed').subscribe(res => {
       console.log(res, 'test');
-     this.initialmethod()
+      this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
+        this.initialmethod()
+      })
+    //  this.initialmethod()
 
     })
   }
@@ -94,7 +97,9 @@ export class BillingSystemComponent implements OnInit {
       this.socketService.updateOrderKotStatus(this.tableNo, 'confirmed').subscribe(res=>{
         // console.log(res,'koy');
         this.toastr.success('Order has been sent to the kitchen!', 'Order Status');
-       this.initialmethod()
+        this.socketService.updateTableStatus(this.tableNo,'KOT table').subscribe(res=>{
+          this.initialmethod()
+        })
       })
     }else{
       this.toastr.warning('Please enter customer name', 'Customer Name Required');
@@ -114,6 +119,11 @@ export class BillingSystemComponent implements OnInit {
   removeItem(data: any) {
     this.socketService.deleteOrder(this.tableNo, data.foodItemId).subscribe(res => {
       console.log(res, 'test');
+      if(res.message=='Order deleted'){
+        this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
+          this.initialmethod()
+        })
+      }
       this.initialmethod()
     })
   }

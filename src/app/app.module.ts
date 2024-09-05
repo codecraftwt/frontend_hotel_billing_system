@@ -18,6 +18,7 @@ import { BillingSystemComponent } from './subComponents/billing-system/billing-s
 import { PrintPageComponent } from './print-page/print-page.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true // Prevent duplicate toasts
     })
   ],
-  providers: [TableService,MenuService],
+  providers: [TableService,MenuService,DatePipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

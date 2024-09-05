@@ -1,4 +1,20 @@
 <div class="container-kds">
+  <div class="color-code-container">
+    <ul class="color_code">
+      <li class="codor-code-list">
+        <div class="color-code-symbole-veg"></div>
+        <p>Order Ready</p>
+      </li>
+      <li class="codor-code-list">
+        <div class="color-code-symbole-non-veg"></div>
+        <p>Cooking</p>
+      </li>
+      <li class="codor-code-list">
+        <div class="color-code-symbole-soup"></div>
+        <p>On Hold</p>
+      </li>
+    </ul>
+  </div>
   <div class="order-list-container">
     <div class="colum" *ngFor="let item of data">
       <div class="header">
@@ -6,12 +22,13 @@
       </div>
       <div class="body">
         <div class="card" [ngClass]="subItem.status=='on hold'?'white':subItem.status=='working'?'yellow':'green'" *ngFor="let subItem of item.ordersList">
+          <p class="time-status">{{getTimeStatus(subItem.updatedAt)}}</p>
           <div class="card-info">
             <p>{{subItem.foodItemName}}</p>
             <p>{{subItem.quantity}}</p>
           </div>
-          <div>
-            <p>{{subItem.orderNote}}</p>
+          <div class="note-div" *ngIf="subItem.orderNote!=''">
+            <p class="note">{{subItem.orderNote}}</p>
           </div>
           <div class="btns">
             <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'working')">Cooking..</button>
