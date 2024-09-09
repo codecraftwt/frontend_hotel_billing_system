@@ -9,37 +9,6 @@ import { TableService } from 'src/app/services/table.service';
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent  {
-  tables = [
-    {
-      number: 1,
-      status: 'Available'
-    },
-    {
-      number: 2,
-      status: 'Reserved'
-    },
-    {
-      number: 3,
-      status: 'Reserved'
-    },
-    {
-      number: 4,
-      status: 'Reserved'
-    },
-    {
-      number: 5,
-      status: 'Reserved'
-    },
-    {
-      number: 6,
-      status: 'Reserved'
-    },
-    {
-      number: 6,
-      status: 'Reserved'
-    },
-    
-  ];
   diningTables: any[] = [];
   showMenu: boolean = false;
   hoveredData: any = null;
@@ -58,25 +27,6 @@ export class TablesComponent  {
     console.log(data.tableNumber,'data');
     this.router.navigate(['/menus/'+data.tableNumber]);
   }
-
-  // onMouseEnter(data: any) {
-  //   this.showMenu = true;
-  //   this.hoveredData = data;
-  //   // setTimeout(() => {
-  //     const tableElement = this.elRef.nativeElement.querySelector('.tableStructured');
-  //     const menuElement = this.elRef.nativeElement.querySelector('.custom-menu');
-  //     const tableRect = tableElement.getBoundingClientRect();
-  //     this.menuStyle = {
-  //       top: `${tableRect.top}px`,
-  //       left: `${tableRect.right + 10}px` // 10px offset from the right edge of the table
-  //     };
-  //   // }, 0);
-  // }
-
-  // onMouseLeave() {
-  //   this.showMenu = false;
-  //   this.hoveredData = null;
-  // }
 
   hoveredTable: any = null;
 
@@ -104,6 +54,23 @@ export class TablesComponent  {
       // Implement your logic to reserve the table
       // Example: this.tableService.updateStatus(table.tableNumber, 'reserved table')
       // this.updateTableStatus(table, 'reserved table');
+    }else{
+      this.socketService.updateTableStatus(table.tableNumber,'blank table').subscribe(res=>{
+        // this.initialmethod()
+      })
     }
+  }
+  onMouseDown(event: MouseEvent, table: any) {
+    if (event.ctrlKey && event.button === 0) {
+      // Ctrl + Left Click detected
+      event.preventDefault(); // Prevent default action to avoid redirection
+      event.stopPropagation(); // Stop event from propagating
+      this.handleCtrlClick(table);
+    }
+  }
+  handleCtrlClick(table: any) {
+    // Handle the Ctrl + Left Click logic here
+    console.log('Ctrl + Left Click on table:', table);
+    // Implement your logic here
   }
 }

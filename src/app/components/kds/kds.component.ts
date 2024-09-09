@@ -63,8 +63,10 @@ export class KdsComponent implements OnInit {
 
   }
 
-  statusUpdate(tableNo: any, foodItemId: any, status: any) {
-    this.socketService.updateFoodItemStatus(tableNo, foodItemId, status).subscribe(res => {
+  statusUpdate(tableNo: any, foodItemId: any, status: any,createdAt:any) {
+    console.log(tableNo, foodItemId, status,createdAt,'tableNo, foodItemId, status');
+    
+    this.socketService.updateFoodItemStatus(tableNo, foodItemId, status,createdAt).subscribe(res => {
       console.log(res, 'update');
 
     })

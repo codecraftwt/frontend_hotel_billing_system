@@ -47,25 +47,25 @@ export class BillingSystemComponent implements OnInit {
 
   update(data: any,qty:any) {
     console.log(data,qty);
-    this.socketService.updateOrderQty(this.tableNo, data.foodItemId, qty).subscribe(res => {
+    this.socketService.updateOrderQty(this.tableNo, data.foodItemId, qty,data.createdAt).subscribe(res => {
       console.log(res, 'test');
       this.initialmethod()
     })
   }
   addNote(data: any) {
     console.log(data);
-    this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote).subscribe(res => {
+    this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote,data.createdAt).subscribe(res => {
       console.log(res, 'test');
       this.initialmethod()
     })
   }
-  deleteOrder(data: any) {
-    console.log(data);
-    this.socketService.updateOrderQty(this.tableNo, data.foodItemId, data.quantity).subscribe(res => {
-      console.log(res, 'test');
-      this.initialmethod()
-    })
-  }
+  // deleteOrder(data: any) {
+  //   console.log(data);
+  //   this.socketService.updateOrderQty(this.tableNo, data.foodItemId, data.quantity).subscribe(res => {
+  //     console.log(res, 'test');
+  //     this.initialmethod()
+  //   })
+  // }
 
   updateDiscount(data: any) {
     console.log(data, 'data');
@@ -117,7 +117,9 @@ export class BillingSystemComponent implements OnInit {
   // }
 
   removeItem(data: any) {
-    this.socketService.deleteOrder(this.tableNo, data.foodItemId).subscribe(res => {
+    console.log(JSON.stringify(data),'data');
+    
+    this.socketService.deleteOrder(this.tableNo, data.foodItemId,data.createdAt).subscribe(res => {
       console.log(res, 'test');
       if(res.message=='Order deleted'){
         this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{

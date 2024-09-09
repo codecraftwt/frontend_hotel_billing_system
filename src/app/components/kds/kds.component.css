@@ -5,7 +5,7 @@
 .body {overflow-y: scroll;height: 95%;padding: 10px;gap: 5px;display: flex;flex-direction: column;}
 .card {background-color: #fff;border-radius: 5px;}
 .card-info {display: flex;justify-content: space-between;padding: 0px 20px;margin: 5px;}
-.btns {padding: 5px;display: flex;justify-content: space-around;}
+.btns {padding: 5px;display: flex;justify-content: space-between;}
 .time-status {padding: 10px;background-color: #ee8585;width: 100px;border-radius: 8px;margin: 3px;font-size: 14px;color: white;font-weight: 700;}
 .btn {width: 49%;padding: 10px 0;background-color: #7d7dff;border: navajowhite;border-radius: 5px;}
 .white {

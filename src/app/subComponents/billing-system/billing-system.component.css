@@ -59,3 +59,10 @@
 .color-code-symbole-soup {width: 20px;background-color: #2d2d2d;border-radius: 50px;margin-right: 5px;}
 .color-code-container {display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}
 .empty-order {display: flex;justify-content: center;height: 70%;align-items: center;}
+.orderDisable{
+    display: none;
+}
+.active{
+    background-color: #6464f8;
+    color: white;
+}

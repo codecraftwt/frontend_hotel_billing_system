@@ -24,7 +24,7 @@
 .table {position: relative;padding: 20px;
   /* Add more styling as needed */
 }
-.popup {position: absolute;left: 50%;top: 100%;transform: translateX(-50%);background-color: white;border: 1px solid #ccc;padding: 10px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);z-index: 1000;display: none; /* Ensure it's hidden initially */}
+.popup {width: 200px;position: absolute;left: 50%;top: 100%;transform: translateX(-50%);background-color: #c1c1c1;border: 1px solid #ccc;padding: 13px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);z-index: 1000;display: none;border-radius: 5px; /* Ensure it's hidden initially */}
 /* Show the popup when the parent .table is hovered */
 .table:hover .popup {display: block}
 .color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
@@ -33,3 +33,8 @@
   .color-code-symbole-non-veg{width: 20px;background-color:#f4f456;border-radius: 50px;margin-right: 5px;}
   .color-code-symbole-soup{width: 20px;background-color: #838383;border-radius: 50px;margin-right: 5px;}
   .color-code-container{display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}
+  .resevebtn{cursor: pointer;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fbfb60;}

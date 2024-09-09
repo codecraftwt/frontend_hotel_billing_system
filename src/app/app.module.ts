@@ -19,6 +19,7 @@ import { PrintPageComponent } from './print-page/print-page.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { DatePipe } from '@angular/common';
     AdminDashboardComponent
   ],
   imports: [
+    AgGridModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -43,7 +45,7 @@ import { DatePipe } from '@angular/common';
       positionClass: 'toast-top-right', // Customize position
       timeOut: 3000, // Duration for which the toast is displayed
       preventDuplicates: true // Prevent duplicate toasts
-    })
+    }),
   ],
   providers: [TableService,MenuService,DatePipe ],
   bootstrap: [AppComponent]

@@ -48,11 +48,11 @@
         <p class="item-price">Price: {{data?.itemPrice | currency:'INR':'symbol':'1.2-2':'en-IN'}}</p>
       </div>
       <div class="qty-container">
-        <button class="btnqty btnpointer" (click)="update(data,data.quantity+1)">+</button>
-        <!-- <input class="qty" type="number" [(ngModel)]="data.quantity" > -->
-        <p class="qty">{{data.quantity}}</p>
         <button [disabled]="data.quantity == 1" [class]="data.quantity == 1?'btnno-drop btnqty':'btnpointer btnqty'"
           (click)="update(data,data.quantity-1)">-</button>
+        <p class="qty">{{data.quantity}}</p>
+        <button class="btnqty btnpointer" (click)="update(data,data.quantity+1)">+</button>
+        <!-- <input class="qty" type="number" [(ngModel)]="data.quantity" > -->
       </div>
       <div class="price">
         {{data?.quantityWithPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
@@ -97,10 +97,10 @@
   <div class="payment-c">
     <h4 class="payment-lable">Payment Type</h4>
     <div class="payment-list-c">
-      <div class="food-list-item" (click)="paymentType('Cash')">Cash</div>
-      <div class="food-list-item" (click)="paymentType('Card')">Card</div>
-      <div class="food-list-item" (click)="paymentType('Due')">Due</div>
-      <div class="food-list-item" (click)="paymentType('Online')">Online</div>
+      <div class="food-list-item"  [ngClass]="{'active': billingData.paymentType === 'Cash'}" (click)="paymentType('Cash')">Cash</div>
+      <div class="food-list-item"  [ngClass]="{'active': billingData.paymentType === 'Card'}" (click)="paymentType('Card')">Card</div>
+      <div class="food-list-item"  [ngClass]="{'active': billingData.paymentType === 'Due'}" (click)="paymentType('Due')">Due</div>
+      <div class="food-list-item"  [ngClass]="{'active': billingData.paymentType === 'Online'}" (click)="paymentType('Online')">Online</div>
     </div>
   </div>
   <hr>
@@ -123,7 +123,7 @@
     <button [disabled]="billingData.kotStatus!=null" [class]="billingData.kotStatus!=null?'btnno-drop':'btnpointer'"
       (click)="confirmorder(billingData)">kot</button>
     <button (click)="printPage()">Print</button>
-    <button (click)="changeOrderStatus()">Save</button>
+    <button [ngClass]="billingData.paymentType==null?'orderDisable':''" (click)="changeOrderStatus()">Order Finished </button>
     <!-- <button (click)="pay()">save & Print</button>
         <button (click)="pay()">KOT</button>
         <button (click)="pay()">KOT & Print</button> -->

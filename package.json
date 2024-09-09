@@ -18,6 +18,8 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "ag-grid-angular": "^25.3.0",
+    "ag-grid-community": "^25.3.0",
     "moment-timezone": "^0.5.45",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~7.5.0",

@@ -1,17 +1,67 @@
 .menu-container {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;background-color: #121315;}
 
 .food-menu {width: 65%;display: flex;flex-direction: column}
-.food-list-label {font-size: 1rem; /* Adjust the font size as needed */font-weight: bold; /* Makes the label bold */margin: 10px 0; /* Adds some space above and below the label */text-align: start; /* Centers the text horizontally */}
+/* Container for the horizontal scrollable items */
+.food-list {
+  padding: 10px;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping */
+  align-items: center;
+  justify-content: flex-start; /* Adjust alignment as needed */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: thin; /* Set scrollbar width for Firefox */
+  scrollbar-color: #2d2d2d transparent; /* Set scrollbar color for Firefox */
+}
 
-.food-list {padding: 10px;width: 100%;height: 30%;display: flex;overflow-x: auto; /* Allow horizontal scrolling */white-space: nowrap; /* Prevent items from wrapping */align-items: center;justify-content: space-around;-ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */scrollbar-width: none;  /* Hide scrollbar for Firefox */}
 /* Hide scrollbar for WebKit browsers */
-.food-list::-webkit-scrollbar {display: none; /* Safari and Chrome */}
+.food-list::-webkit-scrollbar {
+  height: 8px; /* Adjust scrollbar height as needed */
+}
 
-.food-list-item {width: 200px;border: 2px solid #ddd; /* Slightly thicker border for a more defined look */height: 60px; /* Increased height for better visual balance */display: flex;justify-content: center;align-items: center;background-color: #f9f9f9; /* Light gray background for a modern look */cursor: pointer;position: relative;border-radius: 12px; /* More rounded corners */transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */margin-right: 16px; /* Increased spacing between items */box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */padding: 5px;}
+.food-list::-webkit-scrollbar-track {
+  background: transparent; /* Background of the scrollbar track */
+}
 
-.food-list-item:hover {background-color: #e0e0e0; /* Light gray background on hover */transform: scale(1.05); /* Slightly enlarge on hover for emphasis */}
+.food-list::-webkit-scrollbar-thumb {
+  background: #2d2d2d; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
 
-.food-list-item:active {background-color: #d0d0d0; /* Darker gray background on click */transform: scale(0.98); /* Slightly shrink on click */}
+.food-list::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* Food list items styling */
+.food-list-item {
+  width: 200px;
+  border: 2px solid #ddd; /* Slightly thicker border for a more defined look */
+  height: 60px; /* Increased height for better visual balance */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9; /* Light gray background for a modern look */
+  cursor: pointer;
+  position: relative;
+  border-radius: 12px; /* More rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  margin-right: 16px; /* Increased spacing between items */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 5px;
+}
+
+/* Hover and active states for food list items */
+.food-list-item:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover for emphasis */
+}
+
+.food-list-item:active {
+  background-color: #d0d0d0; /* Darker gray background on click */
+  transform: scale(0.98); /* Slightly shrink on click */
+}
 .hr{width: 90%;margin: 0px 46px;background-color: #DBDBDB;height: 2px;border-radius: 67px;}
 .food-items {width: 100%;padding: 10px;display: flex;flex-wrap: wrap; /* Allow items to wrap onto multiple lines */gap: 16px; /* Space between items */overflow-y: auto; /* Enable vertical scrolling */overflow-x: hidden; /* Disable horizontal scrolling */-ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */scrollbar-width: none;  /* Hide scrollbar for Firefox */height: 800px;}
 .food-items-h{display: flex;justify-content: center;align-items: center;}

@@ -53,13 +53,22 @@
       {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
     </div>
     <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+    <!-- <div class="popup" > -->
       <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
       <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
       <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
       <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
     </div>
     <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
-      <button (click)="reserveTable(table, $event)">Reserve Table</button>
+      <!-- <p>This table is blank. If you want to reserve it, please click on this button.</p> -->
+      <p>This table is blank. Click the button to reserve it.</p>
+      <!-- <p>Click to reserve this blank table.</p> -->
+      <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+    </div>
+    <div class="popup" *ngIf="table.status == 'reserved table'">
+      <p>This table reserved</p>
+      <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+      <!-- <button (click)="reserveTable(table, $event)">Reserve Table</button> -->
     </div>
   </div>
 </div>

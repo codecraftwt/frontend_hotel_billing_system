@@ -153,31 +153,35 @@ export class SocketService {
       foodItemId
     })
   }
-  updateOrderQty(tableNo:any,foodItemId:any,quantity:any):Observable<any>{
+  updateOrderQty(tableNo:any,foodItemId:any,quantity:any,createdAt:any):Observable<any>{
     return this.http.put(this.updateapiUrl,{
       tableNo,
       foodItemId,
-      quantity
+      quantity,
+      createdAt
     })
   }
-  updateOrderNote(tableNo:any,foodItemId:any,orderNote:any):Observable<any>{
+  updateOrderNote(tableNo:any,foodItemId:any,orderNote:any,createdAt:any):Observable<any>{
     return this.http.put(this.updateOrderNoteapiUrl,{
       tableNo,
       foodItemId,
-      orderNote
+      orderNote,
+      createdAt
     })
   }
-  deleteOrder(tableNo:any,foodItemId:any):Observable<any>{
+  deleteOrder(tableNo:any,foodItemId:any,createdAt:any):Observable<any>{
     return this.http.put(this.deleteapiUrl,{
       tableNo,
       foodItemId,
+      createdAt
     })
   }
-  updateFoodItemStatus(tableNo:any,foodItemId:any,status:any):Observable<any>{
+  updateFoodItemStatus(tableNo:any,foodItemId:any,status:any,createdAt:any):Observable<any>{
     return this.http.put<any>(this.updateFoodItemStatusapiUrl,{
       tableNo,
       foodItemId,
-      status
+      status,
+      createdAt
     })
   }
   updateOrderKotStatus(tableNo:any,newKotStatus:any):Observable<any>{

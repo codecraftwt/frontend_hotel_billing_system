@@ -31,8 +31,8 @@
             <p class="note">{{subItem.orderNote}}</p>
           </div>
           <div class="btns">
-            <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'working')">Cooking..</button>
-            <button class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'ready')">Ready</button>
+            <button *ngIf="subItem.status=='on hold'" class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'working',subItem.createdAt)">Start cooking..</button>
+            <button *ngIf="subItem.status=='working'" class="btn" (click)="statusUpdate(item.tableNo,subItem.foodItemId,'ready',subItem.createdAt)">Ready</button>
           </div>
         </div>
       </div>
