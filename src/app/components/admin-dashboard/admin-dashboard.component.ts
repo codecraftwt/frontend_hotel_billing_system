@@ -1,7 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 import { GridOptions } from 'ag-grid-community';
+interface Order {
+  id: string;
+  customerName: string;
+  customerAvatar: string;
+  items: string;
+  total: number;
+  status: string;
+}
 
+interface Staff {
+  id: number;
+  name: string;
+  position: string;
+  shift: string;
+  status: string;
+}
+
+interface InventoryItem {
+  id: number;
+  name: string;
+  quantity: number;
+  unit: string;
+  stock: number;
+}
+
+interface MenuItem {
+  name: string;
+  orderCount: number;
+}
+
+interface Reservation {
+  name: string;
+  time: string;
+  guests: number;
+}
+
+interface FinancialInsight {
+  name: string;
+  value: string;
+  trend: 'up' | 'down';
+  icon: string;
+}
+
+interface CustomerFeedback {
+  customerName: string;
+  rating: number;
+  comment: string;
+}
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -75,4 +122,96 @@ export class AdminDashboardComponent implements OnInit {
       console.error('Chart container not found');
     }
   }
+
+  totalOrders = 1234;
+  revenue = 23456;
+  averageOrderValue = 19.50;
+  customerSatisfaction = 4.8;
+
+  recentOrders: Order[] = [
+    {
+      id: "ORD001",
+      customerName: "Alice Johnson",
+      customerAvatar: "/assets/placeholder.svg",
+      items: "Burger, Fries, Soda",
+      total: 15.99,
+      status: "Completed"
+    },
+    {
+      id: "ORD002",
+      customerName: "Bob Smith",
+      customerAvatar: "/assets/placeholder.svg",
+      items: "Pizza, Salad, Beer",
+      total: 22.50,
+      status: "In Progress"
+    },
+    {
+      id: "ORD003",
+      customerName: "Carol Williams",
+      customerAvatar: "/assets/placeholder.svg",
+      items: "Steak, Mashed Potatoes, Wine",
+      total: 35.99,
+      status: "Completed"
+    },
+    {
+      id: "ORD004",
+      customerName: "David Brown",
+      customerAvatar: "/assets/placeholder.svg",
+      items: "Sushi Platter, Green Tea",
+      total: 28.75,
+      status: "In Progress"
+    },
+    {
+      id: "ORD005",
+      customerName: "Eva Davis",
+      customerAvatar: "/assets/placeholder.svg",
+      items: "Pasta, Garlic Bread, Tiramisu",
+      total: 24.50,
+      status: "Completed"
+    }
+  ];
+
+  staffList: Staff[] = [
+    { id: 1, name: "John Doe", position: "Chef", shift: "10:00 AM - 6:00 PM", status: "On Duty" },
+    { id: 2, name: "Jane Smith", position: "Waiter", shift: "12:00 PM - 8:00 PM", status: "On Duty" },
+    { id: 3, name: "Mike Johnson", position: "Bartender", shift: "4:00 PM - 12:00 AM", status: "Off Duty" },
+    { id: 4, name: "Sarah Brown", position: "Host", shift: "11:00 AM - 7:00 PM", status: "On Duty" },
+    { id: 5, name: "Chris Lee", position: "Kitchen Staff", shift: "9:00 AM - 5:00 PM", status: "On Break" }
+  ];
+
+  inventoryItems: InventoryItem[] = [
+    { id: 1, name: "Chicken Breast", quantity: 50, unit: "lbs", stock: 60 },
+    { id: 2, name: "Tomatoes", quantity: 30, unit: "lbs", stock: 40 },
+    { id: 3, name: "Olive Oil", quantity: 5, unit: "liters", stock: 70 },
+    { id: 4, name: "Pasta", quantity: 20, unit: "lbs", stock: 30 },
+    { id: 5, name: "Red Wine", quantity: 10, unit: "bottles", stock: 15 }
+  ];
+
+  popularItems: MenuItem[] = [
+    { name: "Margherita Pizza", orderCount: 145 },
+    { name: "Chicken Caesar Salad", orderCount: 120 },
+    { name: "Beef Burger", orderCount: 110 },
+    { name: "Spaghetti Carbonara", orderCount: 95 },
+    { name: "Grilled Salmon", orderCount: 85 }
+  ];
+
+  upcomingReservations: Reservation[] = [
+    { name: "Johnson Family", time: "Today, 7:00 PM", guests: 4 },
+    { name: "Sarah & Friends", time: "Today, 8:30 PM", guests: 6 },
+    { name: "Mr. & Mrs. Smith", time: "Tomorrow, 6:45 PM", guests: 2 },
+    { name: "Birthday Party", time: "Tomorrow, 7:30 PM", guests: 10 }
+  ];
+
+  financialInsights: FinancialInsight[] = [
+    { name: "Daily Revenue", value: "$3,456", trend: "up", icon: "dollar-sign" },
+    { name: "Monthly Expenses", value: "$12,345", trend: "down", icon: "shopping-cart" },
+    { name: "Profit Margin", value: "22%", trend: "up", icon: "trending-up" },
+    { name: "Average Table Turnover", value: "1.5 hours", trend: "up", icon: "clock" }
+  ];
+
+  customerFeedback: CustomerFeedback[] = [
+    { customerName: "Emily W.", rating: 5, comment: "Excellent food and service! Will definitely come back." },
+    { customerName: "Michael R.", rating: 4, comment: "Great atmosphere, but the wait was a bit long." },
+    { customerName: "Sophia L.", rating: 5, comment: "The new menu items are fantastic. Loved the experience!" }
+  ];
 }

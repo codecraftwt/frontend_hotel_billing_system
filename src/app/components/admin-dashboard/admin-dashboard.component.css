@@ -1,37 +1,239 @@
-/* admin-dashboard.component.css */
-
-/* Make sure the container takes up the desired width and height */
+/* 
 .ag-grid-container {
-  width: 80vw; /* Adjust this value to fit your needs (e.g., 80% of viewport width) */
-  height: calc(100vh - 450px); /* Adjust height to fit within the viewport minus any headers or margins */
+  width: 80vw; 
+  height: calc(100vh - 450px); 
   display: flex;
-  justify-content: center; /* Center the grid horizontally */
-  align-items: center; /* Center the grid vertically */
+  justify-content: center; 
+  align-items: center; 
 }
 
-/* Ensure the AG Grid takes full width and height of the container */
 .ag-theme-alpine {
   width: 100%;
   height: 100%;
 }
 
-/* Example of responsive adjustments */
-/* Example of responsive adjustments */
+
 @media (max-width: 768px) {
   .ag-grid-container {
-    width: 100%; /* Full width on smaller screens */
-    height: calc(100vh - 450px); /* Adjust for smaller screens if necessary */
+    width: 100%; 
+    height: calc(100vh - 450px); 
   }
 }
 
 @media (min-width: 769px) {
   .ag-grid-container {
-    width: 80vw; /* Adjust for larger screens if necessary */
-    height: calc(100vh - 450px); /* Adjust height accordingly */
+    width: 80vw; 
+    height: calc(100vh - 450px); 
   }
 }
-/* Style for the chart container */
+
 #chartContainer {
-  height: 400px; /* Height of the chart */
-  width: 100%; /* Full width */
+  height: 400px; 
+  width: 100%;
+} */
+.dashboard {
+  padding: 2rem;
+  background-color: #373737;
+  min-height: 100vh;
+  width: 94vw;
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.metrics-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.grid-2-col {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.grid-3-col {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background-color: #494a4b;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  color: white;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.metric {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.metric-change {
+  font-size: 0.75rem;
+  color: #c1cbdf;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-default {
+  background-color: #10b981;
+  color: white;
+}
+
+.badge-secondary {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+.list-unstyled{
+  list-style: none;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-muted {
+  color: #c5d1e4;
+}
+
+.progress-bar {
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: #10b981;
+  height: 100%;
+}
+
+.text-red-500 {
+  color: #ef4444;
+}
+
+.text-green-500 {
+  color: #10b981;
+}
+
+.text-yellow-400 {
+  color: #fbbf24;
+}
+
+.text-gray-300 {
+  color: #d1d5db;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.border-b {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.last\:border-b-0:last-child {
+  border-bottom: none;
+}
+
+.last\:pb-0:last-child {
+  padding-bottom: 0;
+}
+
+/* Icons */
+[class^="icon-"], [class*=" icon-"] {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .grid-2-col, .grid-3-col {
+    grid-template-columns: 1fr;
+  }
 }
