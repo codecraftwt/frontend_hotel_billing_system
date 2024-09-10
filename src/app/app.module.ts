@@ -20,6 +20,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
+// import 'ag-grid-enterprise'; 
+
 @NgModule({
   declarations: [
     AppComponent,

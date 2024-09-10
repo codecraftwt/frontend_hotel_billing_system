@@ -1,8 +1,13 @@
-<p>admin-dashboard works!</p>
-<ag-grid-angular
-  style="width: 100%; height: 400px;"
-  class="ag-theme-alpine"
-  [rowData]="rowData"
-  [columnDefs]="columnDefs">
-</ag-grid-angular>
+<!-- admin-dashboard.component.html -->
 
+<div class="ag-grid-container">
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData"
+    [gridOptions]="gridOptions">
+  </ag-grid-angular>
+</div>
+
+<!-- Container for AG Grid chart -->
+<div id="chartContainer" style="height: 400px; width: 100%;"></div>

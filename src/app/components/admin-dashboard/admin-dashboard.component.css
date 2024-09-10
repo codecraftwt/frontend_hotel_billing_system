@@ -1,8 +1,37 @@
+/* admin-dashboard.component.css */
+
+/* Make sure the container takes up the desired width and height */
+.ag-grid-container {
+  width: 80vw; /* Adjust this value to fit your needs (e.g., 80% of viewport width) */
+  height: calc(100vh - 450px); /* Adjust height to fit within the viewport minus any headers or margins */
+  display: flex;
+  justify-content: center; /* Center the grid horizontally */
+  align-items: center; /* Center the grid vertically */
+}
+
+/* Ensure the AG Grid takes full width and height of the container */
 .ag-theme-alpine {
-    --ag-background-color: #ffffff;
-    --ag-border-color: #dcdcdc;
-    --ag-header-background-color: #f4f4f4;
-    --ag-header-foreground-color: #000000;
-    --ag-row-hover-color: #e0e0e0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Example of responsive adjustments */
+/* Example of responsive adjustments */
+@media (max-width: 768px) {
+  .ag-grid-container {
+    width: 100%; /* Full width on smaller screens */
+    height: calc(100vh - 450px); /* Adjust for smaller screens if necessary */
   }
-  
+}
+
+@media (min-width: 769px) {
+  .ag-grid-container {
+    width: 80vw; /* Adjust for larger screens if necessary */
+    height: calc(100vh - 450px); /* Adjust height accordingly */
+  }
+}
+/* Style for the chart container */
+#chartContainer {
+  height: 400px; /* Height of the chart */
+  width: 100%; /* Full width */
+}
