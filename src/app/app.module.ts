@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
+import { WebcamModule } from 'ngx-webcam';
+import { UserComponent } from './subComponents/user/user.component';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { AgGridModule } from 'ag-grid-angular';
     FoodItemsListComponent,
     BillingSystemComponent,
     PrintPageComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    UserComponent
   ],
   imports: [
     AgGridModule,
@@ -48,8 +51,11 @@ import { AgGridModule } from 'ag-grid-angular';
       timeOut: 3000, // Duration for which the toast is displayed
       preventDuplicates: true // Prevent duplicate toasts
     }),
+    WebcamModule,
+    FormsModule 
   ],
   providers: [TableService,MenuService,DatePipe ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
 export class AppModule { }

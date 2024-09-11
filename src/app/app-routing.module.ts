@@ -5,6 +5,7 @@ import { MenusComponent } from './components/menus/menus.component';
 import { KdsComponent } from './components/kds/kds.component';
 import { VoiceRecognitionComponent } from './voice-recognition/voice-recognition.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { UserComponent } from './subComponents/user/user.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'voice',
     component:VoiceRecognitionComponent
+  },
+  {
+    path:'user',
+    component:UserComponent
   }
 ];
 

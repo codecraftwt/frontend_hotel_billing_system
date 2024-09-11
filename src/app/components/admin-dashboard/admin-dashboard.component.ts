@@ -67,7 +67,7 @@ export class AdminDashboardComponent implements OnInit {
     { headerName: 'Customer Name', field: 'customerName', sortable: true, filter: true },
   ];
 
-  rowData: any[] = [];
+  rowData: any;
   gridOptions: GridOptions = {
     pagination: true,
     paginationPageSize: 10,
@@ -91,16 +91,11 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.getAllOrdersAdminItems().subscribe(res => {
-      this.rowData = res.map(order => ({
-        _id: order._id,
-        tableNo: order.tableNo,
-        totalPrice: order.totalPrice,
-        discountPercent: order.discountPercent,
-        afterDiscountPrice: order.afterDiscountPrice,
-        orderStatus: order.orderStatus,
-        kotStatus: order.kotStatus,
-        customerName: order.customerName || 'N/A',
-      }));
+      console.log(res,'res');
+      // console.log(JSON.stringify(res),'res');
+      this.rowData = res
+      console.log(JSON.stringify(this.rowData?.recentOrders),'this.rowData ');
+      
     });
   }
 

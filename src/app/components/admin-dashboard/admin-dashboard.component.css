@@ -237,3 +237,11 @@ th, td {
     grid-template-columns: 1fr;
   }
 }
+
+.table td {
+  /* Ensure the cell has a maximum width */
+  max-width: 150px; /* Adjust as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

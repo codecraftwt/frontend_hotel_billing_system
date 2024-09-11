@@ -13,7 +13,7 @@
 
 
 <div class="dashboard">
-  <h1 class="dashboard-title">Restaurant Dashboard</h1>
+  <!-- <h1 class="dashboard-title">Restaurant Dashboard</h1> -->
   
   <div class="metrics-grid">
     <div class="card">
@@ -22,7 +22,7 @@
         <i class="icon-utensils"></i>
       </div>
       <div class="card-content">
-        <div class="metric">{{ totalOrders }}</div>
+        <div class="metric">{{ rowData?.totalOrders?.count}}</div>
         <p class="metric-change">+15.5% from last month</p>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <i class="icon-dollar-sign"></i>
       </div>
       <div class="card-content">
-        <div class="metric">${{ revenue }}</div>
+        <div class="metric">{{ rowData?.revenue?.thisMonth | currency:'INR':'symbol':'1.2-2'}}</div>
         <p class="metric-change">+12.3% from last month</p>
       </div>
     </div>
@@ -42,7 +42,7 @@
         <i class="icon-bar-chart"></i>
       </div>
       <div class="card-content">
-        <div class="metric">${{ averageOrderValue }}</div>
+        <div class="metric">{{ rowData?.averageOrderValue?.thisMonth | currency:'INR':'symbol':'1.2-2'}}</div>
         <p class="metric-change">+2.5% from last month</p>
       </div>
     </div>
@@ -52,14 +52,14 @@
         <i class="icon-star"></i>
       </div>
       <div class="card-content">
-        <div class="metric">{{ customerSatisfaction }}/5</div>
+        <div class="metric">{{ rowData?.customerSatisfaction?.rating}}/5</div>
         <p class="metric-change">+0.2 from last month</p>
       </div>
     </div>
   </div>
 
   <div class="grid-2-col">
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-header">
         <h2 class="card-title">Recent Orders</h2>
       </div>
@@ -74,7 +74,7 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+                    <tbody>
             <tr *ngFor="let order of recentOrders">
               <td class="font-medium">{{ order.id }}</td>
               <td>
@@ -88,6 +88,49 @@
               <td>
                 <span class="badge" [ngClass]="{'badge-default': order.status === 'Completed', 'badge-secondary': order.status !== 'Completed'}">
                   {{ order.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Recent Orders</h2>
+      </div>
+      <div class="card-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of rowData?.recentOrders">
+              <td class="font-medium">{{ order._id }}</td>
+              <td>
+                <div class="flex-center">
+                  <!-- Assuming you don't have an avatar in the provided response data -->
+                  <!-- <img [src]="order.customerAvatar" [alt]="order.customerName" class="avatar"> -->
+                  {{ order.customerName }}
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li *ngFor="let item of order.ordersList">
+                    {{ item.foodItemName }} ({{ item.quantity }})
+                  </li>
+                </ul>
+              </td>
+              <td>{{ order.afterDiscountPrice.toFixed(2) | currency:'INR':'symbol':'1.2-2' }}</td>
+              <td>
+                <span class="badge" [ngClass]="{'badge-default': order.orderStatus === 'completed', 'badge-secondary': order.orderStatus !== 'completed'}">
+                  {{ order.orderStatus }}
                 </span>
               </td>
             </tr>
@@ -155,9 +198,9 @@
       </div>
       <div class="card-content">
         <ul class="space-y-4 list-unstyled">
-          <li *ngFor="let item of popularItems" class="flex-between">
-            <span>{{ item.name }}</span>
-            <span class="text-muted">{{ item.orderCount }} orders</span>
+          <li *ngFor="let item of rowData?.popularMenuItems" class="flex-between">
+            <span>{{ item.label }}</span>
+            <span class="text-muted">{{ item.value }} orders</span>
           </li>
         </ul>
       </div>
