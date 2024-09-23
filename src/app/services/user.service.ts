@@ -49,4 +49,14 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/logout`, { base64Image });
   }
 
+  post(image:any,image2:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/compare`,{image})
+  }
+  upload(name:any,image:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/user`,{name,image})
+  }
+  compared(image:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/compare-with-stored`,{image})
+  }
+
 }

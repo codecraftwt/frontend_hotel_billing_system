@@ -22,6 +22,8 @@ import { DatePipe } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { WebcamModule } from 'ngx-webcam';
 import { UserComponent } from './subComponents/user/user.component';
+import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
+import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -37,7 +39,10 @@ import { UserComponent } from './subComponents/user/user.component';
     BillingSystemComponent,
     PrintPageComponent,
     AdminDashboardComponent,
-    UserComponent
+    UserComponent,
+    PinEntryComponent,
+    CustomModalComponent,
+    
   ],
   imports: [
     AgGridModule,

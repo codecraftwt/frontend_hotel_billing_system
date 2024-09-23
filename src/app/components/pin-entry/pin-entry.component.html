@@ -1,0 +1,54 @@
+<div class="pin-container">
+    <h2>Enter PIN</h2>
+    <form (ngSubmit)="onSubmit()" #pinForm="ngForm">
+      <div class="pin-inputs">
+        <input
+          type="password"
+          maxLength="1"
+          [(ngModel)]="pin1"
+          name="pin1"
+          #pin1Input
+          class="pin-input"
+          (input)="focusNext($event, pin2Input)"
+          required
+        />
+        <input
+          type="password"
+          maxLength="1"
+          [(ngModel)]="pin2"
+          name="pin2"
+          #pin2Input
+          class="pin-input"
+          (input)="focusNext($event, pin3Input)"
+          (keydown)="handleBackspace($event, pin1Input)"
+          required
+        />
+        <input
+          type="password"
+          maxLength="1"
+          [(ngModel)]="pin3"
+          name="pin3"
+          #pin3Input
+          class="pin-input"
+          (input)="focusNext($event, pin4Input)"
+          (keydown)="handleBackspace($event, pin2Input)"
+          required
+        />
+        <input
+          type="password"
+          maxLength="1"
+          [(ngModel)]="pin4"
+          name="pin4"
+          #pin4Input
+          class="pin-input"
+          (keydown)="handleBackspace($event, pin3Input)"
+          required
+        />
+      </div>
+      <button type="submit" [disabled]="!isPinComplete()">Submit</button>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </form>
+  </div>
+  
+
+  

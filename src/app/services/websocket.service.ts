@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 @Injectable({
@@ -19,4 +20,6 @@ export class WebSocketService {
   on(event: string, callback: (data: any) => void) {
     this.socket.on(event, callback);
   }
+
+  
 }

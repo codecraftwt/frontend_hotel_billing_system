@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 import { GridOptions } from 'ag-grid-community';
+import { DatePipe } from '@angular/common';
 interface Order {
   id: string;
   customerName: string;
@@ -66,6 +67,7 @@ export class AdminDashboardComponent implements OnInit {
     { headerName: 'KOT Status', field: 'kotStatus', sortable: true, filter: true },
     { headerName: 'Customer Name', field: 'customerName', sortable: true, filter: true },
   ];
+  staffList:any[]=[]
 
   rowData: any;
   gridOptions: GridOptions = {
@@ -87,14 +89,18 @@ export class AdminDashboardComponent implements OnInit {
     }
   };
 
-  constructor(private socketService: SocketService) { }
+  constructor(private socketService: SocketService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.socketService.getAllUser().subscribe(res=>{
+      console.log(res,'user=====');
+      this.staffList=res
+    })
     this.socketService.getAllOrdersAdminItems().subscribe(res => {
       console.log(res,'res');
       // console.log(JSON.stringify(res),'res');
       this.rowData = res
-      console.log(JSON.stringify(this.rowData?.recentOrders),'this.rowData ');
+      // console.log(JSON.stringify(this.rowData?.recentOrders),'this.rowData ');
       
     });
   }
@@ -166,13 +172,13 @@ export class AdminDashboardComponent implements OnInit {
     }
   ];
 
-  staffList: Staff[] = [
-    { id: 1, name: "John Doe", position: "Chef", shift: "10:00 AM - 6:00 PM", status: "On Duty" },
-    { id: 2, name: "Jane Smith", position: "Waiter", shift: "12:00 PM - 8:00 PM", status: "On Duty" },
-    { id: 3, name: "Mike Johnson", position: "Bartender", shift: "4:00 PM - 12:00 AM", status: "Off Duty" },
-    { id: 4, name: "Sarah Brown", position: "Host", shift: "11:00 AM - 7:00 PM", status: "On Duty" },
-    { id: 5, name: "Chris Lee", position: "Kitchen Staff", shift: "9:00 AM - 5:00 PM", status: "On Break" }
-  ];
+  // staffList: Staff[] = [
+  //   { id: 1, name: "John Doe", position: "Chef", shift: "10:00 AM - 6:00 PM", status: "On Duty" },
+  //   { id: 2, name: "Jane Smith", position: "Waiter", shift: "12:00 PM - 8:00 PM", status: "On Duty" },
+  //   { id: 3, name: "Mike Johnson", position: "Bartender", shift: "4:00 PM - 12:00 AM", status: "Off Duty" },
+  //   { id: 4, name: "Sarah Brown", position: "Host", shift: "11:00 AM - 7:00 PM", status: "On Duty" },
+  //   { id: 5, name: "Chris Lee", position: "Kitchen Staff", shift: "9:00 AM - 5:00 PM", status: "On Break" }
+  // ];
 
   inventoryItems: InventoryItem[] = [
     { id: 1, name: "Chicken Breast", quantity: 50, unit: "lbs", stock: 60 },
@@ -209,4 +215,14 @@ export class AdminDashboardComponent implements OnInit {
     { customerName: "Michael R.", rating: 4, comment: "Great atmosphere, but the wait was a bit long." },
     { customerName: "Sophia L.", rating: 5, comment: "The new menu items are fantastic. Loved the experience!" }
   ];
+
+  convertToIST(utcDate: string | null): string {
+    if (!utcDate) {
+      return '--'; // Return '--' for null case
+    }
+
+    const date = new Date(utcDate);
+    return this.datePipe.transform(date, 'medium', 'UTC+5:30') || '--'; // Return '--' for invalid date
+  }
+
 }

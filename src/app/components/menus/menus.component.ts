@@ -50,17 +50,12 @@ export class MenusComponent implements OnInit {
 
     //food Items service
 
-    this.socketService.getFoodCategory().subscribe(data => {
-      console.log(data,'data food category');
-      this.foodCatagoriesData=data
-      
-    });
+    
     // this.socketService.getOrdersItems().subscribe(res=>{
     //   console.log(res,'res======');
       
     // })
     this.socketService.getFoodItems().subscribe(data => {
-      console.log(data,'data items');
       // console.log(JSON.stringify(data),'data items');
       this.data = data;
       // console.log(this.filteredData==[],'filteredData==[]');
@@ -68,6 +63,24 @@ export class MenusComponent implements OnInit {
       // this.filteredData = data;
       
     });
+    setTimeout(() => {
+      this.socketService.getFoodCategory().subscribe(res => {
+        // this.foodCatagoriesData=data
+        res.forEach(category => {
+          console.log(category,'category');
+          
+          this.foodCatagoriesData.push({
+            _id:category._id,
+            name: category.name,
+            count: this.data.filter(item => item.category.name === category.name).length,
+          });
+        });
+
+        console.log(this.foodCatagoriesData,'this.foodCatagoriesData');
+        
+      });
+    }, 500);
+
   }
 
   getFoodList(data:any){

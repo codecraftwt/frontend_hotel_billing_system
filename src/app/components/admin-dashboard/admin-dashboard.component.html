@@ -154,12 +154,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let staff of staffList">
-              <td class="font-medium">{{ staff.name }}</td>
-              <td>{{ staff.position }}</td>
-              <td>{{ staff.shift }}</td>
+              <td class="font-medium">{{ staff.username}}</td>
+              <td>{{ staff.role }}</td>
+              <td>{{ convertToIST(staff.todayTimesheet[0].checkInTime) }} - {{ convertToIST(staff.todayTimesheet[0].checkOutTime) || null }}</td>
               <td>
-                <span class="badge" [ngClass]="{'badge-default': staff.status === 'On Duty', 'badge-secondary': staff.status !== 'On Duty'}">
-                  {{ staff.status }}
+                <span class="badge" [ngClass]="{'badge-default': staff.todayTimesheet[0].status === 'on duty', 'badge-secondary': staff.todayTimesheet[0].status !== 'on duty'}">
+                  {{ staff.todayTimesheet[0].status}}
                 </span>
               </td>
             </tr>

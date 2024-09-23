@@ -6,6 +6,7 @@ import { KdsComponent } from './components/kds/kds.component';
 import { VoiceRecognitionComponent } from './voice-recognition/voice-recognition.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserComponent } from './subComponents/user/user.component';
+import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,7 @@ const routes: Routes = [
   },
   {
     path:'user',
-    component:UserComponent
+    component:PinEntryComponent
   }
 ];
 

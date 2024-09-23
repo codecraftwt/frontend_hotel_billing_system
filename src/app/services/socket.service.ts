@@ -32,6 +32,11 @@ export class SocketService {
   private updateTableStatusapiUrl=`${this.Base_URL}/api/tables/`
   private statusUrl=`${this.Base_URL}/api/status`
   private baseUrl = `${this.Base_URL}/api/foodItems`
+  // private allUser = `${this.Base_URL}/api/alluser`
+  private allUser = `${this.Base_URL}/api/alluser-timeSheet`
+  // private allUserTimeSheet = `${this.Base_URL}/api/alluser-timeSheet`
+  private signup=`${this.Base_URL}/api/signup`
+  private login=`${this.Base_URL}/api/login`
 
   private diningTablesSubject = new BehaviorSubject<any[]>([]);
   private foodCategorySubject = new BehaviorSubject<any[]>([]);
@@ -39,6 +44,7 @@ export class SocketService {
   private ordersSubject = new BehaviorSubject<any[]>([]);
   private getAllordersSubject = new BehaviorSubject<any[]>([]);
   private getAllordersAdminSubject = new BehaviorSubject<any[]>([]);
+  private getAllUsers = new BehaviorSubject<any[]>([]);
 
   constructor(private http: HttpClient) {
     this.socket = io(`${this.Base_URL}`);
@@ -51,6 +57,7 @@ export class SocketService {
     this.fetchFoodItems()
     this.fetchAllOrders()
     this.fetchAllOrdersAdmin()
+    this.fetchAllUser()
 
     this.setupSocketListeners()
   }
@@ -64,6 +71,16 @@ export class SocketService {
         })
       )
       .subscribe(data => this.diningTablesSubject.next(data));
+  }
+  private fetchAllUser(): void {
+    this.http.get<any[]>(this.allUser)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching dining tables:', error);
+          return []; // Return an empty array in case of error
+        })
+      )
+      .subscribe(data => this.getAllUsers.next(data));
   }
   private fetchFoodCategory(): void {
     this.http.get<any[]>(this.foodCategoryapiUrl)
@@ -124,10 +141,14 @@ export class SocketService {
     this.socket.on('newFoodItem', (data: any[]) => {this.foodItemsSubject.next(data)});
     this.socket.on('orderUpdated', (data: any[]) => {this.ordersSubject.next(data)});
     this.socket.on('orderUpdated', (data: any[]) => {this.fetchAllOrders(),this.fetchDiningTables(),this.fetchAllOrdersAdmin()});
+    this.socket.on('user', (data: any[]) => {this.fetchAllUser()});
   }
   
   getDiningTables(): Observable<any[]> {
     return this.diningTablesSubject.asObservable();
+  }
+  getAllUser(): Observable<any[]> {
+    return this.getAllUsers.asObservable();
   }
   getFoodCategory(): Observable<any[]> {
     return this.foodCategorySubject.asObservable();
@@ -151,6 +172,17 @@ export class SocketService {
     return this.http.post<any>(this.ordersapiUrl,{
       tableNo,
       foodItemId
+    })
+  }
+  signUp(username:any,usePass:any):Observable<any>{
+    return this.http.post<any>(this.signup,{
+      username,
+      usePass
+    })
+  }
+  logIn(usePass:any):Observable<any>{
+    return this.http.post<any>(this.login,{
+      usePass
     })
   }
   updateOrderQty(tableNo:any,foodItemId:any,quantity:any,createdAt:any):Observable<any>{
