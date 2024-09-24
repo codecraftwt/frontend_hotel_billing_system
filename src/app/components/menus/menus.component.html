@@ -1,4 +1,7 @@
-<div class="menu-container">
+<div class="menu-container loadingC" *ngIf="foodCatagoriesData.length == 0">
+  <img src="../../../assets/logo2.png" width="100px" height="100px" alt="">
+</div>
+<div class="menu-container"  *ngIf="foodCatagoriesData.length != 0">
   <div class="food-menu">
     <div class="food-list">
       <app-food-catagories-list

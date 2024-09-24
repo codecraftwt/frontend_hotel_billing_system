@@ -15,60 +15,133 @@
       </li>
     </ul>
   </div>
-
-  <div class="table" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}" *ngFor="let table of diningTables"
-    (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
-    <div class="table-number">{{ table.tableNumber }}</div>
-
-    <!-- Reusable Chair Component -->
-    <ng-container *ngFor="let position of ['top', 'right', 'bottom','left']">
-      <div class="chair chair-{{position}}">
-        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Chair SVG Paths -->
-          <path
-            d="M30.1838 28.1717C30.6166 28.1717 31.0385 28.3434 31.3631 28.676L34.3491 31.7983C34.9657 32.442 34.9333 33.4613 34.2842 34.0729C33.635 34.6845 32.6072 34.663 31.9906 34.0193L29.0045 30.897C28.3879 30.2532 28.4095 29.2339 29.0586 28.6224C29.3724 28.3219 29.7727 28.1825 30.173 28.1825L30.1838 28.1717Z"
-            fill="#2D2D2D" />
-          <path
-            d="M5.02999 28.1717C5.43029 28.1717 5.83059 28.3219 6.14434 28.6116C6.79347 29.2232 6.8151 30.2425 6.19843 30.8863L3.21242 34.0085C2.59575 34.6523 1.56795 34.6738 0.918822 34.0622C0.26969 33.4506 0.248051 32.4313 0.864727 31.7875L3.85073 28.6653C4.16448 28.3327 4.59724 28.161 5.02999 28.161L5.02999 28.1717Z"
-            fill="#2D2D2D" />
-          <path
-            d="M2.83366 13.8854L2.82284 13.8854C1.43803 15.2695 0.669884 17.1257 0.669884 19.057L0.669884 20.8167C0.669884 23.7995 1.83832 26.6642 3.91554 28.8208L5.59247 30.5483C7.46413 32.4796 9.95247 33.7027 12.6247 34.0032L16.314 34.4323C17.2228 34.5396 18.1424 34.5396 19.0511 34.4323L22.4591 34.0246C25.1205 33.7027 27.598 32.4796 29.4589 30.5697L31.0709 28.9067C33.2022 26.6964 34.3707 23.7565 34.3166 20.7094L34.2841 18.9068C34.2516 17.0614 33.5268 15.3017 32.2393 13.9713C31.1683 12.8661 29.6861 12.2331 28.139 12.2331L6.84746 12.2331C5.34364 12.2331 3.89391 12.8232 2.83366 13.8854Z"
-            fill="#838383" />
-          <path
-            d="M2.83366 12.8177L2.82284 12.8177C1.43803 14.2018 0.669884 16.058 0.669884 17.9893L0.669884 19.7489C0.669884 22.7317 1.83832 25.5965 3.91554 27.7531L5.59247 29.4805C7.46413 31.4118 9.95247 32.635 12.6247 32.9354L16.314 33.3646C17.2228 33.4719 18.1424 33.4719 19.0511 33.3646L22.4591 32.9569C25.1205 32.635 27.598 31.4118 29.4589 29.502L31.0709 27.8389C33.2022 25.6287 34.3707 22.6888 34.3166 19.6416L34.2841 17.8391C34.2516 15.9936 33.5268 14.234 32.2393 12.9035C31.1683 11.7984 29.6861 11.1654 28.139 11.1654L6.84746 11.1654C5.34364 11.1654 3.89391 11.7555 2.83366 12.8177Z"
-            [attr.fill]="table.status == 'KOT table' ? '#e3e3dc' : '#2D2D2D'" />
-          <path
-            d="M33.2886 3.50433L31.9903 2.52795C30.3675 1.31552 28.3985 0.650297 26.3645 0.650297L8.92451 0.650297C6.85811 0.650297 4.8458 1.33698 3.21215 2.59233L2.01125 3.51506C0.799542 4.44852 0.81036 6.2618 2.04371 7.18453L4.13175 8.7403C5.17036 9.51282 6.44699 9.93127 7.74525 9.93127L27.5221 9.93127C28.7988 9.93127 30.0429 9.52356 31.0815 8.78322L33.2561 7.20599C34.5111 6.29399 34.5219 4.43779 33.2886 3.50433Z"
-            fill="#838383" />
-          <path
-            d="M31.7896 5.29396L30.6012 4.27808C29.1158 3.01659 27.3135 2.32445 25.4518 2.32445L9.48845 2.32445C7.59701 2.32445 5.75509 3.03892 4.25977 4.34506L3.16056 5.30513C2.05144 6.27636 2.06134 8.16301 3.19026 9.12308L5.10151 10.7418C6.05218 11.5456 7.22071 11.981 8.40904 11.981L26.5114 11.981C27.6799 11.981 28.8187 11.5567 29.7694 10.7865L31.7599 9.1454C32.9086 8.1965 32.9185 6.2652 31.7896 5.29396Z"
-            fill="#212529" />
-          <path
-            d="M33.2886 4.48114L31.9903 3.50476C30.3675 2.29233 28.3985 1.6271 26.3645 1.6271L8.92451 1.6271C6.85811 1.6271 4.8458 2.31379 3.21215 3.56913L2.01125 4.49187C0.799542 5.42533 0.81036 7.23861 2.04371 8.16134L4.13175 9.71711C5.17036 10.4896 6.44699 10.9081 7.74525 10.9081L27.5221 10.9081C28.7988 10.9081 30.0429 10.5004 31.0815 9.76003L33.2561 8.1828C34.5111 7.2708 34.5219 5.4146 33.2886 4.48114Z"
-            [attr.fill]="table.status == 'KOT table' ? 'white' : '#2D2D2D'" />
-        </svg>
+  <ng-container  *ngFor="let table of diningTables">
+    <ng-container *ngIf="!([15, 8,7,9,10].includes(table.tableNumber))">
+      <div class="table" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+        
+        <!-- Reusable Chair Component -->
+        
+           <div class="table-number">{{ table.tableNumber }}</div>
+           <ng-container *ngFor="let position of ['top', 'right', 'bottom','left']">
+             <!-- <div class="chair chair-{{position}}">
+               <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path
+                   d="M30.1838 28.1717C30.6166 28.1717 31.0385 28.3434 31.3631 28.676L34.3491 31.7983C34.9657 32.442 34.9333 33.4613 34.2842 34.0729C33.635 34.6845 32.6072 34.663 31.9906 34.0193L29.0045 30.897C28.3879 30.2532 28.4095 29.2339 29.0586 28.6224C29.3724 28.3219 29.7727 28.1825 30.173 28.1825L30.1838 28.1717Z"
+                   fill="#2D2D2D" />
+                 <path
+                   d="M5.02999 28.1717C5.43029 28.1717 5.83059 28.3219 6.14434 28.6116C6.79347 29.2232 6.8151 30.2425 6.19843 30.8863L3.21242 34.0085C2.59575 34.6523 1.56795 34.6738 0.918822 34.0622C0.26969 33.4506 0.248051 32.4313 0.864727 31.7875L3.85073 28.6653C4.16448 28.3327 4.59724 28.161 5.02999 28.161L5.02999 28.1717Z"
+                   fill="#2D2D2D" />
+                 <path
+                   d="M2.83366 13.8854L2.82284 13.8854C1.43803 15.2695 0.669884 17.1257 0.669884 19.057L0.669884 20.8167C0.669884 23.7995 1.83832 26.6642 3.91554 28.8208L5.59247 30.5483C7.46413 32.4796 9.95247 33.7027 12.6247 34.0032L16.314 34.4323C17.2228 34.5396 18.1424 34.5396 19.0511 34.4323L22.4591 34.0246C25.1205 33.7027 27.598 32.4796 29.4589 30.5697L31.0709 28.9067C33.2022 26.6964 34.3707 23.7565 34.3166 20.7094L34.2841 18.9068C34.2516 17.0614 33.5268 15.3017 32.2393 13.9713C31.1683 12.8661 29.6861 12.2331 28.139 12.2331L6.84746 12.2331C5.34364 12.2331 3.89391 12.8232 2.83366 13.8854Z"
+                   fill="#838383" />
+                 <path
+                   d="M2.83366 12.8177L2.82284 12.8177C1.43803 14.2018 0.669884 16.058 0.669884 17.9893L0.669884 19.7489C0.669884 22.7317 1.83832 25.5965 3.91554 27.7531L5.59247 29.4805C7.46413 31.4118 9.95247 32.635 12.6247 32.9354L16.314 33.3646C17.2228 33.4719 18.1424 33.4719 19.0511 33.3646L22.4591 32.9569C25.1205 32.635 27.598 31.4118 29.4589 29.502L31.0709 27.8389C33.2022 25.6287 34.3707 22.6888 34.3166 19.6416L34.2841 17.8391C34.2516 15.9936 33.5268 14.234 32.2393 12.9035C31.1683 11.7984 29.6861 11.1654 28.139 11.1654L6.84746 11.1654C5.34364 11.1654 3.89391 11.7555 2.83366 12.8177Z"
+                   [attr.fill]="table.status == 'KOT table' ? '#e3e3dc' : '#2D2D2D'" />
+                 <path
+                   d="M33.2886 3.50433L31.9903 2.52795C30.3675 1.31552 28.3985 0.650297 26.3645 0.650297L8.92451 0.650297C6.85811 0.650297 4.8458 1.33698 3.21215 2.59233L2.01125 3.51506C0.799542 4.44852 0.81036 6.2618 2.04371 7.18453L4.13175 8.7403C5.17036 9.51282 6.44699 9.93127 7.74525 9.93127L27.5221 9.93127C28.7988 9.93127 30.0429 9.52356 31.0815 8.78322L33.2561 7.20599C34.5111 6.29399 34.5219 4.43779 33.2886 3.50433Z"
+                   fill="#838383" />
+                 <path
+                   d="M31.7896 5.29396L30.6012 4.27808C29.1158 3.01659 27.3135 2.32445 25.4518 2.32445L9.48845 2.32445C7.59701 2.32445 5.75509 3.03892 4.25977 4.34506L3.16056 5.30513C2.05144 6.27636 2.06134 8.16301 3.19026 9.12308L5.10151 10.7418C6.05218 11.5456 7.22071 11.981 8.40904 11.981L26.5114 11.981C27.6799 11.981 28.8187 11.5567 29.7694 10.7865L31.7599 9.1454C32.9086 8.1965 32.9185 6.2652 31.7896 5.29396Z"
+                   fill="#212529" />
+                 <path
+                   d="M33.2886 4.48114L31.9903 3.50476C30.3675 2.29233 28.3985 1.6271 26.3645 1.6271L8.92451 1.6271C6.85811 1.6271 4.8458 2.31379 3.21215 3.56913L2.01125 4.49187C0.799542 5.42533 0.81036 7.23861 2.04371 8.16134L4.13175 9.71711C5.17036 10.4896 6.44699 10.9081 7.74525 10.9081L27.5221 10.9081C28.7988 10.9081 30.0429 10.5004 31.0815 9.76003L33.2561 8.1828C34.5111 7.2708 34.5219 5.4146 33.2886 4.48114Z"
+                   [attr.fill]="table.status == 'KOT table' ? 'white' : '#2D2D2D'" />
+               </svg>
+               
+             </div> -->
+             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
+           </ng-container>
+         
+        <div class="price" >
+          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+        <!-- <div class="popup" > -->
+          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+          <!-- <p>This table is blank. If you want to reserve it, please click on this button.</p> -->
+          <p>This table is blank. Click the button to reserve it.</p>
+          <!-- <p>Click to reserve this blank table.</p> -->
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+        </div>
+        <div class="popup" *ngIf="table.status == 'reserved table'">
+          <p>This table reserved</p>
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          <!-- <button (click)="reserveTable(table, $event)">Reserve Table</button> -->
+        </div>
       </div>
     </ng-container>
-    <div class="price" >
-      {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
-    </div>
-    <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
-    <!-- <div class="popup" > -->
-      <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
-      <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
-      <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
-      <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
-    </div>
-    <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
-      <!-- <p>This table is blank. If you want to reserve it, please click on this button.</p> -->
-      <p>This table is blank. Click the button to reserve it.</p>
-      <!-- <p>Click to reserve this blank table.</p> -->
-      <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
-    </div>
-    <div class="popup" *ngIf="table.status == 'reserved table'">
-      <p>This table reserved</p>
-      <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
-      <!-- <button (click)="reserveTable(table, $event)">Reserve Table</button> -->
-    </div>
-  </div>
+    <ng-container *ngIf="([8,9].includes(table.tableNumber))">
+      <div class="table table15" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+        
+        <!-- Reusable Chair Component -->
+        
+           <div class="table-number">{{ table.tableNumber }}</div>
+           <ng-container *ngFor="let position of ['bottom15']">
+             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair2'"></app-chair-icon>
+           </ng-container>
+           <ng-container *ngFor="let position of ['left15','top15']">
+            <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair3'"></app-chair-icon>
+           </ng-container>
+         
+        <div class="price" >
+          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+        <!-- <div class="popup" > -->
+          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+          <!-- <p>This table is blank. If you want to reserve it, please click on this button.</p> -->
+          <p>This table is blank. Click the button to reserve it.</p>
+          <!-- <p>Click to reserve this blank table.</p> -->
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+        </div>
+        <div class="popup" *ngIf="table.status == 'reserved table'">
+          <p>This table reserved</p>
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          <!-- <button (click)="reserveTable(table, $event)">Reserve Table</button> -->
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="([7,10].includes(table.tableNumber))">
+      <div class="table table7" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+           <div class="table-number">{{ table.tableNumber }}</div>
+           <ng-container *ngFor="let position of ['top', 'top1','top2', 'bottom','bottom1','bottom2']">
+             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
+           </ng-container>
+        <div class="price" >
+          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+        <!-- <div class="popup" > -->
+          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+        </div>
+        <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+          <!-- <p>This table is blank. If you want to reserve it, please click on this button.</p> -->
+          <p>This table is blank. Click the button to reserve it.</p>
+          <!-- <p>Click to reserve this blank table.</p> -->
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+        </div>
+        <div class="popup" *ngIf="table.status == 'reserved table'">
+          <p>This table reserved</p>
+          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          <!-- <button (click)="reserveTable(table, $event)">Reserve Table</button> -->
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>

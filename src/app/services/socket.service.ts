@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketService {
 
-  Base_URL:any=environment.apiUrl
+  Base_URL: any = environment.apiUrl
 
   private socket: Socket;
 
@@ -18,25 +18,26 @@ export class SocketService {
   private foodCategoryapiUrl = `${this.Base_URL}/api/foodCategory`;
   private foodItemsapiUrl = `${this.Base_URL}/api/foodItems`;
   private ordersapiUrl = `${this.Base_URL}/api/orders`; //get api
-  private updateapiUrl=`${this.Base_URL}/api/updateFoodItemQuantity`
-  private updateOrderNoteapiUrl=`${this.Base_URL}/api/updateOrderNote`
-  private deleteapiUrl=`${this.Base_URL}/api/deleteFoodItem`
-  private getallapiUrl=`${this.Base_URL}/api/getAllOrders`
-  private getallOrderAminapiUrl=`${this.Base_URL}/api/getAllOrdersAdmin`
-  private updateFoodItemStatusapiUrl=`${this.Base_URL}/api/updateFoodItemStatus`
-  private updateOrderKotStatusapiUrl=`${this.Base_URL}/api/updateOrderKotStatus`
-  private updatePaymentTypeapiUrl=`${this.Base_URL}/api/update-payment-type`
-  private updateDiscountapiUrl=`${this.Base_URL}/api/update-discount`
-  private addCustomerNameapiUrl=`${this.Base_URL}/api/add-customer-name`
-  private updateOrderStatusapiUrl=`${this.Base_URL}/api/orders/updateStatus`
-  private updateTableStatusapiUrl=`${this.Base_URL}/api/tables/`
-  private statusUrl=`${this.Base_URL}/api/status`
+  private updateapiUrl = `${this.Base_URL}/api/updateFoodItemQuantity`
+  private updateOrderNoteapiUrl = `${this.Base_URL}/api/updateOrderNote`
+  private deleteapiUrl = `${this.Base_URL}/api/deleteFoodItem`
+  private getallapiUrl = `${this.Base_URL}/api/getAllOrders`
+  private getallOrderAminapiUrl = `${this.Base_URL}/api/getAllOrdersAdmin`
+  private updateFoodItemStatusapiUrl = `${this.Base_URL}/api/updateFoodItemStatus`
+  private updateOrderKotStatusapiUrl = `${this.Base_URL}/api/updateOrderKotStatus`
+  private updatePaymentTypeapiUrl = `${this.Base_URL}/api/update-payment-type`
+  private updateDiscountapiUrl = `${this.Base_URL}/api/update-discount`
+  private addCustomerNameapiUrl = `${this.Base_URL}/api/add-customer-name`
+  private addCustomerNumberapiUrl = `${this.Base_URL}/api/add-customer-number`
+  private updateOrderStatusapiUrl = `${this.Base_URL}/api/orders/updateStatus`
+  private updateTableStatusapiUrl = `${this.Base_URL}/api/tables/`
+  private statusUrl = `${this.Base_URL}/api/status`
   private baseUrl = `${this.Base_URL}/api/foodItems`
   // private allUser = `${this.Base_URL}/api/alluser`
   private allUser = `${this.Base_URL}/api/alluser-timeSheet`
   // private allUserTimeSheet = `${this.Base_URL}/api/alluser-timeSheet`
-  private signup=`${this.Base_URL}/api/signup`
-  private login=`${this.Base_URL}/api/login`
+  private signup = `${this.Base_URL}/api/signup`
+  private login = `${this.Base_URL}/api/login`
 
   private diningTablesSubject = new BehaviorSubject<any[]>([]);
   private foodCategorySubject = new BehaviorSubject<any[]>([]);
@@ -102,8 +103,8 @@ export class SocketService {
       )
       .subscribe(data => this.foodItemsSubject.next(data));
   }
-   fetchOrders(tableNo:any): void {
-    this.http.get<any[]>(this.ordersapiUrl+'/'+tableNo)
+  fetchOrders(tableNo: any): void {
+    this.http.get<any[]>(this.ordersapiUrl + '/' + tableNo)
       .pipe(
         catchError(error => {
           console.error('Error fetching dining tables:', error);
@@ -136,14 +137,14 @@ export class SocketService {
   }
 
   private setupSocketListeners(): void {
-    this.socket.on('updateTables', (data: any[]) => {this.fetchDiningTables()});
-    this.socket.on('newCategory', (data: any[]) => {this.foodCategorySubject.next(data)});
-    this.socket.on('newFoodItem', (data: any[]) => {this.foodItemsSubject.next(data)});
-    this.socket.on('orderUpdated', (data: any[]) => {this.ordersSubject.next(data)});
-    this.socket.on('orderUpdated', (data: any[]) => {this.fetchAllOrders(),this.fetchDiningTables(),this.fetchAllOrdersAdmin()});
-    this.socket.on('user', (data: any[]) => {this.fetchAllUser()});
+    this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables() });
+    this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
+    this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
+    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) });
+    this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
+    this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
   }
-  
+
   getDiningTables(): Observable<any[]> {
     return this.diningTablesSubject.asObservable();
   }
@@ -168,68 +169,68 @@ export class SocketService {
   getFoodItemsByCategoryId(categoryId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${categoryId}`);
   }
-  createOrders(tableNo:any,foodItemId:any):Observable<any>{
-    return this.http.post<any>(this.ordersapiUrl,{
+  createOrders(tableNo: any, foodItemId: any): Observable<any> {
+    return this.http.post<any>(this.ordersapiUrl, {
       tableNo,
       foodItemId
     })
   }
-  signUp(username:any,usePass:any):Observable<any>{
-    return this.http.post<any>(this.signup,{
+  signUp(username: any, usePass: any): Observable<any> {
+    return this.http.post<any>(this.signup, {
       username,
       usePass
     })
   }
-  logIn(usePass:any):Observable<any>{
-    return this.http.post<any>(this.login,{
+  logIn(usePass: any): Observable<any> {
+    return this.http.post<any>(this.login, {
       usePass
     })
   }
-  updateOrderQty(tableNo:any,foodItemId:any,quantity:any,createdAt:any):Observable<any>{
-    return this.http.put(this.updateapiUrl,{
+  updateOrderQty(tableNo: any, foodItemId: any, quantity: any, createdAt: any): Observable<any> {
+    return this.http.put(this.updateapiUrl, {
       tableNo,
       foodItemId,
       quantity,
       createdAt
     })
   }
-  updateOrderNote(tableNo:any,foodItemId:any,orderNote:any,createdAt:any):Observable<any>{
-    return this.http.put(this.updateOrderNoteapiUrl,{
+  updateOrderNote(tableNo: any, foodItemId: any, orderNote: any, createdAt: any): Observable<any> {
+    return this.http.put(this.updateOrderNoteapiUrl, {
       tableNo,
       foodItemId,
       orderNote,
       createdAt
     })
   }
-  deleteOrder(tableNo:any,foodItemId:any,createdAt:any):Observable<any>{
-    return this.http.put(this.deleteapiUrl,{
+  deleteOrder(tableNo: any, foodItemId: any, createdAt: any): Observable<any> {
+    return this.http.put(this.deleteapiUrl, {
       tableNo,
       foodItemId,
       createdAt
     })
   }
-  updateFoodItemStatus(tableNo:any,foodItemId:any,status:any,createdAt:any):Observable<any>{
-    return this.http.put<any>(this.updateFoodItemStatusapiUrl,{
+  updateFoodItemStatus(tableNo: any, foodItemId: any, status: any, createdAt: any): Observable<any> {
+    return this.http.put<any>(this.updateFoodItemStatusapiUrl, {
       tableNo,
       foodItemId,
       status,
       createdAt
     })
   }
-  updateOrderKotStatus(tableNo:any,newKotStatus:any):Observable<any>{
-    return this.http.patch<any>(this.updateOrderKotStatusapiUrl,{
+  updateOrderKotStatus(tableNo: any, newKotStatus: any): Observable<any> {
+    return this.http.patch<any>(this.updateOrderKotStatusapiUrl, {
       tableNo,
       newKotStatus
     })
   }
-  updatePaymentType(tableNo:any,paymentType:any):Observable<any>{
-    return this.http.patch<any>(this.updatePaymentTypeapiUrl,{
+  updatePaymentType(tableNo: any, paymentType: any): Observable<any> {
+    return this.http.patch<any>(this.updatePaymentTypeapiUrl, {
       tableNo,
       paymentType
     })
   }
-  updateTableWithOrder(tableNo:any,orderId:any):void{
-    this.http.put<any>(this.updateTableWithOrderapiUrl+tableNo,{
+  updateTableWithOrder(tableNo: any, orderId: any): void {
+    this.http.put<any>(this.updateTableWithOrderapiUrl + tableNo, {
       orderId
     }).pipe(
       catchError(error => {
@@ -237,33 +238,40 @@ export class SocketService {
         return []; // Return an empty array in case of error
       })
     )
-    .subscribe(data => {console.log(data,'data')
-      // if(data.order != ""){
-      //   this.fetchDiningTables()
-      //   this.listenForTableUpdates();
-      // }
-    });
+      .subscribe(data => {
+        console.log(data, 'data')
+        // if(data.order != ""){
+        //   this.fetchDiningTables()
+        //   this.listenForTableUpdates();
+        // }
+      });
   }
-  updateDiscount(tableNo:any,discountPercent:any):Observable<any>{
-    return this.http.patch<any>(this.updateDiscountapiUrl,{
+  updateDiscount(tableNo: any, discountPercent: any): Observable<any> {
+    return this.http.patch<any>(this.updateDiscountapiUrl, {
       tableNo,
       discountPercent
     })
   }
-  addCustomerName(tableNo:any,customerName:any):Observable<any>{
-    return this.http.patch<any>(this.addCustomerNameapiUrl,{
+  addCustomerName(tableNo: any, customerName: any): Observable<any> {
+    return this.http.patch<any>(this.addCustomerNameapiUrl, {
       tableNo,
       customerName
     })
   }
-  updateOrderStatus(tableNo:any,newStatus:any):Observable<any>{
-    return this.http.patch<any>(this.updateOrderStatusapiUrl,{
+  addCustomerNumber(tableNo: any, customerNo: any): Observable<any> {
+    return this.http.patch<any>(this.addCustomerNumberapiUrl, {
+      tableNo,
+      customerNo
+    })
+  }
+  updateOrderStatus(tableNo: any, newStatus: any): Observable<any> {
+    return this.http.patch<any>(this.updateOrderStatusapiUrl, {
       tableNo,
       newStatus
     })
   }
-  updateTableStatus(tableNo:any,status:any):Observable<any>{
-    return this.http.patch<any>(this.updateTableStatusapiUrl+tableNo+'/status',{
+  updateTableStatus(tableNo: any, status: any): Observable<any> {
+    return this.http.patch<any>(this.updateTableStatusapiUrl + tableNo + '/status', {
       status
     })
   }
@@ -273,8 +281,8 @@ export class SocketService {
     if (!searchTerm.trim()) {
       return [];
     }
-    return data.filter(item => 
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    return data.filter(item =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.shortcode.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }

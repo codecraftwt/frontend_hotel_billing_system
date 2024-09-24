@@ -24,6 +24,8 @@ import { WebcamModule } from 'ngx-webcam';
 import { UserComponent } from './subComponents/user/user.component';
 import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
+import { SoundService } from './services/sound.service';
+import { ChairIconComponent } from './subComponents/chair-icon/chair-icon.component';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -42,7 +44,7 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
     UserComponent,
     PinEntryComponent,
     CustomModalComponent,
-    
+    ChairIconComponent
   ],
   imports: [
     AgGridModule,
@@ -59,7 +61,7 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
     WebcamModule,
     FormsModule 
   ],
-  providers: [TableService,MenuService,DatePipe ],
+  providers: [TableService,MenuService,DatePipe,SoundService ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

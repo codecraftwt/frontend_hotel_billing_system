@@ -119,6 +119,10 @@
     </div>
   </div>
   <hr>
+  <div class="NOP-container">
+    <label for="#">No. of Peoples</label>
+    <input class="input-amount" type="number"  [(ngModel)]="billingData.customerNo" (change)="addCustomerNumber(billingData)">
+  </div>
   <div class="billing-pay">
     <button [disabled]="billingData.kotStatus!=null" [class]="billingData.kotStatus!=null?'btnno-drop':'btnpointer'"
       (click)="confirmorder(billingData)">kot</button>

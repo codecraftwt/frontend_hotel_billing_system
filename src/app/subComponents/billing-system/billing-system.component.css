@@ -66,3 +66,4 @@
     background-color: #6464f8;
     color: white;
 }
+.NOP-container{display: flex;padding: 20px;justify-content: space-around;}

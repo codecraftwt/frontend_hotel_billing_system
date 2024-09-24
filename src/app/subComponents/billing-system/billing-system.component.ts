@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SocketService } from 'src/app/services/socket.service';
+import { SoundService } from 'src/app/services/sound.service';
 
 @Component({
   selector: 'app-billing-system',
@@ -17,7 +18,7 @@ export class BillingSystemComponent implements OnInit {
   billingData: any
   totalAmount: number = 0;
   tableNo: any
-  constructor(private socketService: SocketService, private route: ActivatedRoute,private toastr: ToastrService) {
+  constructor(private socketService: SocketService, private route: ActivatedRoute,private toastr: ToastrService,private sound:SoundService) {
     // this.updateTotal();
   }
 
@@ -46,6 +47,7 @@ export class BillingSystemComponent implements OnInit {
   }
 
   update(data: any,qty:any) {
+    this.sound.playSound()
     console.log(data,qty);
     this.socketService.updateOrderQty(this.tableNo, data.foodItemId, qty,data.createdAt).subscribe(res => {
       console.log(res, 'test');
@@ -53,6 +55,7 @@ export class BillingSystemComponent implements OnInit {
     })
   }
   addNote(data: any) {
+    this.sound.playSound()
     console.log(data);
     this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote,data.createdAt).subscribe(res => {
       console.log(res, 'test');
@@ -80,7 +83,14 @@ export class BillingSystemComponent implements OnInit {
       this.initialmethod()
     })
   }
+  addCustomerNumber(data:any){
+    this.socketService.addCustomerNumber(this.tableNo, data.customerNo).subscribe(res => {
+      console.log(res, 'test');
+      this.initialmethod()
+    })
+  }
   changeOrderStatus() {
+    this.sound.playSound()
     this.socketService.updateOrderStatus(this.tableNo, 'completed').subscribe(res => {
       console.log(res, 'test');
       this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
@@ -92,6 +102,7 @@ export class BillingSystemComponent implements OnInit {
   }
 
   confirmorder(data:any){
+    this.sound.playSound()
     console.log(data,'data----');
     if(data.customerName!==null){
       this.socketService.updateOrderKotStatus(this.tableNo, 'confirmed').subscribe(res=>{
@@ -107,6 +118,7 @@ export class BillingSystemComponent implements OnInit {
   }
 
   paymentType(type:any){
+    this.sound.playSound()
     this.socketService.updatePaymentType(this.tableNo,type).subscribe(res=>{
       this.initialmethod()
     })
@@ -117,6 +129,7 @@ export class BillingSystemComponent implements OnInit {
   // }
 
   removeItem(data: any) {
+    this.sound.playSound()
     console.log(JSON.stringify(data),'data');
     
     this.socketService.deleteOrder(this.tableNo, data.foodItemId,data.createdAt).subscribe(res => {
@@ -137,13 +150,16 @@ export class BillingSystemComponent implements OnInit {
   isExpanded = false;
 
   toggle() {
+    this.sound.playSound()
     this.isExpanded = !this.isExpanded;
   }
 
   ammount(data:any){
+    this.sound.playSound()
     this.remaingAmmount=data-this.billingData.afterDiscountPrice
   }
   printPage() {
+    this.sound.playSound()
     window.print();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
 import { SocketService } from 'src/app/services/socket.service';
+import { SoundService } from 'src/app/services/sound.service';
 
 @Component({
   selector: 'app-menus',
@@ -30,7 +31,7 @@ export class MenusComponent implements OnInit {
   totalAmount: number = 0;
 
 
-  constructor(private router: Router,private menuService:MenuService,private socketService: SocketService,private route: ActivatedRoute) {
+  constructor(private router: Router,private menuService:MenuService,private socketService: SocketService,private route: ActivatedRoute,private sound:SoundService) {
     this.updateTotal();
    }
 
@@ -84,6 +85,7 @@ export class MenusComponent implements OnInit {
   }
 
   getFoodList(data:any){
+    this.sound.playSound()
     console.log(data,'data');
     // this.foodCatagoriesId=data.foodCategoryId
     // this.menuService.getFoodItems(this.foodCatagoriesId).subscribe(res=>{
@@ -98,6 +100,7 @@ export class MenusComponent implements OnInit {
     })
   }
   getFoodItem(data:any){
+    this.sound.playSound()
     console.log(data,'item');
     this.socketService.createOrders(this.tableNo,data._id).subscribe(res=>{
       console.log(res,'hello');  

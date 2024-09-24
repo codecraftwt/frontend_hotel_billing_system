@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SocketService } from 'src/app/services/socket.service';
+import { SoundService } from 'src/app/services/sound.service';
 
 @Component({
   selector: 'app-pin-entry',
@@ -14,7 +15,7 @@ export class PinEntryComponent {
   pin4: string = '';
   errorMessage: string | null = null;
 
-  constructor(private socketService: SocketService,private toastr: ToastrService){}
+  constructor(private socketService: SocketService,private toastr: ToastrService,private sound:SoundService){}
 
   focusNext(event: Event, nextInput: HTMLInputElement) {
     const input = event.target as HTMLInputElement | null;
@@ -38,6 +39,7 @@ export class PinEntryComponent {
   }
 
   onSubmit() {
+    this.sound.playSound()
     const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
     console.log(pin,'pin');
     this.socketService.logIn(pin).subscribe(res=>{
