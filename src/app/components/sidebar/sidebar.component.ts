@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   }
 
   isModalOpen = false;
+  isModalOpenR = false;
 
   openModal() {
     this.sound.playSound()
@@ -24,6 +25,15 @@ export class SidebarComponent implements OnInit {
   closeModal() {
     this.sound.playSound()
     this.isModalOpen = false; // Update this method if needed
+  }
+  openModalR() {
+    this.sound.playSound()
+    this.isModalOpenR = true;
+  }
+
+  closeModalR() {
+    this.sound.playSound()
+    this.isModalOpenR = false; // Update this method if needed
   }
 
   sounds(){

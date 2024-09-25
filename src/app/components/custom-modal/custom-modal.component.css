@@ -16,7 +16,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px; /* Adjust width as needed */
+    min-width:400px; /*Adjust width as needed*/
     border: 1px solid #494a4b;
     position: relative;
   }

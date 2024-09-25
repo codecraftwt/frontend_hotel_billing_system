@@ -26,6 +26,7 @@ import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 import { SoundService } from './services/sound.service';
 import { ChairIconComponent } from './subComponents/chair-icon/chair-icon.component';
+import { ReservationTableComponent } from './subComponents/reservation-table/reservation-table.component';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ChairIconComponent } from './subComponents/chair-icon/chair-icon.compon
     UserComponent,
     PinEntryComponent,
     CustomModalComponent,
-    ChairIconComponent
+    ChairIconComponent,
+    ReservationTableComponent
   ],
   imports: [
     AgGridModule,

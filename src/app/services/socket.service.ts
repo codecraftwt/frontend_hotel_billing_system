@@ -38,6 +38,10 @@ export class SocketService {
   // private allUserTimeSheet = `${this.Base_URL}/api/alluser-timeSheet`
   private signup = `${this.Base_URL}/api/signup`
   private login = `${this.Base_URL}/api/login`
+  private reservation=`${this.Base_URL}/api/create-reservation`
+  private getReservation=`${this.Base_URL}/api/get-reservations`
+  private reservationStatus=`${this.Base_URL}/api/reservation-status`
+  private reservationRemove=`${this.Base_URL}/api/reservation`
 
   private diningTablesSubject = new BehaviorSubject<any[]>([]);
   private foodCategorySubject = new BehaviorSubject<any[]>([]);
@@ -46,6 +50,7 @@ export class SocketService {
   private getAllordersSubject = new BehaviorSubject<any[]>([]);
   private getAllordersAdminSubject = new BehaviorSubject<any[]>([]);
   private getAllUsers = new BehaviorSubject<any[]>([]);
+  private getReservationData = new BehaviorSubject<any[]>([]);
 
   constructor(private http: HttpClient) {
     this.socket = io(`${this.Base_URL}`);
@@ -59,6 +64,8 @@ export class SocketService {
     this.fetchAllOrders()
     this.fetchAllOrdersAdmin()
     this.fetchAllUser()
+    this.fetchReservation()
+
 
     this.setupSocketListeners()
   }
@@ -72,6 +79,16 @@ export class SocketService {
         })
       )
       .subscribe(data => this.diningTablesSubject.next(data));
+  }
+  private fetchReservation(): void {
+    this.http.get<any[]>(this.getReservation)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching dining tables:', error);
+          return []; // Return an empty array in case of error
+        })
+      )
+      .subscribe(data => this.getReservationData.next(data));
   }
   private fetchAllUser(): void {
     this.http.get<any[]>(this.allUser)
@@ -137,16 +154,20 @@ export class SocketService {
   }
 
   private setupSocketListeners(): void {
-    this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables() });
+    this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables()});
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
     this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
     this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) });
     this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
+    this.socket.on('reservation', (data: any[]) => { this.fetchReservation() });
   }
 
   getDiningTables(): Observable<any[]> {
     return this.diningTablesSubject.asObservable();
+  }
+  getAllReservation(): Observable<any[]> {
+    return this.getReservationData.asObservable();
   }
   getAllUser(): Observable<any[]> {
     return this.getAllUsers.asObservable();
@@ -173,6 +194,11 @@ export class SocketService {
     return this.http.post<any>(this.ordersapiUrl, {
       tableNo,
       foodItemId
+    })
+  }
+  createReservation(data:any): Observable<any> {
+    return this.http.post<any>(this.reservation, {
+      data
     })
   }
   signUp(username: any, usePass: any): Observable<any> {
@@ -223,28 +249,35 @@ export class SocketService {
       newKotStatus
     })
   }
+  updateReservationStatus(tableNumber: any, status : any): Observable<any> {
+    return this.http.patch<any>(this.reservationStatus, {
+      tableNumber,
+      status 
+    })
+  }
   updatePaymentType(tableNo: any, paymentType: any): Observable<any> {
     return this.http.patch<any>(this.updatePaymentTypeapiUrl, {
       tableNo,
       paymentType
     })
   }
-  updateTableWithOrder(tableNo: any, orderId: any): void {
-    this.http.put<any>(this.updateTableWithOrderapiUrl + tableNo, {
+  updateTableWithOrder(tableNo: any, orderId: any):Observable<any> {
+    return this.http.put<any>(this.updateTableWithOrderapiUrl + tableNo, {
       orderId
-    }).pipe(
-      catchError(error => {
-        console.error('Error fetching dining tables:', error);
-        return []; // Return an empty array in case of error
-      })
-    )
-      .subscribe(data => {
-        console.log(data, 'data')
-        // if(data.order != ""){
-        //   this.fetchDiningTables()
-        //   this.listenForTableUpdates();
-        // }
-      });
+    })
+    // .pipe(
+    //   catchError(error => {
+    //     console.error('Error fetching dining tables:', error);
+    //     return []; // Return an empty array in case of error
+    //   })
+    // )
+      // .subscribe(data => {
+      //   console.log(data, 'data')
+      //   // if(data.order != ""){
+      //   //   this.fetchDiningTables()
+      //   //   this.listenForTableUpdates();
+      //   // }
+      // });
   }
   updateDiscount(tableNo: any, discountPercent: any): Observable<any> {
     return this.http.patch<any>(this.updateDiscountapiUrl, {
@@ -286,5 +319,10 @@ export class SocketService {
       item.shortcode.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
+
+  reservationCancel(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.reservationRemove}/${id}`);
+  }
+  
 
 }

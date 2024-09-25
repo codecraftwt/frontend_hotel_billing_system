@@ -18,6 +18,7 @@ export class BillingSystemComponent implements OnInit {
   billingData: any
   totalAmount: number = 0;
   tableNo: any
+  tableDetails:any
   constructor(private socketService: SocketService, private route: ActivatedRoute,private toastr: ToastrService,private sound:SoundService) {
     // this.updateTotal();
   }
@@ -41,7 +42,10 @@ export class BillingSystemComponent implements OnInit {
       console.log(JSON.stringify(res), 'order get');
       this.billingData = res
       if (res?._id) {
-        this.socketService.updateTableWithOrder(res?.tableNo, res?._id)
+        this.socketService.updateTableWithOrder(res?.tableNo, res?._id).subscribe(res=>{
+          console.log(res,'res---test');
+          this.tableDetails=res
+        })
       }
     })
   }
@@ -104,7 +108,14 @@ export class BillingSystemComponent implements OnInit {
   confirmorder(data:any){
     this.sound.playSound()
     console.log(data,'data----');
+    console.log(this.tableDetails,'tableDetails');
+    
     if(data.customerName!==null){
+      if(this.tableDetails.status=='reserved table'){
+        this.socketService.updateReservationStatus(this.tableNo,'completed').subscribe(res=>{
+          console.log(res,'res--reserve status');
+        })
+      }
       this.socketService.updateOrderKotStatus(this.tableNo, 'confirmed').subscribe(res=>{
         // console.log(res,'koy');
         this.toastr.success('Order has been sent to the kitchen!', 'Order Status');

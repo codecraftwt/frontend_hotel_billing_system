@@ -1,0 +1,78 @@
+<div class="reservation-container">
+    <!-- <h1>{{ view === 'buttons' ? 'Welcome!' : (view === 'form' ? 'Reservation Form' : 'Reservation List') }}</h1> -->
+  
+    <div class="btn2" *ngIf="view === 'buttons'">
+      <button class="form" (click)="toggleView('form')" title="Reservation Form"> <img src="../../../assets/form.png" width="100%" height="100%" alt="" srcset=""></button>
+      <button class="form" (click)="toggleView('list')" title="Reservation List"><img src="../../../assets/list.png" width="100%" height="100%" alt="" srcset=""></button>
+    </div>
+  
+    <div *ngIf="view === 'form'">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="reservationName">Reservation Name</label>
+          <input type="text" id="reservationName" [(ngModel)]="reservationName" name="reservationName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="numberOfPeople">Number of People</label>
+          <input type="number" id="numberOfPeople" [(ngModel)]="numberOfPeople" name="numberOfPeople" min="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="tableNumber">Table Number</label>
+          <input type="number" id="tableNumber" [(ngModel)]="tableNumber" name="tableNumber" min="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="userPhoneNumber">User Phone Number</label>
+          <input type="tel" id="userPhoneNumber" [(ngModel)]="userPhoneNumber" name="userPhoneNumber" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="reservationDateTime">Reservation Date & Time</label>
+          <input type="datetime-local" id="reservationDateTime" [(ngModel)]="reservationDateTime" name="reservationDateTime" required>
+        </div>
+          
+        <button type="submit" class="submit-button">Reserve Table</button>
+        <button type="button" (click)="toggleView('buttons')">Back</button>
+      </form>
+    </div>
+  
+    <!-- <div *ngIf="view === 'list'">
+      <button (click)="toggleView('buttons')" class="back-button">Back</button>
+      <ul>
+        <li *ngFor="let reservation of reservationList">
+          {{ reservation.reservationName}} - {{ reservation.numberOfPeople }} people at Table {{ reservation.tableNumber }} on {{ reservation.reservationDateTime }} ({{ reservation.userPhoneNumber }})
+        </li>
+      </ul>
+    </div> -->
+    <div *ngIf="view === 'list'">
+        <button (click)="toggleView('buttons')" class="back-button">Back</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Reservation Name</th>
+              <th>Number of People</th>
+              <th>Table Number</th>
+              <th>Date & Time</th>
+              <th>Phone Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservationList; let i = index">
+              <td>{{ reservation.reservationName }}</td>
+              <td>{{ reservation.numberOfPeople }}</td>
+              <td>{{ reservation.tableNumber }}</td>
+              <td>{{ reservation.reservationDateTime }}</td>
+              <td>{{ reservation.userPhoneNumber }}</td>
+              <td>
+                <button (click)="deleteReservation(reservation)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+  </div>
+  
