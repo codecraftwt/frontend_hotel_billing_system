@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { interval, Subscription } from 'rxjs';
 import { SocketService } from 'src/app/services/socket.service';
 import { SoundService } from 'src/app/services/sound.service';
 import { TableService } from 'src/app/services/table.service';
@@ -20,124 +22,92 @@ export class TablesComponent {
     //   tableNumber: 1
     // }
   ];
+  reservationData: any[] = []
   showMenu: boolean = false;
   hoveredData: any = null;
   menuStyle: { [key: string]: string } = {};
-  constructor(private router: Router, private elRef: ElementRef, private renderer: Renderer2, private service: TableService, private socketService: SocketService, private sound: SoundService) {}
-
+  constructor(private router: Router, private elRef: ElementRef, private renderer: Renderer2, private service: TableService, private socketService: SocketService, private sound: SoundService, private toastr: ToastrService) { }
+  private subscription!: Subscription;
   ngOnInit(): void {
-    // this.socketService.getDiningTables().subscribe(data => {
-    //   this.diningTables = data;
-    //   console.log(JSON.stringify(data), 'diningtable');
-
-    //   this.socketService.getAllReservation().subscribe(res => {
-    //     console.log(res, 'reservation data===');
-
-    //     // Get the current date in IST
-    //     const currentTime = new Date();
-    //     const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC +5:30
-    //     const currentISTTime = new Date(currentTime.getTime() + istOffset);
-
-    //     // Get today's date in IST without time
-    //     const todayStart = new Date(currentISTTime);
-    //     todayStart.setHours(0, 0, 0, 0);
-    //     const todayEnd = new Date(currentISTTime);
-    //     todayEnd.setHours(23, 59, 59, 999);
-
-    //     // Iterate over the dining tables
-    //     this.diningTables.forEach(table => {
-    //       // Check if the table status is "blank table"
-    //       if (table.status === 'blank table') {
-    //         // Find matching reservations for this table number
-    //         const matchingReservation = res.find(reservation => reservation.tableNumber === table.tableNumber);
-    //         if (matchingReservation) {
-    //           // Parse the reservation date and time
-    //           const reservationDateTime = new Date(matchingReservation.reservationDateTime);
-    //           console.log(reservationDateTime, 'reservationDateTime');
-
-    //           const reservationISTTime = new Date(reservationDateTime.getTime() + istOffset);
-    //           console.log(reservationISTTime, 'reservationISTTime');
-
-    //           // Subtract one hour from the reservation time
-    //           reservationISTTime.setHours(reservationISTTime.getHours() - 1);
-
-    //           // Check if the reservation is today
-    //           if (reservationISTTime >= todayStart && reservationISTTime <= todayEnd) {
-    //             if (reservationISTTime <= currentISTTime) {
-    //               this.socketService.updateTableStatus(matchingReservation.tableNumber, 'reserved table').subscribe(res => {
-    //                 // this.initialmethod()
-    //               })
-    //               console.log(matchingReservation, 'matchingReservation that is due or past');
-    //             } else {
-    //               console.log(matchingReservation, 'matchingReservation that is upcoming');
-    //             }
-    //           }
-    //         }
-    //       }
-    //     });
-    //   });
-
-    //   console.log(this.diningTables, 'this.diningTables');
-    // });
 
     this.socketService.getDiningTables().subscribe(data => {
       this.diningTables = data;
-      console.log(JSON.stringify(data), 'diningtable');
-
       this.socketService.getAllReservation().subscribe(res => {
-        console.log(res, 'reservation data===');
-
-        // Get the current date in IST
-        const currentTime = new Date();
-        console.log(currentTime, 'currentTime');
-
-        const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC +5:30
-        const currentISTTime = new Date(currentTime.getTime());
-        console.log(currentISTTime, 'currentISTTime');
-
-        // Get today's date in IST without time
-        const todayStart = new Date(currentISTTime);
-        todayStart.setHours(0, 0, 0, 0);
-        const todayEnd = new Date(currentISTTime);
-        todayEnd.setHours(23, 59, 59, 999);
-
-        // Iterate over the dining tables
-        this.diningTables.forEach(table => {
-          // Check if the table status is "blank table"
-          if (table.status === 'blank table') {
-            // Find matching reservations for this table number
-            const matchingReservation = res.find(reservation => reservation.tableNumber === table.tableNumber);
-            if (matchingReservation) {
-              // Parse the reservation date and time
-              const reservationDateTime = new Date(matchingReservation.reservationDateTime);
-              console.log(reservationDateTime, 'reservationDateTime');
-
-              // Assuming reservationDateTime is in UTC, convert to IST
-              const reservationISTTime = new Date(reservationDateTime.getTime());
-
-              // Subtract one hour from the reservation time
-              reservationISTTime.setHours(reservationISTTime.getHours() - 1);
-              console.log(reservationISTTime, 'reservationISTTime');
-
-              // Check if the reservation is today
-              if (reservationISTTime >= todayStart && reservationISTTime <= todayEnd) {
-                if (reservationISTTime <= currentISTTime) {
-                  this.socketService.updateTableStatus(matchingReservation.tableNumber, 'reserved table').subscribe(res => {
-                    // this.initialmethod()
-                  })
-                  console.log(matchingReservation, 'matchingReservation that is due or past');
-                } else {
-                  console.log(matchingReservation, 'matchingReservation that is upcoming');
-                }
-              }
-            }
-          }
-        });
+        this.reservationData = res
+        console.log(this.reservationData,'reservationData');
+        
+        this.updateTbaleStatus()
       });
-
-      console.log(this.diningTables, 'this.diningTables');
+    });
+    this.subscription = interval(30000).subscribe(() => {
+      if(this.reservationData.length!=0){
+        this.updateTbaleStatus()
+      }
     });
 
+  }
+
+  updateTbaleStatus() {
+    // const isMatched = this.checkForTimeMatch();
+    // console.log('Is current time matched?', isMatched);
+    console.log('hello');
+    // Get the current date in IST
+    const currentTime = new Date();
+    console.log('currentTime===>', currentTime);
+
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC +5:30
+    const currentISTTime = new Date(currentTime.getTime());
+    console.log('currentISTTime===>', currentISTTime);
+
+    // Get today's date in IST without time
+    const todayStart = new Date(currentISTTime);
+    todayStart.setHours(0, 0, 0, 0);
+    const todayEnd = new Date(currentISTTime);
+    todayEnd.setHours(23, 59, 59, 999);
+
+    // Iterate over the dining tables
+    this.diningTables.forEach(table => {
+      // Check if the table status is "blank table"
+      if (table.status === 'blank table') {
+        // Find matching reservations for this table number
+        const matchingReservation = this.reservationData.find(reservation => reservation.tableNumber === table.tableNumber);
+        if (matchingReservation) {
+          console.log('matchingReservation===>', matchingReservation);
+
+          // Parse the reservation date and time
+          const reservationDateTime = new Date(matchingReservation.reservationDateTime);
+          console.log('reservationDateTime===>', reservationDateTime);
+
+          // Assuming reservationDateTime is in UTC, convert to IST
+          const reservationISTTime = new Date(reservationDateTime.getTime());
+
+          // Subtract one hour from the reservation time
+          reservationISTTime.setHours(reservationISTTime.getHours() - 1);
+          console.log('reservationISTTime===>', reservationISTTime);
+
+          // Check if the reservation is today
+          if (reservationISTTime >= todayStart && reservationISTTime <= todayEnd) {
+            if (reservationISTTime <= currentISTTime) {
+              this.socketService.updateTableStatus(matchingReservation.tableNumber, 'reserved table').subscribe(res => {
+                // this.initialmethod()
+              })
+              console.log('matchingReservation that is due or past===>', matchingReservation);
+              const message = `Reservation for ${matchingReservation.reservationName} confirmed! 
+                     Table Number: ${matchingReservation.tableNumber}, 
+                     Number of People: ${matchingReservation.numberOfPeople}, 
+                     Phone: ${matchingReservation.userPhoneNumber}`;
+
+              this.toastr.success(message, 'Reservation upcoming', {
+                timeOut: 5000, // Duration in milliseconds
+                positionClass: 'toast-top-center' // Position of the toast
+              });
+            } else {
+              console.log('matchingReservation that is upcoming===>', matchingReservation);
+            }
+          }
+        }
+      }
+    });
   }
 
   onTableClick(data: any) {

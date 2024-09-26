@@ -64,7 +64,7 @@
               <td>{{ reservation.reservationName }}</td>
               <td>{{ reservation.numberOfPeople }}</td>
               <td>{{ reservation.tableNumber }}</td>
-              <td>{{ reservation.reservationDateTime }}</td>
+              <td>{{ reservation.reservationDateTime|utcToIst }}</td>
               <td>{{ reservation.userPhoneNumber }}</td>
               <td>
                 <button (click)="deleteReservation(reservation)">Delete</button>

@@ -27,6 +27,8 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
 import { SoundService } from './services/sound.service';
 import { ChairIconComponent } from './subComponents/chair-icon/chair-icon.component';
 import { ReservationTableComponent } from './subComponents/reservation-table/reservation-table.component';
+import { SortByDatePipe } from './pipes/sort-by-date.pipe';
+import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ReservationTableComponent } from './subComponents/reservation-table/res
     PinEntryComponent,
     CustomModalComponent,
     ChairIconComponent,
-    ReservationTableComponent
+    ReservationTableComponent,
+    SortByDatePipe,
+    UtcToIstPipe
   ],
   imports: [
     AgGridModule,

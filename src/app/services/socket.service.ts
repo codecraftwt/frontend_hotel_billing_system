@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -52,7 +52,16 @@ export class SocketService {
   private getAllUsers = new BehaviorSubject<any[]>([]);
   private getReservationData = new BehaviorSubject<any[]>([]);
 
+  // private subscription: Subscription;
+
   constructor(private http: HttpClient) {
+    // this.subscription = interval(60000).subscribe(() => {
+    //   // const isMatched = this.checkForTimeMatch();
+    //   // console.log('Is current time matched?', isMatched);
+    //   console.log('hello');
+    // });
+    
+    
     this.socket = io(`${this.Base_URL}`);
     this.initializeDiningTables();
   }
@@ -249,9 +258,10 @@ export class SocketService {
       newKotStatus
     })
   }
-  updateReservationStatus(tableNumber: any, status : any): Observable<any> {
+  updateReservationStatus(tableNumber: any,privesStatus:any, status : any): Observable<any> {
     return this.http.patch<any>(this.reservationStatus, {
       tableNumber,
+      privesStatus,
       status 
     })
   }

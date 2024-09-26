@@ -112,7 +112,7 @@ export class BillingSystemComponent implements OnInit {
     
     if(data.customerName!==null){
       if(this.tableDetails.status=='reserved table'){
-        this.socketService.updateReservationStatus(this.tableNo,'completed').subscribe(res=>{
+        this.socketService.updateReservationStatus(this.tableNo,'processing','completed').subscribe(res=>{
           console.log(res,'res--reserve status');
         })
       }

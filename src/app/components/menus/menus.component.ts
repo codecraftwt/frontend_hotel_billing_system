@@ -80,7 +80,7 @@ export class MenusComponent implements OnInit {
         console.log(this.foodCatagoriesData,'this.foodCatagoriesData');
         
       });
-    }, 500);
+    }, 5);
 
   }
 

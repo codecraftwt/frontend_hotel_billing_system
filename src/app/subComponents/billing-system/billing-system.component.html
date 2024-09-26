@@ -38,7 +38,7 @@
           </p>
     </div> -->
 <div class="card-body" *ngIf="billingData?.length!=0">
-  <div class="card-item" [ngStyle]="getStyles(data.type, data.status)" *ngFor="let data of billingData?.ordersList">
+  <div class="card-item" [ngStyle]="getStyles(data.type, data.status)" *ngFor="let data of billingData?.ordersList | sortByDate">
     <div class="top">
       <div class="img">
         <img src={{data.img}} alt="Item Image">
@@ -94,6 +94,12 @@
     </div>
   </div>
   <hr>
+  <div class="billing-pay mb">
+    <button [disabled]="billingData.kotStatus!=null" [class]="billingData.kotStatus!=null?'btnno-drop':'btnpointer'"
+      (click)="confirmorder(billingData)">kot</button>
+    <button (click)="printPage()">Print</button>
+    <!-- <button [ngClass]="billingData.paymentType==null?'orderDisable':''" (click)="changeOrderStatus()">Order Finished </button> -->
+  </div>
   <div class="payment-c">
     <h4 class="payment-lable">Payment Type</h4>
     <div class="payment-list-c">
@@ -124,13 +130,10 @@
     <input class="input-amount" type="number"  [(ngModel)]="billingData.customerNo" (change)="addCustomerNumber(billingData)">
   </div>
   <div class="billing-pay">
-    <button [disabled]="billingData.kotStatus!=null" [class]="billingData.kotStatus!=null?'btnno-drop':'btnpointer'"
+    <!-- <button [disabled]="billingData.kotStatus!=null" [class]="billingData.kotStatus!=null?'btnno-drop':'btnpointer'"
       (click)="confirmorder(billingData)">kot</button>
-    <button (click)="printPage()">Print</button>
+    <button (click)="printPage()">Print</button> -->
     <button [ngClass]="billingData.paymentType==null?'orderDisable':''" (click)="changeOrderStatus()">Order Finished </button>
-    <!-- <button (click)="pay()">save & Print</button>
-        <button (click)="pay()">KOT</button>
-        <button (click)="pay()">KOT & Print</button> -->
   </div>
 </div>
 <!-- </div> -->

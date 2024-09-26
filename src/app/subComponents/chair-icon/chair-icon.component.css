@@ -1,28 +1,48 @@
 .chair {position: absolute;width: 20px; /* Adjust as needed */height: 20px; /* Adjust as needed *//* background-color: #ddd; */border-radius: 50%;}
 .chair-top {top: -40px; /* Adjust spacing from table */left: 50%;transform: translateX(-80%);}
+.chair-top-all {top: 5px;
+    left: 128%;
+    transform: translateX(-80%);}
 .chair-top1 {top: -40px; /* Adjust spacing from table */left: 22%;transform: translateX(-80%);}
 .chair-top2 {top: -40px; /* Adjust spacing from table */left: 75%;transform: translateX(-80%);}
 .chair-top15 {top: -12px;
     left: 101%;
     transform: translateX(-17%);}
 .chair-top svg {transform: rotate(0deg); /* Rotate by 90 degrees */transform-origin: center; /* Rotate around the center of the SVG */}
+.chair-top-all svg {    transform: rotate(89deg);
+    transform-origin: center;}
 .chair-top1 svg {transform: rotate(0deg); /* Rotate by 90 degrees */transform-origin: center; /* Rotate around the center of the SVG */}
 .chair-top2 svg {transform: rotate(0deg); /* Rotate by 90 degrees */transform-origin: center; /* Rotate around the center of the SVG */}
 .chair-top15 svg {    transform: rotate(58deg);
     transform-origin: center;}
 .chair-right {right: -25px; /* Adjust spacing from table */top: 50%;transform: translateY(-80%);}
+.chair-right-all {    right: -25px;
+    top: 70%;
+    transform: translateY(-80%);}
 .chair-right svg {transform: rotate(90deg); /* Adjust the degree as needed for your rotation */transform-origin: center; /* Rotate around the center of the SVG */}
+.chair-right-all svg {transform: rotate(90deg);
+    transform-origin: center;}
 .chair-bottom {bottom: -30px; /* Adjust spacing from table */left: 50%;transform: translateX(-80%);}
+.chair-bottom-all {bottom: 19px;
+    left: -35%;
+    transform: translateX(-80%);}
 .chair-bottom1 {bottom: -30px; /* Adjust spacing from table */left: 22%;transform: translateX(-80%);}
 .chair-bottom2 {bottom: -30px; /* Adjust spacing from table */left: 75%;transform: translateX(-80%);}
 .chair-bottom15 {bottom: -29px;left: 17%;transform: translateX(-80%);}
 .chair-bottom svg{transform: rotate(180deg); /* Rotate by 90 degrees */transform-origin: center;}
+.chair-bottom-all svg{transform: rotate(271deg);
+    transform-origin: center;}
 .chair-bottom15 svg{transform: rotate(180deg); /* Rotate by 90 degrees */transform-origin: center;}
 .chair-bottom1 svg{transform: rotate(180deg); /* Rotate by 90 degrees */transform-origin: center;}
 .chair-bottom2 svg{transform: rotate(180deg); /* Rotate by 90 degrees */transform-origin: center;}
 .chair-left {left: -40px; /* Adjust spacing from table */top: 50%;transform: translateY(-80%);}
+.chair-left-all {    left: -40px;
+    top: 25%;
+    transform: translateY(-80%);}
 .chair-left15{left: -33px;
     top: -11%;
     transform: translateY(-13%);}
 .chair-left svg{transform: rotate(-90deg); /* Rotate by 90 degrees */transform-origin: center;}
+.chair-left-all svg{transform: rotate(-90deg);
+    transform-origin: center;}
 .chair-left15 svg{transform: rotate(-68deg);transform-origin: center;}

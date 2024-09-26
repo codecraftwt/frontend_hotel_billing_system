@@ -23,7 +23,7 @@
         <!-- Reusable Chair Component -->
         
            <div class="table-number">{{ table.tableNumber }}</div>
-           <ng-container *ngFor="let position of ['top', 'right', 'bottom','left']">
+           <ng-container *ngFor="let position of ['top-all', 'right-all', 'bottom-all','left-all']">
              <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
            </ng-container>
          
