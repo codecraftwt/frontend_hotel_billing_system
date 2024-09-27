@@ -15,97 +15,99 @@
       </li>
     </ul>
   </div>
-  <ng-container  *ngFor="let table of diningTables">
-    <ng-container *ngIf="!([15, 8,7,9,10].includes(table.tableNumber))">
-      <div class="table" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
-        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
-        
-        <!-- Reusable Chair Component -->
-        
-           <div class="table-number">{{ table.tableNumber }}</div>
-           <ng-container *ngFor="let position of ['top-all', 'right-all', 'bottom-all','left-all']">
-             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
-           </ng-container>
-         
-        <div class="price" >
-          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+  <!-- <section> -->
+    <ng-container  *ngFor="let table of diningTables">
+      <ng-container *ngIf="!([15, 8,7,9,10].includes(table.tableNumber))">
+        <div class="table" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+          (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+          
+          <!-- Reusable Chair Component -->
+          
+             <div class="table-number">{{ table.tableNumber }}</div>
+             <ng-container *ngFor="let position of ['top-all', 'right-all', 'bottom-all','left-all']">
+               <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
+             </ng-container>
+           
+          <div class="price" >
+            {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+          </div>
+          <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+          <!-- <div class="popup" > -->
+            <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+            <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+            <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+            <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+          </div>
+          <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+            <p>This table is blank. Click the button to reserve it.</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+          </div>
+          <div class="popup" *ngIf="hoveredTable === table && table.status == 'reserved table'">
+            <p>This table reserved</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          </div> -->
         </div>
-        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
-        <!-- <div class="popup" > -->
-          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
-          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
-          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
-          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+      </ng-container>
+      <ng-container *ngIf="([8,9].includes(table.tableNumber))">
+        <div class="table table15" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+          (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+          
+          <!-- Reusable Chair Component -->
+          
+             <div class="table-number">{{ table.tableNumber }}</div>
+             <ng-container *ngFor="let position of ['bottom15']">
+               <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair2'"></app-chair-icon>
+             </ng-container>
+             <ng-container *ngFor="let position of ['left15','top15']">
+              <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair3'"></app-chair-icon>
+             </ng-container>
+           
+          <div class="price" >
+            {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+          </div>
+          <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+            <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+            <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+            <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+            <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+          </div>
+          <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+            <p>This table is blank. Click the button to reserve it.</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+          </div>
+          <div class="popup" *ngIf="table.status == 'reserved table'">
+            <p>This table reserved</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          </div> -->
         </div>
-        <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
-          <p>This table is blank. Click the button to reserve it.</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+      </ng-container>
+      <ng-container *ngIf="([7,10].includes(table.tableNumber))">
+        <div class="table table7" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
+          (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
+             <div class="table-number">{{ table.tableNumber }}</div>
+             <ng-container *ngFor="let position of ['top', 'top1','top2', 'bottom','bottom1','bottom2']">
+               <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
+             </ng-container>
+          <div class="price" >
+            {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
+          </div>
+          <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
+          <!-- <div class="popup" > -->
+            <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
+            <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
+            <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
+            <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
+          </div>
+          <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
+            <p>This table is blank. Click the button to reserve it.</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
+          </div>
+          <div class="popup" *ngIf="table.status == 'reserved table'">
+            <p>This table reserved</p>
+            <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
+          </div> -->
         </div>
-        <div class="popup" *ngIf="hoveredTable === table && table.status == 'reserved table'">
-          <p>This table reserved</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
-        </div> -->
-      </div>
+      </ng-container>
     </ng-container>
-    <ng-container *ngIf="([8,9].includes(table.tableNumber))">
-      <div class="table table15" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
-        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
-        
-        <!-- Reusable Chair Component -->
-        
-           <div class="table-number">{{ table.tableNumber }}</div>
-           <ng-container *ngFor="let position of ['bottom15']">
-             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair2'"></app-chair-icon>
-           </ng-container>
-           <ng-container *ngFor="let position of ['left15','top15']">
-            <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair3'"></app-chair-icon>
-           </ng-container>
-         
-        <div class="price" >
-          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
-        </div>
-        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
-          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
-          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
-          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
-          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
-        </div>
-        <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
-          <p>This table is blank. Click the button to reserve it.</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
-        </div>
-        <div class="popup" *ngIf="table.status == 'reserved table'">
-          <p>This table reserved</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
-        </div> -->
-      </div>
-    </ng-container>
-    <ng-container *ngIf="([7,10].includes(table.tableNumber))">
-      <div class="table table7" [ngClass]="{'white': table.status === 'KOT table','yellow': table.status === 'reserved table'}"
-        (mouseenter)="onMouseEnter(table)" (mouseleave)="onMouseLeave()" (click)="onTableClick(table)">
-           <div class="table-number">{{ table.tableNumber }}</div>
-           <ng-container *ngFor="let position of ['top', 'top1','top2', 'bottom','bottom1','bottom2']">
-             <app-chair-icon [position]="position" [table]="{ status: table.status }" [chair]="'chair1'"></app-chair-icon>
-           </ng-container>
-        <div class="price" >
-          {{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}
-        </div>
-        <div class="popup" *ngIf="hoveredTable === table && table.status == 'KOT table'">
-        <!-- <div class="popup" > -->
-          <p>{{ table?.order?.totalPrice | currency:'INR':'symbol':'1.2-2':'en-IN' }}</p>
-          <p>ready:{{orderStatus(table?.order?.ordersList,'ready')}}</p>
-          <p>cooking:{{orderStatus(table?.order?.ordersList,'working')}}</p>
-          <p>on hold:{{orderStatus(table?.order?.ordersList,'on hold')}}</p>
-        </div>
-        <!-- <div class="popup" *ngIf="hoveredTable === table && table.status == 'blank table'">
-          <p>This table is blank. Click the button to reserve it.</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Reserve Table</button>
-        </div>
-        <div class="popup" *ngIf="table.status == 'reserved table'">
-          <p>This table reserved</p>
-          <button class="resevebtn" (click)="reserveTable(table, $event)">Cancel Reservation</button>
-        </div> -->
-      </div>
-    </ng-container>
-  </ng-container>
+  <!-- </section> -->
 </div>

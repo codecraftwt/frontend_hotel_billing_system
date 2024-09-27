@@ -1,7 +1,7 @@
 .reservation-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    /* padding: 20px; */
     /* border: 1px solid #ddd; */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -10,11 +10,16 @@
   .btn2{
     display: flex;
     justify-content: space-evenly;
+    padding: 20px;
   }
   .form{
     background-color: transparent;
     border: none;
     cursor: pointer;
+  }
+  .submit-form{
+    padding: 20px;
+    text-align: end;
   }
   h1 {
     text-align: center;
@@ -32,6 +37,7 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    color: white;
   }
   
   input {
@@ -40,6 +46,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    background-color: #414141;
+    color: white;
+
   }
   
   input:focus {
@@ -64,4 +73,67 @@
   .table{
     background-color: aliceblue;
     padding: 10px;
+  }
+
+  .card {
+    background-color: #494a4b;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    color: white;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  .metric {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .metric-change {
+    font-size: 0.75rem;
+    color: #c1cbdf;
+  }
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 19px; */
+    /* margin-top: 14px; */
+    border-bottom: 1px solid white;
+    padding: 13px 0;
+
+  }
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .text-muted {
+    color: #c5d1e4;
+  }
+  .font-medium {
+    font-weight: 500;
+    text-align: start;
+  }
+  .delete-reservation{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
   }

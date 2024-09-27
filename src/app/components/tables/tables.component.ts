@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, AfterViewInit, SimpleChanges, OnChanges, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { interval, Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { TableService } from 'src/app/services/table.service';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.css']
 })
-export class TablesComponent {
+export class TablesComponent implements OnInit {
 
   isModalOpen = false;
   diningTables: any[] = [
@@ -28,7 +28,16 @@ export class TablesComponent {
   menuStyle: { [key: string]: string } = {};
   constructor(private router: Router, private elRef: ElementRef, private renderer: Renderer2, private service: TableService, private socketService: SocketService, private sound: SoundService, private toastr: ToastrService) { }
   private subscription!: Subscription;
+  // currentTime: string = '';/
+
   ngOnInit(): void {
+    // setInterval(() => {
+    //   // this.currentTime = new Date().toLocaleTimeString();
+      
+    //   this.currentTime = new Date().toLocaleTimeString();
+    //   console.log(this.currentTime,'currentTime');
+      
+    // }, 0);
 
     this.socketService.getDiningTables().subscribe(data => {
       this.diningTables = data;
@@ -46,6 +55,8 @@ export class TablesComponent {
     });
 
   }
+
+
 
   updateTbaleStatus() {
     // const isMatched = this.checkForTimeMatch();
@@ -159,4 +170,7 @@ export class TablesComponent {
     console.log('Ctrl + Left Click on table:', table);
     // Implement your logic here
   }
+
+
+
 }

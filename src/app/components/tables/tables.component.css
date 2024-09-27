@@ -1,4 +1,7 @@
-.table-container {display: flex;flex-wrap: wrap;justify-content: space-around;align-items: center;gap: 100px;padding: 90px;padding-top: 20px;width: 95vw;height: 100vh;}
+.table-container {display: flex;flex-wrap: wrap;justify-content: space-around;align-items: center;gap: 100px;padding: 90px;padding-top: 20px;width: 95vw;height: 100vh;
+  background-color: #212d3b;
+  background-image: linear-gradient(to right, #313a48 1px, transparent 1px), linear-gradient(to bottom, #313a48 1px, transparent 1px);
+  background-size: 40px 40px;}
 .table {position: relative;width: 65px;height: 92px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
 .table15 {position: relative;width: 70px;height: 70px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
 .table7 {position: relative;width: 200px;height: 70px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
