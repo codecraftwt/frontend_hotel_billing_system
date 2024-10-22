@@ -41,24 +41,26 @@ export class PinEntryComponent {
   onSubmit() {
     this.sound.playSound()
     const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
-    console.log(pin,'pin');
+    // console.log(pin,'pin');
+    // localStorage.setItem('role',JSON.stringify(['kds']))
     this.socketService.logIn(pin).subscribe(res=>{
       console.log(res,'res====');
       let index=res.timesheet.length
       console.log(res.timesheet[index-1].status,'res.timesheet[index-1].status');
-      
+      localStorage.setItem('role',JSON.stringify(res.role))
       // console.log(res.timesheet[index-1],'test');
       if(res.timesheet[index-1].status=="off duty"){
         this.toastr.info('You have successfully logged out.', 'Logout Status');
       }
       if(res.timesheet[index-1].status=="on duty"){
         this.toastr.success('You have successfully logged in!', 'Login Status');
-
       }
       // // if(res.username){
       // //   this.toastr.success('You have successfully logged in!', 'Login Status');
       // // }
     })
+
+
     // alert(`Entered PIN: ${pin}`); // Replace with your validation logic
     this.resetPin(); // Reset the PIN after submission
   }

@@ -29,6 +29,7 @@ import { ChairIconComponent } from './subComponents/chair-icon/chair-icon.compon
 import { ReservationTableComponent } from './subComponents/reservation-table/reservation-table.component';
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
+import { AuthService } from './services/auth.service';
 // import 'ag-grid-enterprise'; 
 
 @NgModule({
@@ -67,7 +68,7 @@ import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
     WebcamModule,
     FormsModule 
   ],
-  providers: [TableService,MenuService,DatePipe,SoundService ],
+  providers: [TableService,MenuService,DatePipe,SoundService ,AuthService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

@@ -7,7 +7,10 @@ import { VoiceRecognitionComponent } from './voice-recognition/voice-recognition
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserComponent } from './subComponents/user/user.component';
 import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
-
+import { RoleGuard } from './services/auth/role.guard';
+interface RouteData {
+  expectedRole: string[];
+}
 const routes: Routes = [
   {
     path:"",
@@ -23,12 +26,16 @@ const routes: Routes = [
     component:MenusComponent
   },
   {
-    path:'kds',
-    component:KdsComponent
+    path: 'kds',
+    component: KdsComponent,
+    canActivate: [RoleGuard], // Protect this route
+    data: { expectedRole: ['kds', 'admin'] } as RouteData  // Specify the required role
   },
   {
-    path:'dashboard',
-    component:AdminDashboardComponent
+    path: 'dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [RoleGuard], // Protect this route
+    data: { expectedRole: ['admin'] } as RouteData  // Specify the required role
   },
   {
     path:'voice',

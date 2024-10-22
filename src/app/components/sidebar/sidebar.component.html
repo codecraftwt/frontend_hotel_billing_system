@@ -3,13 +3,13 @@
     <img src="../../../assets/logo2.png" width="100%" height="100%" alt="">
   </div>
   <ul class="sidebar-menu">
-    <li routerLink="/tables" routerLinkActive="active" (click)="sounds()" title="Dining Table">
+    <li *ngIf="hasRole('admin')" routerLink="/tables" routerLinkActive="active" (click)="sounds()" title="Dining Table">
       <img src="../../../assets/tables.png" width="100%" height="100%" alt="">
     </li>
     <!-- <li routerLink="/menu" routerLinkActive="active">
         <img src="../../../assets/dining.png"  width="100%" height="100%" alt="" srcset="">
       </li> -->
-    <li routerLink="/kds" routerLinkActive="active" (click)="sounds()" title="KDS section">
+    <li *ngIf="hasAnyRole(['kds', 'admin'])" routerLink="/kds" routerLinkActive="active" (click)="sounds()" title="KDS section">
       <img src="../../../assets/kitchen.png" width="100%" height="100%" alt="" srcset="">
     </li>
     <li routerLink="/dashboard" routerLinkActive="active" (click)="sounds()" title="Admin Title">
