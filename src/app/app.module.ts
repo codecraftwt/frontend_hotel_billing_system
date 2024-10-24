@@ -30,7 +30,6 @@ import { ReservationTableComponent } from './subComponents/reservation-table/res
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
 import { AuthService } from './services/auth.service';
-// import 'ag-grid-enterprise'; 
 
 @NgModule({
   declarations: [

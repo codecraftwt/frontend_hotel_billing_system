@@ -25,7 +25,6 @@ export class KdsComponent implements OnInit {
       .pipe(
         pairwise(), // Pair current and previous values
         map(([previous, current]) => {
-          // Compare data
           const changes = this.getChanges(previous, current);
           return { previous, current, changes };
         }),
@@ -33,42 +32,20 @@ export class KdsComponent implements OnInit {
       )
       .subscribe(({ previous, current, changes }) => {
         if (changes.length > 0) {
-          console.log('Data changed:', changes);
-          console.log(JSON.stringify(changes), 'changes');
           const updatedValues = this.extractUpdatedValues(changes);
-          console.log('Updated values:', updatedValues);
-          // Handle data changes here
         }
       });
-
-    // let data = convertUTCToIST('2024-09-05T09:04:29.281Z');
-    // console.log(data,'timeeee');
-
   }
 
   ngOnInit(): void {
     this.socketService.getAllOrdersItems().subscribe(res => {
-      console.log(res, 'res=========test');
       this.data = res
-      // console.log(this.data, 'this.data');
-      // console.log(JSON.stringify(this.data), 'this.data');
-      // this.updateData(res);
-
-      // setTimeout(() => {
-      //   this.updateData({ key: 'value2' });
-      // }, 5000);
     })
     let a = this.getTimeStatus('2024-09-05T10:06:30.044Z')
-    console.log(a, 'a');
-
   }
 
   statusUpdate(tableNo: any, foodItemId: any, status: any,createdAt:any) {
-    console.log(tableNo, foodItemId, status,createdAt,'tableNo, foodItemId, status');
-    
     this.socketService.updateFoodItemStatus(tableNo, foodItemId, status,createdAt).subscribe(res => {
-      console.log(res, 'update');
-
     })
   }
 
@@ -163,15 +140,6 @@ export class KdsComponent implements OnInit {
       })
       .filter(change => change !== null); // Filter out null values
   }
-
-  // convertToMumbaiTime(utcTime: string): string {
-  //   // // Convert UTC time to Mumbai time
-  //   // const mumbaiTime = moment.utc(utcTime).tz('Asia/Kolkata').format('YYYY-MM-DD hh:mm:ss A');
-  //   // return mumbaiTime;
-  //   // Convert UTC time to Mumbai time
-  //   const mumbaiTime = moment.utc(utcTime).tz('Asia/Kolkata').format('hh:mm:ss A');
-  //   return mumbaiTime;
-  // }
 
   // Method to convert UTC time to Mumbai time
   convertToMumbaiTime(utcTime: string): moment.Moment {

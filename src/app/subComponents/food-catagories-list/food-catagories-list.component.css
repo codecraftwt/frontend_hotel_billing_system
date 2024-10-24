@@ -16,13 +16,13 @@
 }
 
 .food-list-item:hover {
-    background-color: #e0e0e0; /* Light gray background on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover for emphasis */
+    background-color: #e0e0e0; 
+    transform: scale(1.05);
 }
 
 .food-list-item:active {
-    background-color: #d0d0d0; /* Darker gray background on click */
-    transform: scale(0.98); /* Slightly shrink on click */
+    background-color: #d0d0d0; 
+    transform: scale(0.98); 
 }
 .catagory-name{
     font-weight: bold;

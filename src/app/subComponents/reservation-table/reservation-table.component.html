@@ -1,6 +1,4 @@
 <div class="reservation-container">
-    <!-- <h1>{{ view === 'buttons' ? 'Welcome!' : (view === 'form' ? 'Reservation Form' : 'Reservation List') }}</h1> -->
-  
     <div class="btn2" *ngIf="view === 'buttons'">
       <button class="form" (click)="toggleView('form')" title="Reservation Form"> <img src="../../../assets/form.png" width="50%" height="100%" alt="" srcset=""></button>
       <button *ngIf="reservationList.length!=0" class="form" (click)="toggleView('list')" title="Reservation List"><img src="../../../assets/list.png" width="50%" height="100%" alt="" srcset=""></button>
@@ -8,9 +6,7 @@
   
     <div *ngIf="view === 'form'">
       <form (ngSubmit)="onSubmit()" class="submit-form">
-        <!-- <button type="button" (click)="toggleView('buttons')">Back</button> -->
         <button (click)="toggleView('buttons')" class="back-button delete-reservation"><img src="../../../assets/back.png" alt="" title="back" srcset="" width="100%" height="100%"></button>
-
         <div class="form-group">
           <label for="reservationName">Reservation Name</label>
           <input type="text" id="reservationName" [(ngModel)]="reservationName" name="reservationName" required>
@@ -40,40 +36,8 @@
       </form>
     </div>
   
-    <!-- <div *ngIf="view === 'list'">
-      <button (click)="toggleView('buttons')" class="back-button">Back</button>
-      <ul>
-        <li *ngFor="let reservation of reservationList">
-          {{ reservation.reservationName}} - {{ reservation.numberOfPeople }} people at Table {{ reservation.tableNumber }} on {{ reservation.reservationDateTime }} ({{ reservation.userPhoneNumber }})
-        </li>
-      </ul>
-    </div> -->
     <div *ngIf="view === 'list'">
-        <!-- <button (click)="toggleView('buttons')" class="back-button">Back</button> -->
-        <!-- <table class="table">
-          <thead>
-            <tr>
-              <th>Reservation Name</th>
-              <th>Number of People</th>
-              <th>Table Number</th>
-              <th>Date & Time</th>
-              <th>Phone Number</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let reservation of reservationList; let i = index">
-              <td>{{ reservation.reservationName }}</td>
-              <td>{{ reservation.numberOfPeople }}</td>
-              <td>{{ reservation.tableNumber }}</td>
-              <td>{{ reservation.reservationDateTime|utcToIst }}</td>
-              <td>{{ reservation.userPhoneNumber }}</td>
-              <td>
-                <button (click)="deleteReservation(reservation)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
+        
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">Upcoming Reservations</h2>
@@ -94,7 +58,6 @@
                 <div >
                   <button class="delete-reservation" (click)="deleteReservation(reservation)"><img src="../../../assets/delete.png" alt="" title="delete" srcset="" width="100%" height="100%"></button>
                 </div>
-                <!-- <span class="badge">{{ reservation.numberOfPeople }} guests</span> -->
               </li>
             </ul>
           </div>

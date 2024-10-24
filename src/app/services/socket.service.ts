@@ -52,16 +52,7 @@ export class SocketService {
   private getAllUsers = new BehaviorSubject<any[]>([]);
   private getReservationData = new BehaviorSubject<any[]>([]);
 
-  // private subscription: Subscription;
-
   constructor(private http: HttpClient) {
-    // this.subscription = interval(60000).subscribe(() => {
-    //   // const isMatched = this.checkForTimeMatch();
-    //   // console.log('Is current time matched?', isMatched);
-    //   console.log('hello');
-    // });
-    
-    
     this.socket = io(`${this.Base_URL}`);
     this.initializeDiningTables();
   }
@@ -275,19 +266,6 @@ export class SocketService {
     return this.http.put<any>(this.updateTableWithOrderapiUrl + tableNo, {
       orderId
     })
-    // .pipe(
-    //   catchError(error => {
-    //     console.error('Error fetching dining tables:', error);
-    //     return []; // Return an empty array in case of error
-    //   })
-    // )
-      // .subscribe(data => {
-      //   console.log(data, 'data')
-      //   // if(data.order != ""){
-      //   //   this.fetchDiningTables()
-      //   //   this.listenForTableUpdates();
-      //   // }
-      // });
   }
   updateDiscount(tableNo: any, discountPercent: any): Observable<any> {
     return this.http.patch<any>(this.updateDiscountapiUrl, {

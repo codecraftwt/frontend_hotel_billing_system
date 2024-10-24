@@ -12,24 +12,11 @@ import { UserService } from 'src/app/services/user.service';
 export class UserComponent {
   user:any=''
   public showWebcam = true;
-  public webcamImage: WebcamImage | null = null; // Adjusted type definition
-  public trigger: Subject<void> = new Subject<void>(); // Changed from private to public
+  public webcamImage: WebcamImage | null = null; 
+  public trigger: Subject<void> = new Subject<void>(); 
   public videoOptions: MediaTrackConstraints = {
-    // width: {ideal: 1024},
-    // height: {ideal: 576}
   };
   constructor(private userService: UserService) {
-    // this.userService.onSignupResponse(data => {
-    //   console.log('Signup Response:', data);
-    // });
-
-    // this.userService.onLoginResponse(data => {
-    //   console.log('Login Response:', data);
-    // });
-
-    // this.userService.onLogoutResponse(data => {
-    //   console.log('Logout Response:', data);
-    // });
   }
 
   convertBase64ToBlob(base64: string, contentType: string): Blob {

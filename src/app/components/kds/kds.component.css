@@ -8,10 +8,7 @@
 .btns {padding: 5px;display: flex;justify-content: space-between;}
 .time-status {padding: 10px;background-color: #ee8585;width: 100px;border-radius: 8px;margin: 3px;font-size: 14px;color: white;font-weight: 700;}
 .btn {width: 49%;padding: 10px 0;background-color: #7d7dff;border: navajowhite;border-radius: 5px;}
-.white {
-  background-color: #dadada;
-}
-
+.white {background-color: #dadada;}
 .yellow {background-color: #f4f456;}
 .green {background-color: #74da74;}
 /* Custom scrollbar for WebKit browsers */
@@ -26,10 +23,7 @@
 .note-div {width: 100%;padding: 5px;}
 .note {padding: 10px;background-color: #836d6d78;border-radius: 6px;}
 .color_code {display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
-.codor-code-list {
-  display: flex;
-}
-
+.codor-code-list {display: flex;}
 .color-code-symbole-veg {width: 20px;background-color: #74da74;border-radius: 50px;margin-right: 5px;}
 .color-code-symbole-non-veg {width: 20px;background-color: #f4f456;border-radius: 50px;margin-right: 5px;}
 .color-code-symbole-soup {width: 20px;background-color: #dadada;border-radius: 50px;margin-right: 5px;}

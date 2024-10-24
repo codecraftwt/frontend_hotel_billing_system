@@ -2,20 +2,20 @@
   background-color: #212d3b;
   background-image: linear-gradient(to right, #313a48 1px, transparent 1px), linear-gradient(to bottom, #313a48 1px, transparent 1px);
   background-size: 40px 40px;}
-.table {position: relative;width: 65px;height: 92px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
-.table15 {position: relative;width: 70px;height: 70px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
-.table7 {position: relative;width: 200px;height: 70px;background-color: #838383;/* border: 2px solid #ddd; */border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table {position: relative;width: 65px;height: 92px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table15 {position: relative;width: 70px;height: 70px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table7 {position: relative;width: 200px;height: 70px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
 .table-number {font-size: 24px;font-weight: bold;}
 .table-status {font-size: 16px;color: #666;}
-.chair {position: absolute;width: 20px; /* Adjust as needed */height: 20px; /* Adjust as needed *//* background-color: #ddd; */border-radius: 50%;}
-.chair-top {top: -40px; /* Adjust spacing from table */left: 50%;transform: translateX(-80%);}
-.chair-top svg {transform: rotate(0deg); /* Rotate by 90 degrees */transform-origin: center; /* Rotate around the center of the SVG */}
-.chair-right {right: -25px; /* Adjust spacing from table */top: 50%;transform: translateY(-80%);}
-.chair-right svg {transform: rotate(90deg); /* Adjust the degree as needed for your rotation */transform-origin: center; /* Rotate around the center of the SVG */}
-.chair-bottom {bottom: -30px; /* Adjust spacing from table */left: 50%;transform: translateX(-80%);}
-.chair-bottom svg{transform: rotate(180deg); /* Rotate by 90 degrees */transform-origin: center;}
-.chair-left {left: -40px; /* Adjust spacing from table */top: 50%;transform: translateY(-80%);}
-.chair-left svg{transform: rotate(-90deg); /* Rotate by 90 degrees */transform-origin: center;}
+.chair {position: absolute;width: 20px;height: 20px;border-radius: 50%;}
+.chair-top {top: -40px;left: 50%;transform: translateX(-80%);}
+.chair-top svg {transform: rotate(0deg); transform-origin: center;}
+.chair-right {right: -25px;top: 50%;transform: translateY(-80%);}
+.chair-right svg {transform: rotate(90deg);transform-origin: center;}
+.chair-bottom {bottom: -30px;left: 50%;transform: translateX(-80%);}
+.chair-bottom svg{transform: rotate(180deg); transform-origin: center;}
+.chair-left {left: -40px;top: 50%;transform: translateY(-80%);}
+.chair-left svg{transform: rotate(-90deg); transform-origin: center;}
   /* Optional: Responsive adjustments */
   @media (max-width: 600px) {
     .table {width: 100px;height: 100px}

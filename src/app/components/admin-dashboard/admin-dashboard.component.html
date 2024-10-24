@@ -1,20 +1,4 @@
-<!-- 
-
-<div class="ag-grid-container">
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    [columnDefs]="columnDefs"
-    [rowData]="rowData"
-    [gridOptions]="gridOptions">
-  </ag-grid-angular>
-</div>
-
-<div id="chartContainer" style="height: 400px; width: 100%;"></div> -->
-
-
 <div class="dashboard">
-  <!-- <h1 class="dashboard-title">Restaurant Dashboard</h1> -->
-  
   <div class="metrics-grid">
     <div class="card">
       <div class="card-header">
@@ -59,42 +43,6 @@
   </div>
 
   <div class="grid-2-col">
-    <!-- <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">Recent Orders</h2>
-      </div>
-      <div class="card-content">
-        <table>
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Items</th>
-              <th>Total</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-                    <tbody>
-            <tr *ngFor="let order of recentOrders">
-              <td class="font-medium">{{ order.id }}</td>
-              <td>
-                <div class="flex-center">
-                  <img [src]="order.customerAvatar" [alt]="order.customerName" class="avatar">
-                  {{ order.customerName }}
-                </div>
-              </td>
-              <td>{{ order.items }}</td>
-              <td>${{ order.total.toFixed(2) }}</td>
-              <td>
-                <span class="badge" [ngClass]="{'badge-default': order.status === 'Completed', 'badge-secondary': order.status !== 'Completed'}">
-                  {{ order.status }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div> -->
     <div class="card">
       <div class="card-header">
         <h2 class="card-title">Recent Orders</h2>
@@ -115,8 +63,6 @@
               <td class="font-medium">{{ order._id }}</td>
               <td>
                 <div class="flex-center">
-                  <!-- Assuming you don't have an avatar in the provided response data -->
-                  <!-- <img [src]="order.customerAvatar" [alt]="order.customerName" class="avatar"> -->
                   {{ order.customerName }}
                 </div>
               </td>

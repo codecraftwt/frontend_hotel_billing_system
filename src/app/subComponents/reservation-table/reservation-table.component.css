@@ -1,8 +1,6 @@
 .reservation-container {
     max-width: 600px;
     margin: 0 auto;
-    /* padding: 20px; */
-    /* border: 1px solid #ddd; */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #414141;
@@ -113,8 +111,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin-bottom: 19px; */
-    /* margin-top: 14px; */
     border-bottom: 1px solid white;
     padding: 13px 0;
 

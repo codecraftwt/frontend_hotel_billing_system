@@ -7,7 +7,7 @@ import { io, Socket } from 'socket.io-client';
 })
 export class WebSocketService {
   private socket: Socket;
-  private serverUrl = 'http://localhost:3000'; // Your server URL
+  private serverUrl = 'http://localhost:3000';
 
   constructor() {
     this.socket = io(this.serverUrl);

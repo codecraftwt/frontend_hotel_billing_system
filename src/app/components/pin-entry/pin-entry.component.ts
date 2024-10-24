@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { SocketService } from 'src/app/services/socket.service';
 import { SoundService } from 'src/app/services/sound.service';
 
@@ -16,7 +17,7 @@ export class PinEntryComponent {
   pin4: string = '';
   errorMessage: string | null = null;
 
-  constructor(private route:Router,private socketService: SocketService,private toastr: ToastrService,private sound:SoundService){}
+  constructor(private auth: AuthService,private route:Router,private socketService: SocketService,private toastr: ToastrService,private sound:SoundService){}
 
   focusNext(event: Event, nextInput: HTMLInputElement) {
     const input = event.target as HTMLInputElement | null;
@@ -42,32 +43,9 @@ export class PinEntryComponent {
   onSubmit() {
     this.sound.playSound()
     const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
-    // console.log(pin,'pin');
-    // localStorage.setItem('role',JSON.stringify(['kds']))
     this.socketService.logIn(pin).subscribe(res=>{
-      console.log(res,'res====');
-      let index=res.timesheet.length
-      console.log(res.timesheet[index-1].status,'res.timesheet[index-1].status');
-      localStorage.setItem('role',JSON.stringify(res.role))
-      // console.log(res.timesheet[index-1],'test');
-      if(res.timesheet[index-1].status=="off duty"){
-        this.toastr.info('You have successfully logged out.', 'Logout Status');
-      }
-      if(res.timesheet[index-1].status=="on duty"){
-        this.toastr.success('You have successfully logged in!', 'Login Status');
-      }
-      // // if(res.username){
-      // //   this.toastr.success('You have successfully logged in!', 'Login Status');
-      // // }
-      if(res.role[0]=="admin"){
-        setTimeout(() => {
-          this.route.navigate(['/dashboard'])
-        }, 900);
-      }
+      this.auth.updateRoles(res)
     })
-
-
-    // alert(`Entered PIN: ${pin}`); // Replace with your validation logic
     this.resetPin(); // Reset the PIN after submission
   }
 

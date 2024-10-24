@@ -19,7 +19,9 @@ const routes: Routes = [
   },
   {
     path:"tables",
-    component:TablesComponent
+    component:TablesComponent,
+    canActivate: [RoleGuard], // Protect this route
+    data: { expectedRole: ['counter', 'admin'] } as RouteData  // Specify the required role
   },
   {
     path:"menus/:id",

@@ -30,20 +30,15 @@ export class BillingSystemComponent implements OnInit {
 
   initialmethod(){
     this.route.params.subscribe(params => {
-      // console.log(params) //log the entire params object
-      // console.log(params['id']) //log the value of id
       this.tableNo = params['id']
       this.socketService.fetchOrders(params['id'])
       this.customerAmmount=''
       this.remaingAmmount=''
     });
     this.socketService.getOrdersItems().subscribe((res: any) => {
-      console.log(res, 'order get');
-      console.log(JSON.stringify(res), 'order get');
       this.billingData = res
       if (res?._id) {
         this.socketService.updateTableWithOrder(res?.tableNo, res?._id).subscribe(res=>{
-          console.log(res,'res---test');
           this.tableDetails=res
         })
       }
@@ -52,72 +47,49 @@ export class BillingSystemComponent implements OnInit {
 
   update(data: any,qty:any) {
     this.sound.playSound()
-    console.log(data,qty);
     this.socketService.updateOrderQty(this.tableNo, data.foodItemId, qty,data.createdAt).subscribe(res => {
-      console.log(res, 'test');
       this.initialmethod()
     })
   }
   addNote(data: any) {
     this.sound.playSound()
-    console.log(data);
     this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote,data.createdAt).subscribe(res => {
-      console.log(res, 'test');
       this.initialmethod()
     })
   }
-  // deleteOrder(data: any) {
-  //   console.log(data);
-  //   this.socketService.updateOrderQty(this.tableNo, data.foodItemId, data.quantity).subscribe(res => {
-  //     console.log(res, 'test');
-  //     this.initialmethod()
-  //   })
-  // }
-
+  
   updateDiscount(data: any) {
-    console.log(data, 'data');
     this.socketService.updateDiscount(this.tableNo, data.discountPercent).subscribe(res => {
-      console.log(res, 'test');
       this.initialmethod()
     })
   }
   addCustomerName(data:any){
     this.socketService.addCustomerName(this.tableNo, data.customerName).subscribe(res => {
-      console.log(res, 'test');
       this.initialmethod()
     })
   }
   addCustomerNumber(data:any){
     this.socketService.addCustomerNumber(this.tableNo, data.customerNo).subscribe(res => {
-      console.log(res, 'test');
       this.initialmethod()
     })
   }
   changeOrderStatus() {
     this.sound.playSound()
     this.socketService.updateOrderStatus(this.tableNo, 'completed').subscribe(res => {
-      console.log(res, 'test');
       this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
         this.initialmethod()
       })
-    //  this.initialmethod()
-
     })
   }
 
   confirmorder(data:any){
     this.sound.playSound()
-    console.log(data,'data----');
-    console.log(this.tableDetails,'tableDetails');
-    
     if(data.customerName!==null){
       if(this.tableDetails.status=='reserved table'){
         this.socketService.updateReservationStatus(this.tableNo,'processing','completed').subscribe(res=>{
-          console.log(res,'res--reserve status');
         })
       }
       this.socketService.updateOrderKotStatus(this.tableNo, 'confirmed').subscribe(res=>{
-        // console.log(res,'koy');
         this.toastr.success('Order has been sent to the kitchen!', 'Order Status');
         this.socketService.updateTableStatus(this.tableNo,'KOT table').subscribe(res=>{
           this.initialmethod()
@@ -135,16 +107,10 @@ export class BillingSystemComponent implements OnInit {
     })
   }
 
-  // updateTotal() {
-  //   this.totalAmount = this.billingData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  // }
-
   removeItem(data: any) {
     this.sound.playSound()
-    console.log(JSON.stringify(data),'data');
     
     this.socketService.deleteOrder(this.tableNo, data.foodItemId,data.createdAt).subscribe(res => {
-      console.log(res, 'test');
       if(res.message=='Order deleted'){
         this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
           this.initialmethod()

@@ -13,9 +13,6 @@ export class PrintPageComponent implements OnInit {
   ngOnInit(): void {
     this.socketService.getOrdersItems().subscribe((res: any) => {
       this.orderData = res
-      // if (res?._id) {
-      //   this.socketService.updateTableWithOrder(res?.tableNo, res?._id)
-      // }
     })
   }
 
