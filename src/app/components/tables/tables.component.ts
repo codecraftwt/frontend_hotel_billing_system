@@ -40,7 +40,9 @@ export class TablesComponent implements OnInit {
     // }, 0);
 
     this.socketService.getDiningTables().subscribe(data => {
-      this.diningTables = data;
+      console.log(JSON.stringify(data),'data');
+      
+      this.diningTables = data.sort((a, b) => a.tableNumber - b.tableNumber);;
       this.socketService.getAllReservation().subscribe(res => {
         this.reservationData = res
         console.log(this.reservationData,'reservationData');

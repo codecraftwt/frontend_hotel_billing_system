@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SocketService } from 'src/app/services/socket.service';
 import { SoundService } from 'src/app/services/sound.service';
@@ -15,7 +16,7 @@ export class PinEntryComponent {
   pin4: string = '';
   errorMessage: string | null = null;
 
-  constructor(private socketService: SocketService,private toastr: ToastrService,private sound:SoundService){}
+  constructor(private route:Router,private socketService: SocketService,private toastr: ToastrService,private sound:SoundService){}
 
   focusNext(event: Event, nextInput: HTMLInputElement) {
     const input = event.target as HTMLInputElement | null;
@@ -58,6 +59,11 @@ export class PinEntryComponent {
       // // if(res.username){
       // //   this.toastr.success('You have successfully logged in!', 'Login Status');
       // // }
+      if(res.role[0]=="admin"){
+        setTimeout(() => {
+          this.route.navigate(['/dashboard'])
+        }, 900);
+      }
     })
 
 
