@@ -28,3 +28,4 @@
 .color-code-symbole-non-veg {width: 20px;background-color: #f4f456;border-radius: 50px;margin-right: 5px;}
 .color-code-symbole-soup {width: 20px;background-color: #dadada;border-radius: 50px;margin-right: 5px;}
 .color-code-container {display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}
+.loadingC{height: 100%;display: flex;align-items: center;justify-content: center;}

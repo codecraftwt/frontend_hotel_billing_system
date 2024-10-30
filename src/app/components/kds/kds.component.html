@@ -15,7 +15,10 @@
       </li>
     </ul>
   </div>
-  <div class="order-list-container">
+  <div class="menu-container loadingC" *ngIf="data.length == 0">
+    <img src="../../../assets/Group 51.png" alt="" srcset="" width="15%" height="35%">
+  </div>
+  <div class="order-list-container" *ngIf="data.length != 0">
     <div class="colum" *ngFor="let item of data">
       <div class="header">
         <p>Table No.:{{item.tableNo}}</p>

@@ -6,6 +6,7 @@ import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
   styleUrls: ['./food-catagories-list.component.css']
 })
 export class FoodCatagoriesListComponent implements OnInit {
+  @Input()active!:boolean;
   @Input() data: any;
   @Output() itemClick = new EventEmitter<any>();
 
