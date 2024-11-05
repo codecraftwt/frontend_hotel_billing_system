@@ -133,3 +133,9 @@
     border: none;
     cursor: pointer;
   }
+  .btns{
+    padding: 20px;
+  }
+  .btns p{
+    color: white;
+  }

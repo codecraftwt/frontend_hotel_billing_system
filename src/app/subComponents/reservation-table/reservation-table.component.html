@@ -1,7 +1,7 @@
 <div class="reservation-container">
     <div class="btn2" *ngIf="view === 'buttons'">
-      <button class="form" (click)="toggleView('form')" title="Reservation Form"> <img src="../../../assets/form.png" width="50%" height="100%" alt="" srcset=""></button>
-      <button *ngIf="reservationList.length!=0" class="form" (click)="toggleView('list')" title="Reservation List"><img src="../../../assets/list.png" width="50%" height="100%" alt="" srcset=""></button>
+      <button class="form btns" (click)="toggleView('form')" title="Reservation Form"> <img src="../../../assets/form.png" width="50%" height="100%" alt="" srcset=""><p>Reservation Form</p></button>
+      <button *ngIf="reservationList.length!=0" class="form btns" (click)="toggleView('list')" title="Reservation List"><img src="../../../assets/list.png" width="50%" height="100%" alt="" srcset=""><p>Reservation List</p></button>
     </div>
   
     <div *ngIf="view === 'form'">
