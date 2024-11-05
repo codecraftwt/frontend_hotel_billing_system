@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { TablesComponent } from './components/tables/tables.component';
+import { TablesComponent } from './components/table/tables/tables.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { FormsModule } from '@angular/forms';
 import { KdsComponent } from './components/kds/kds.component';
@@ -19,9 +19,9 @@ import { PrintPageComponent } from './print-page/print-page.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-import { AgGridModule } from 'ag-grid-angular';
+// import { AgGridModule } from 'ag-grid-angular';
 import { WebcamModule } from 'ngx-webcam';
-import { UserComponent } from './subComponents/user/user.component';
+// import { UserComponent } from './subComponents/user/user.component';
 import { PinEntryComponent } from './components/pin-entry/pin-entry.component';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 import { SoundService } from './services/sound.service';
@@ -44,7 +44,7 @@ import { AuthService } from './services/auth.service';
     BillingSystemComponent,
     PrintPageComponent,
     AdminDashboardComponent,
-    UserComponent,
+    // UserComponent,
     PinEntryComponent,
     CustomModalComponent,
     ChairIconComponent,
@@ -53,7 +53,7 @@ import { AuthService } from './services/auth.service';
     UtcToIstPipe
   ],
   imports: [
-    AgGridModule,
+    // AgGridModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TablesComponent } from './components/tables/tables.component';
+import { TablesComponent } from './components/table/tables/tables.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { KdsComponent } from './components/kds/kds.component';
 import { VoiceRecognitionComponent } from './voice-recognition/voice-recognition.component';
@@ -17,15 +17,23 @@ const routes: Routes = [
     redirectTo:"tables",
     pathMatch:"full"
   },
+  // {
+  //   path:"tables",
+  //   component:TablesComponent,
+  //   canActivate: [RoleGuard], // Protect this route
+  //   data: { expectedRole: ['counter', 'admin'] } as RouteData  // Specify the required role
+  // },
   {
-    path:"tables",
-    component:TablesComponent,
+    path:'tables',
+    loadChildren:()=>import('./components/table/table.module').then(m=>m.TableModule),
     canActivate: [RoleGuard], // Protect this route
-    data: { expectedRole: ['counter', 'admin'] } as RouteData  // Specify the required role
+    data: { expectedRole: ['counter', 'admin'] } as RouteData
   },
   {
     path:"menus/:id",
-    component:MenusComponent
+    component:MenusComponent,
+    canActivate: [RoleGuard], // Protect this route
+    data: { expectedRole: ['counter', 'admin'] } as RouteData
   },
   {
     path: 'kds',

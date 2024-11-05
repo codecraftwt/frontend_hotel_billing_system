@@ -11,6 +11,9 @@ import { SoundService } from 'src/app/services/sound.service';
 export class SidebarComponent implements OnInit {
 
   private intervalId: any;
+  
+  isModalOpen = false;
+  isModalOpenR = false;
 
   constructor(private toastr: ToastrService,private sound:SoundService,private auth:AuthService) { }
 
@@ -22,10 +25,14 @@ export class SidebarComponent implements OnInit {
     }else{
       this.startRoleCleanup();
     }
+    this.auth.getCloseLoginModule$().subscribe((status)=>{
+      if(status){
+        this.closeModal()
+      }
+    })
+
   }
 
-  isModalOpen = false;
-  isModalOpenR = false;
 
   openModal() {
     this.sound.playSound()

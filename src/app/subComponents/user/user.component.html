@@ -1,11 +1,11 @@
-<div>
+<!-- <div>
     <button (click)="toggleWebcam()">Toggle Webcam</button>
     <button (click)="captureImage('signup')">Sign Up</button>
     <button (click)="captureImage('login')">Login</button>
     <button (click)="captureImage('logout')">Logout</button>
   </div>
   <input type="text" [(ngModel)]="user">
-  <!-- <ngx-webcam [height]="500" [width]="500"  *ngIf="showWebcam" [trigger]="trigger" (imageCapture)="handleImage($event)"></ngx-webcam> -->
+  <ngx-webcam [height]="500" [width]="500"  *ngIf="showWebcam" [trigger]="trigger" (imageCapture)="handleImage($event)"></ngx-webcam>
 
   <webcam [height]="500" [width]="500" [trigger]="trigger" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
 		 [allowCameraSwitch]="true"  [videoOptions]="videoOptions" 
@@ -15,4 +15,4 @@
     <h2>Captured Image:</h2>
     <img [src]="webcamImage.imageAsDataUrl" />
   </div>
-  
+   -->

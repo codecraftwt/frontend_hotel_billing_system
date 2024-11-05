@@ -60,9 +60,12 @@ export class TablesComponent implements OnInit {
         const matchingReservation = this.reservationData.find(reservation => reservation.tableNumber === table.tableNumber);
         if (matchingReservation) {
           // Parse the reservation date and time
+          const istOffset = 5.5 * 60 * 60 * 1000;
           const reservationDateTime = new Date(matchingReservation.reservationDateTime);
+          console.log(reservationDateTime,'reservationDateTime');
+          
           // Assuming reservationDateTime is in UTC, convert to IST
-          const reservationISTTime = new Date(reservationDateTime.getTime());
+          const reservationISTTime = new Date(reservationDateTime.getTime()-istOffset);
           // Subtract one hour from the reservation time
           reservationISTTime.setHours(reservationISTTime.getHours() - 1);
           // Check if the reservation is today

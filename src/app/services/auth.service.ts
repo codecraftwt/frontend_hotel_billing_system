@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private roles: string[] = [];
   private rolesSubject = new BehaviorSubject<string[]>(this.getUserRoles());
+  private closeLoginModuleSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private toastr: ToastrService,private route:Router) {
+  constructor(private toastr: ToastrService,private route:Router,private socket:SocketService) {
     this.roles = this.rolesSubject.value; // Initialize roles from the BehaviorSubject
   }
 
@@ -28,6 +30,7 @@ export class AuthService {
       localStorage.removeItem('role')
       this.roles = res.role;
       this.rolesSubject.next([]);
+      this.closeLoginModuleSubject.next(false);
       this.route.navigate(['/'])
     }
     if(res.timesheet[index-1].status=="on duty"){
@@ -35,6 +38,15 @@ export class AuthService {
       this.roles = res.role;
       localStorage.setItem('role', JSON.stringify(res.role)); // Update localStorage
       this.rolesSubject.next(this.roles); // Emit the new roles
+
+            // Set the closeLoginModule to true for 'admin' or 'counter' roles
+            if (res.role[0] === "admin" || res.role[0] === "counter") {
+              this.closeLoginModuleSubject.next(true);
+            } else {
+              this.closeLoginModuleSubject.next(false);  // Default to false for other roles
+            }
+
+            
       if(res.role[0]=="admin"){
           this.route.navigate(['/dashboard'])
       }
@@ -58,5 +70,8 @@ export class AuthService {
   // Expose the roles as an observable for subscribers
   getRoles$() {
     return this.rolesSubject.asObservable();
+  }
+  getCloseLoginModule$() {
+    return this.closeLoginModuleSubject.asObservable();
   }
 }
