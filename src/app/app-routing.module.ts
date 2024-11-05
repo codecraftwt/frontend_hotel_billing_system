@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path:"menus/:id",
     component:MenusComponent
-  },
+  }, 
   {
     path: 'kds',
     component: KdsComponent,
