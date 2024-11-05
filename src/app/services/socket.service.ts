@@ -54,10 +54,10 @@ export class SocketService {
 
   constructor(private http: HttpClient) {
     this.socket = io(`${this.Base_URL}`);
-    this.initializeDiningTables();
+    // this.initializeDiningTables();
   }
 
-  private initializeDiningTables(): void {
+  public initializeDiningTables(): void {
     this.fetchDiningTables();
     this.fetchFoodCategory()
     this.fetchFoodItems()
@@ -157,8 +157,8 @@ export class SocketService {
     this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables()});
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
     this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
-    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) });
-    this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
+    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.fetchAllOrders(),  this.fetchAllOrdersAdmin() });
+    // this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
     this.socket.on('reservation', (data: any[]) => { this.fetchReservation() });
   }

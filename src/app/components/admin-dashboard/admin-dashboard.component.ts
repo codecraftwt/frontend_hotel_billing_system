@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
-import { GridOptions } from 'ag-grid-community';
+// import { GridOptions } from 'ag-grid-community';
 import { DatePipe } from '@angular/common';
 interface Order {
   id: string;
@@ -70,24 +70,24 @@ export class AdminDashboardComponent implements OnInit {
   staffList:any[]=[]
 
   rowData: any;
-  gridOptions: GridOptions = {
-    pagination: true,
-    paginationPageSize: 10,
-    defaultColDef: {
-      sortable: true,
-      filter: true,
-      resizable: true
-    },
-    rowSelection: 'multiple',
-    suppressRowClickSelection: true,
-    animateRows: true,
-    domLayout: 'autoHeight',
-    onGridReady: (params) => {
-      params.api.sizeColumnsToFit();
-      // Initialize chart after grid is ready
-      this.createChart(params.api);
-    }
-  };
+  // gridOptions: GridOptions = {
+  //   pagination: true,
+  //   paginationPageSize: 10,
+  //   defaultColDef: {
+  //     sortable: true,
+  //     filter: true,
+  //     resizable: true
+  //   },
+  //   rowSelection: 'multiple',
+  //   suppressRowClickSelection: true,
+  //   animateRows: true,
+  //   domLayout: 'autoHeight',
+  //   onGridReady: (params) => {
+  //     params.api.sizeColumnsToFit();
+  //     // Initialize chart after grid is ready
+  //     this.createChart(params.api);
+  //   }
+  // };
 
   constructor(private socketService: SocketService,private datePipe: DatePipe) { }
 
