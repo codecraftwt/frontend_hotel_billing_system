@@ -6,8 +6,8 @@
         <i class="icon-utensils"></i>
       </div>
       <div class="card-content">
-        <div class="metric">{{ rowData?.totalOrders?.count}}</div>
-        <p class="metric-change">+15.5% from last month</p>
+        <div class="metric">{{ rowData?.totalOrders?.thisMonth}}</div>
+        <p class="metric-change">{{rowData?.totalOrders?.percentageChange | number:'1.2-2'}}% from last month</p>
       </div>
     </div>
     <div class="card">
@@ -17,7 +17,7 @@
       </div>
       <div class="card-content">
         <div class="metric">{{ rowData?.revenue?.thisMonth | currency:'INR':'symbol':'1.2-2'}}</div>
-        <p class="metric-change">+12.3% from last month</p>
+        <p class="metric-change">{{rowData?.revenue?.percentageChange | number:'1.2-2'}}% from last month</p>
       </div>
     </div>
     <div class="card">
@@ -27,7 +27,7 @@
       </div>
       <div class="card-content">
         <div class="metric">{{ rowData?.averageOrderValue?.thisMonth | currency:'INR':'symbol':'1.2-2'}}</div>
-        <p class="metric-change">+2.5% from last month</p>
+        <p class="metric-change">{{rowData?.averageOrderValue?.percentageChange | number:'1.2-2'}}% from last month</p>
       </div>
     </div>
     <div class="card">
