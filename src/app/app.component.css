@@ -2,21 +2,26 @@
     width: 100%;
     height: 100%;
     display: flex;
+    padding: 10px;
+    background: #181825;
+    gap: 10px;
 }
 .sidebar{
-    margin: 0;
+    width: 4%;
+    /* margin: 0;
     width:5%;
     height: 99.9vh;
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 .render{
-    width: 95%;
-    height: 99.9vh;
+    width: 96%;
+    /* height: 99.9vh; */
     display: flex;
     justify-content: center;
     position: relative;
-    background-color: #373737;
+    /* background-color: #373737; */
+    border-radius: 9px;
 }

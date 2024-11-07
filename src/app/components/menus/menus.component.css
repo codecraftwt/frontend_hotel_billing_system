@@ -1,8 +1,8 @@
-.menu-container {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;background-color: #121315;}
+.menu-container {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex; gap: 10px;/*background-color: #121315;*/}
 
-.food-menu {width: 65%;display: flex;flex-direction: column}
+.food-menu {width: 65%;display: flex;flex-direction: column;background: #27293d;border-radius: 10px;}
 /* Container for the horizontal scrollable items */
-.food-list {padding: 10px;width: 100%;height: 41%;display: flex;overflow-x: auto;white-space: nowrap;align-items: center;justify-content: flex-start;-ms-overflow-style: none;scrollbar-width: thin;scrollbar-color: #2d2d2d transparent;}
+.food-list {padding: 10px;width: 100%;/*height: 41%*/min-height: 27%;display: flex;overflow-x: auto;white-space: nowrap;align-items: center;justify-content: flex-start;-ms-overflow-style: none;scrollbar-width: thin;scrollbar-color: #a6ace1 transparent;}
 /* Hide scrollbar for WebKit browsers */
 .food-list::-webkit-scrollbar {height: 8px; }
 .food-list::-webkit-scrollbar-track {background: transparent; }
@@ -14,7 +14,19 @@
 .food-list-item:hover {background-color: #e0e0e0;transform: scale(1.05); }
 .food-list-item:active {background-color: #d0d0d0;transform: scale(0.98); }
 .hr{width: 90%;margin: 0px 46px;background-color: #DBDBDB;height: 2px;border-radius: 67px;}
-.food-items {width: 100%;padding: 10px;display: flex;flex-wrap: wrap; gap: 16px;overflow-y: auto;overflow-x: hidden;-ms-overflow-style: none;scrollbar-width: none; height: 800px;}
+.food-items {    
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  /* height: 800px; */
+  justify-content: center;
+}
 .food-items-h{display: flex;justify-content: center;align-items: center;}
 
 /* Hide scrollbar for WebKit browsers */
@@ -27,7 +39,8 @@
 
 
 /* billing */
-.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;font-family: 'Arial, sans-serif';overflow: hidden;}
+.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;font-family: 'Arial, sans-serif';overflow: hidden; background: #27293d;
+  border-radius: 10px;}
 .billing-header {text-align: center;margin-bottom: 20px;}
 .customer-name {margin-bottom: 20px;display: flex;flex-direction: column;align-items: flex-start;}
 .customer-name label {margin-bottom: 5px;font-weight: bold;}
@@ -70,7 +83,12 @@
   .input-amount{width: 100px;height: 50px;border: none;border-radius: 10px;}
   .pay-field-lable{margin-bottom: 5px;}
   .search-box{display: flex;justify-content: center;margin: 5px 0px;flex-direction: column;align-items: center;}
-  .search-input{padding: 20px;border: none;width: 95%;border-radius: 50px;background-color: #2d2d2d;color: #d0d0d0;}
+  .search-input{padding: 20px;
+    border: none;
+    width: 95%;
+    border-radius: 50px;
+    background-color: #a6ace1;
+    color: #605656;}
   .color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
   .codor-code-list{display: flex;}
   .color-code-symbole-veg{width: 20px;background-color: #48eb48;border-radius: 50px;margin-right: 5px;}

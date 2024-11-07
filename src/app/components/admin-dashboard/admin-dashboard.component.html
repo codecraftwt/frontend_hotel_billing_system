@@ -45,6 +45,35 @@
   <div class="grid-2-col">
     <div class="card">
       <div class="card-header">
+        <h2 class="card-title">Staff Management</h2>
+      </div>
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Shift</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let staff of staffList">
+              <td class="font-medium">{{ staff.username}}</td>
+              <td>{{ staff.role }}</td>
+              <td>{{ convertToIST(staff.todayTimesheet[0].checkInTime) }} - {{ convertToIST(staff.todayTimesheet[0].checkOutTime) || null }}</td>
+              <td>
+                <span class="badge" [ngClass]="{'badge-default': staff.todayTimesheet[0].status === 'on duty', 'badge-secondary': staff.todayTimesheet[0].status !== 'on duty'}">
+                  {{ staff.todayTimesheet[0].status}}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
         <h2 class="card-title">Recent Orders</h2>
       </div>
       <div class="card-content">
@@ -77,35 +106,6 @@
               <td>
                 <span class="badge" [ngClass]="{'badge-default': order.orderStatus === 'completed', 'badge-secondary': order.orderStatus !== 'completed'}">
                   {{ order.orderStatus }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">Staff Management</h2>
-      </div>
-      <div class="card-content">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Shift</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let staff of staffList">
-              <td class="font-medium">{{ staff.username}}</td>
-              <td>{{ staff.role }}</td>
-              <td>{{ convertToIST(staff.todayTimesheet[0].checkInTime) }} - {{ convertToIST(staff.todayTimesheet[0].checkOutTime) || null }}</td>
-              <td>
-                <span class="badge" [ngClass]="{'badge-default': staff.todayTimesheet[0].status === 'on duty', 'badge-secondary': staff.todayTimesheet[0].status !== 'on duty'}">
-                  {{ staff.todayTimesheet[0].status}}
                 </span>
               </td>
             </tr>
