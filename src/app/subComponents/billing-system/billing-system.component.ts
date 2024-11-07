@@ -157,9 +157,9 @@ export class BillingSystemComponent implements OnInit {
       case 'ready':
         return { 'background-color': '#74da74' }; // Green color
       case 'on hold':
-        return { 'background-color': '#2D2D2D', 'color': 'white' }; // Dark gray color
+        return { 'background-color': '#5d64a8', 'color': 'white' }; // Dark gray color
       default:
-        return { 'background-color': '#2D2D2D', 'color': 'white' }; // Default dark gray color
+        return { 'background-color': '#5d64a8', 'color': 'white' }; // Default dark gray color
     }
   }
 

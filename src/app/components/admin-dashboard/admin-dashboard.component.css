@@ -1,9 +1,19 @@
-.dashboard {padding: 2rem;background-color: #373737;min-height: 100vh;width: 94vw;}
+.dashboard {    padding: 2rem;
+  background-color: #27293d;
+  /* min-height: 100vh; */
+  width: 94vw;
+  /* width: 0%; */
+  /* overflow-x: scroll; */
+  height: 97vh;
+  overflow-y: scroll;
+  border-radius: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #a6ace1 transparent;}
 .dashboard-title {font-size: 1.875rem;font-weight: bold;margin-bottom: 1.5rem;}
 .metrics-grid {display: grid;gap: 1.5rem;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));margin-bottom: 1.5rem;}
-.grid-2-col {display: grid;gap: 1.5rem;grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));margin-bottom: 1.5rem;}
+.grid-2-col {display: grid;gap: 1.5rem;/*grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));*/margin-bottom: 1.5rem;}
 .grid-3-col {display: grid;gap: 1.5rem;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));margin-bottom: 1.5rem;}
-.card {background-color: #494a4b;border-radius: 0.5rem;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow: hidden;color: white;}
+.card {background-color: #5e65a9;border-radius: 0.5rem;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow: hidden;color: white;}
 .card-header {display: flex;justify-content: space-between;align-items: center;padding: 1rem;border-bottom: 1px solid #e5e7eb;}
 .card-title {font-size: 0.875rem;font-weight: 500;}
 .card-content {padding: 1rem;}

@@ -45,15 +45,17 @@ export class MenusComponent implements OnInit {
       this.data = data;
     });
     setTimeout(() => {
-      this.socketService.getFoodCategory().subscribe(res => {
-        res.forEach(category => {
-          this.foodCatagoriesData.push({
-            _id:category._id,
-            name: category.name,
-            count: this.data.filter(item => item.category.name === category.name).length,
+        this.socketService.getFoodCategory().subscribe(res => {
+          res.forEach(category => {
+            if(this.foodCatagoriesData.length<=5){
+            this.foodCatagoriesData.push({
+              _id:category._id,
+              name: category.name,
+              count: this.data.filter(item => item.category.name === category.name).length,
+            });
+          }
           });
         });
-      });
     }, 5);
 
   }

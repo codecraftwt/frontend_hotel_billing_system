@@ -1,15 +1,17 @@
 .sidebar {
-    width: 5%;
-    height: 100vh;
-    background-color: #373737;
-    color: #ecf0f1;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-right: 2px solid #34495e;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 97vh;
+  background-color: #2a6cf5;
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  border-right: 2px solid #34495e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
   }
   
   .sidebar-header {
