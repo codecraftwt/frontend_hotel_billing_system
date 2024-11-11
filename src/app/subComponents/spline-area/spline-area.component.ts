@@ -7,6 +7,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 })
 export class SplineAreaComponent {
   @Input() totalOrders: { x: string, y: number }[] = []; // Dynamic input
+  @Input()color:string|undefined
   chartOptions: any;
   show:boolean=false
   constructor(){
@@ -87,7 +88,7 @@ export class SplineAreaComponent {
     },
     data: [{
       type: "splineArea",
-      color: "rgba(0, 255, 0, 0.7)",
+      color: this.color,
       xValueFormatString: "YYYY-MM-DD", // Keep date formatting as is for the X axis
       lineThickness: 2, // Remove the line for the spline area
       fillOpacity: 0.7, // Keeps the area but no lines
@@ -100,13 +101,16 @@ export class SplineAreaComponent {
       ]?.map(point => {
         // Add indexLabel to highest and lowest points
         let label = "";
+        let labelColor = "";
         if (point.y === Math.max(...this.getDataPoints().map((p:any) => p.y))) {
           label = "Highest";
+          labelColor = "red";
         } else if (point.y === Math.min(...this.getDataPoints().map((p:any) => p.y))) {
           label = "Lowest";
+          labelColor = "blue"; 
         }
 
-        return { ...point, indexLabel: label };
+        return { ...point, indexLabel: label ,indexLabelFontColor: labelColor};
       })
     }]
   };
