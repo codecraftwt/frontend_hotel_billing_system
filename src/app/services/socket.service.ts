@@ -23,6 +23,7 @@ export class SocketService {
   private deleteapiUrl = `${this.Base_URL}/api/deleteFoodItem`
   private getallapiUrl = `${this.Base_URL}/api/getAllOrders`
   private getallOrderAminapiUrl = `${this.Base_URL}/api/getAllOrdersAdmin`
+  private getallOrderAminGraphapiUrl = `${this.Base_URL}/api/getAllOrdersAdminGraph`
   private updateFoodItemStatusapiUrl = `${this.Base_URL}/api/updateFoodItemStatus`
   private updateOrderKotStatusapiUrl = `${this.Base_URL}/api/updateOrderKotStatus`
   private updatePaymentTypeapiUrl = `${this.Base_URL}/api/update-payment-type`
@@ -49,6 +50,7 @@ export class SocketService {
   private ordersSubject = new BehaviorSubject<any[]>([]);
   private getAllordersSubject = new BehaviorSubject<any[]>([]);
   private getAllordersAdminSubject = new BehaviorSubject<any[]>([]);
+  private getAllordersAdminGraphSubject = new BehaviorSubject<any[]>([]);
   private getAllUsers = new BehaviorSubject<any[]>([]);
   private getReservationData = new BehaviorSubject<any[]>([]);
 
@@ -63,6 +65,7 @@ export class SocketService {
     this.fetchFoodItems()
     this.fetchAllOrders()
     this.fetchAllOrdersAdmin()
+    this.fetchAllOrdersAdminGraph()
     this.fetchAllUser()
     this.fetchReservation()
 
@@ -152,12 +155,26 @@ export class SocketService {
       )
       .subscribe(data => this.getAllordersAdminSubject.next(data));
   }
+  private fetchAllOrdersAdminGraph(): void {
+    this.http.get<any[]>(this.getallOrderAminGraphapiUrl)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching dining tables:', error);
+          return []; // Return an empty array in case of error
+        })
+      )
+      .subscribe(data => 
+        // console.log(data)
+        
+        this.getAllordersAdminGraphSubject.next(data)
+      );
+  }
 
   private setupSocketListeners(): void {
     this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables()});
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
     this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
-    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.fetchAllOrders(),  this.fetchAllOrdersAdmin() });
+    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.fetchAllOrders(),  this.fetchAllOrdersAdmin(),this.fetchAllOrdersAdminGraph() });
     // this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
     this.socket.on('reservation', (data: any[]) => { this.fetchReservation() });
@@ -186,6 +203,11 @@ export class SocketService {
   }
   getAllOrdersAdminItems(): Observable<any[]> {
     return this.getAllordersAdminSubject.asObservable();
+  }
+  getAllOrdersAdminGraphItems(): Observable<any[]> {
+    // console.log(this.getAllordersAdminGraphSubject.asObservable());
+    
+    return this.getAllordersAdminGraphSubject.asObservable();
   }
   getFoodItemsByCategoryId(categoryId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${categoryId}`);

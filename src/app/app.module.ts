@@ -30,6 +30,8 @@ import { ReservationTableComponent } from './subComponents/reservation-table/res
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
 import { AuthService } from './services/auth.service';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { SplineAreaComponent } from './subComponents/spline-area/spline-area.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { AuthService } from './services/auth.service';
     ChairIconComponent,
     ReservationTableComponent,
     SortByDatePipe,
-    UtcToIstPipe
+    UtcToIstPipe,
+    SplineAreaComponent
   ],
   imports: [
     // AgGridModule,
@@ -65,7 +68,8 @@ import { AuthService } from './services/auth.service';
       preventDuplicates: true // Prevent duplicate toasts
     }),
     WebcamModule,
-    FormsModule 
+    FormsModule ,
+    CanvasJSAngularChartsModule
   ],
   providers: [TableService,MenuService,DatePipe,SoundService ,AuthService],
   bootstrap: [AppComponent],

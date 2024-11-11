@@ -1,0 +1,10 @@
+.chart-container {
+    width: 100%;               /* Make the width 100% of the parent container */
+    height: 100%;              /* Make the height 100% of the parent container */
+    max-width: 100%;           /* Ensure it doesn't go beyond the parent width */
+    max-height: 100%;          /* Ensure it doesn't go beyond the parent height */
+    min-width: 150px;          /* Set the minimum width */
+    min-height: 100px;         /* Set the minimum height */
+    position: relative;        /* Ensure that the chart scales proportionally */
+  }
+  
