@@ -11,7 +11,7 @@
           <p class="metric-change">{{rowData?.totalOrders?.percentageChange | number:'1.2-2'}}% from last month</p>
         </div>
         <div>
-          <app-spline-area [totalOrders]="graphData.totalOrders"></app-spline-area>
+          <app-spline-area [totalOrders]="graphData.totalOrders" [color]="'rgba(0, 255, 0, 0.7)'"></app-spline-area>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
           <p class="metric-change">{{rowData?.revenue?.percentageChange | number:'1.2-2'}}% from last month</p>
         </div>
         <div>
-          <app-spline-area [totalOrders]="graphData.revenue"></app-spline-area>
+          <app-spline-area [totalOrders]="graphData.revenue" [color]="'rgba(255, 165, 0, 0.7)'"></app-spline-area>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
           <p class="metric-change">{{rowData?.averageOrderValue?.percentageChange | number:'1.2-2'}}% from last month</p>
         </div>
         <div>
-          <app-spline-area [totalOrders]="graphData.averageOrderValue"></app-spline-area>
+          <app-spline-area [totalOrders]="graphData.averageOrderValue" [color]="'rgba(255, 255, 0, 0.7)'"></app-spline-area>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
           <p class="metric-change">+0.2 from last month</p>
         </div>
         <div>
-          <app-spline-area [totalOrders]="graphData.totalCustomers"></app-spline-area>
+          <app-spline-area [totalOrders]="graphData.totalCustomers" [color]="'rgba(0, 0, 255, 0.7)'"></app-spline-area>
         </div>
       </div>
     </div>
