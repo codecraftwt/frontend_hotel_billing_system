@@ -70,6 +70,7 @@ export class AdminDashboardComponent implements OnInit {
   staffList:any[]=[]
 
   rowData: any;
+  graphData:any;
   // gridOptions: GridOptions = {
   //   pagination: true,
   //   paginationPageSize: 10,
@@ -96,8 +97,14 @@ export class AdminDashboardComponent implements OnInit {
       console.log(res,'user=====');
       this.staffList=res
     })
+    this.socketService.getAllOrdersAdminGraphItems().subscribe(res => {
+      this.graphData = res
+      console.log(this.graphData,'graphData');
+    });
     this.socketService.getAllOrdersAdminItems().subscribe(res => {
       this.rowData = res
+      console.log(res,'res');
+      
     });
   }
 

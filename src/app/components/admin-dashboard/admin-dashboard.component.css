@@ -17,6 +17,11 @@
 .card-header {display: flex;justify-content: space-between;align-items: center;padding: 1rem;border-bottom: 1px solid #e5e7eb;}
 .card-title {font-size: 0.875rem;font-weight: 500;}
 .card-content {padding: 1rem;}
+.card-content2 {padding: 1rem;display: flex;justify-content: space-around;}
+.wapper{display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;}
 .metric {font-size: 1.5rem;font-weight: bold;}
 .metric-change {font-size: 0.75rem;color: #c1cbdf;}
 table {width: 100%;border-collapse: collapse;}
