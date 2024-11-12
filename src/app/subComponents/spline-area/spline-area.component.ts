@@ -74,17 +74,19 @@ export class SplineAreaComponent {
     backgroundColor: "transparent", // Set background to transparent
     title: null, // Remove title
     axisY: {
-      title: null, // Remove Y axis title
-      labelFormatter: () => "", // Remove Y axis labels
-      valueFormatString: "", // Remove value formatting
-      lineThickness: 0, // Remove Y axis line
-      gridThickness: 0, // Remove Y axis grid lines
+      includeZero: true,
+      gridThickness: 0, // Remove horizontal gridlines
+      lineThickness: 0, // Remove Y-axis line
+      tickThickness: 0, // Remove Y-axis ticks/dashes
+      labelFontSize: 0, // Remove Y-axis labels
+      visible: false,   // Hide Y-axis
     },
     axisX: {
-      title: null, // Remove X axis title
-      labelFormatter: () => "", // Remove X axis labels
-      lineThickness: 0, // Remove X axis line
-      gridThickness: 0, // Remove X axis grid lines
+      gridThickness: 0, // Remove vertical gridlines
+      lineThickness: 0, // Remove X-axis line
+      tickThickness: 0, // Remove X-axis ticks/dashes
+      labelFontSize: 0, // Remove X-axis labels
+      visible: false,   // Hide X-axis
     },
     data: [{
       type: "splineArea",
@@ -103,11 +105,11 @@ export class SplineAreaComponent {
         let label = "";
         let labelColor = "";
         if (point.y === Math.max(...this.getDataPoints().map((p:any) => p.y))) {
-          label = "Highest";
-          labelColor = "red";
+          label = "Highest\u2191";
+          labelColor = "white";
         } else if (point.y === Math.min(...this.getDataPoints().map((p:any) => p.y))) {
-          label = "Lowest";
-          labelColor = "blue"; 
+          label = "Lowest\u2193";
+          labelColor = "white"; 
         }
 
         return { ...point, indexLabel: label ,indexLabelFontColor: labelColor};

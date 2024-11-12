@@ -14,9 +14,9 @@
   border-radius: 9px;
 
 }
-.table {position: relative;width: 65px;height: 92px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
-.table15 {position: relative;width: 70px;height: 70px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
-.table7 {position: relative;width: 200px;height: 70px;background-color: #838383;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table {position: relative;width: 65px;height: 92px;background-color: #898ec2;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table15 {position: relative;width: 70px;height: 70px;background-color: #898ec2;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
+.table7 {position: relative;width: 200px;height: 70px;background-color: #898ec2;border-radius: 66.94px;text-align: center;display: flex;flex-direction: column;justify-content: center;align-items: center;margin: 20px;cursor: pointer;}
 .table-number {font-size: 24px;font-weight: bold;}
 .table-status {font-size: 16px;color: #666;}
 .chair {position: absolute;width: 20px;height: 20px;border-radius: 50%;}
@@ -48,7 +48,7 @@
   .codor-code-list{display: flex;}
   .color-code-symbole-veg{width: 20px;background-color: white;border-radius: 50px;margin-right: 5px;}
   .color-code-symbole-non-veg{width: 20px;background-color:#f4f456;border-radius: 50px;margin-right: 5px;}
-  .color-code-symbole-soup{width: 20px;background-color: #838383;border-radius: 50px;margin-right: 5px;}
+  .color-code-symbole-soup{width: 20px;background-color: #898ec2;border-radius: 50px;margin-right: 5px;}
   .color-code-container{display: flex;width: 100%;justify-content: flex-end;margin-top: 5px;}
   .resevebtn{cursor: pointer;
     padding: 5px;
