@@ -64,3 +64,6 @@ th, td {padding: 0.75rem;text-align: left;border-bottom: 1px solid #e5e7eb;}
   .grid-2-col, .grid-3-col { grid-template-columns: 1fr;}
 }
 .table td {max-width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+:host ::ng-deep .canvasjs-chart-credit{
+  display: none;
+}

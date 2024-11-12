@@ -1,7 +1,7 @@
-.pin-container {display: flex;flex-direction: column;align-items: center;justify-content: center;background-color: #1b1b1b; }
+.pin-container {display: flex;flex-direction: column;align-items: center;justify-content: center;background-color: #5e65a9;padding: 10px; }
 h2 {margin-bottom: 20px;color: white;}
 .pin-inputs {display: flex;gap: 10px; }
-.pin-input {width: 50px; height: 50px; font-size: 24px; text-align: center; border: 2px solid #007bff;border-radius: 5px; background-color: #1b1b1b;color: white;}
+.pin-input {width: 50px; height: 50px; font-size: 24px; text-align: center; border: 2px solid #007bff;border-radius: 5px; background-color: #5e65a9;color: white;}
 button {margin-top: 20px; width: 220px; height: 45px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
 .error {color: red; margin-top: 10px; }
   
