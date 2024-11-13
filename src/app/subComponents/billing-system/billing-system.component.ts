@@ -27,8 +27,12 @@ export class BillingSystemComponent implements OnInit {
     this.initialmethod()
     
   }
+  resTableNo:any;
+  resId:any;
 
   initialmethod(){
+    console.log('hiiii');
+    
     this.route.params.subscribe(params => {
       this.tableNo = params['id']
       this.socketService.fetchOrders(params['id'])
@@ -37,12 +41,19 @@ export class BillingSystemComponent implements OnInit {
     });
     this.socketService.getOrdersItems().subscribe((res: any) => {
       this.billingData = res
-      if (res?._id) {
-        this.socketService.updateTableWithOrder(res?.tableNo, res?._id).subscribe(res=>{
-          this.tableDetails=res
-        })
-      }
+      console.log(res,'res===billing data');
+      this.resTableNo=res?.tableNo;
+      this.resId=res?._id;
     })
+    this.updateTableDetails()
+  }
+
+  updateTableDetails(){
+    if (this.resId) {
+      this.socketService.updateTableWithOrder(this.resTableNo, this.resId).subscribe(res=>{
+        this.tableDetails=res
+      })
+    }
   }
 
   update(data: any,qty:any) {
@@ -63,8 +74,10 @@ export class BillingSystemComponent implements OnInit {
       this.initialmethod()
     })
   }
+  customerNameRequired:boolean=false
   addCustomerName(data:any){
     this.socketService.addCustomerName(this.tableNo, data.customerName).subscribe(res => {
+      this.customerNameRequired=true
       this.initialmethod()
     })
   }
@@ -84,7 +97,7 @@ export class BillingSystemComponent implements OnInit {
 
   confirmorder(data:any){
     this.sound.playSound()
-    if(data.customerName!==null){
+    if(data.customerName!==null && this.customerNameRequired==true){
       if(this.tableDetails.status=='reserved table'){
         this.socketService.updateReservationStatus(this.tableNo,'processing','completed').subscribe(res=>{
         })
@@ -103,7 +116,10 @@ export class BillingSystemComponent implements OnInit {
   paymentType(type:any){
     this.sound.playSound()
     this.socketService.updatePaymentType(this.tableNo,type).subscribe(res=>{
-      this.initialmethod()
+      if(res.paymentType!=null||res.paymentType!=undefined){
+        console.log(res,'payment type');
+        this.initialmethod()
+      }
     })
   }
 
@@ -115,8 +131,9 @@ export class BillingSystemComponent implements OnInit {
         this.socketService.updateTableStatus(this.tableNo,'blank table').subscribe(res=>{
           this.initialmethod()
         })
+      }else{
+        this.initialmethod()
       }
-      this.initialmethod()
     })
   }
 
