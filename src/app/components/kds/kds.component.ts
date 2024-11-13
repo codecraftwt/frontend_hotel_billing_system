@@ -46,6 +46,7 @@ export class KdsComponent implements OnInit {
 
   statusUpdate(tableNo: any, foodItemId: any, status: any,createdAt:any) {
     this.socketService.updateFoodItemStatus(tableNo, foodItemId, status,createdAt).subscribe(res => {
+      this.data=res
     })
   }
 

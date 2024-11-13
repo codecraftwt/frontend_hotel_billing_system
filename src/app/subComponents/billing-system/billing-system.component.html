@@ -1,6 +1,9 @@
 <div class="customer-name">
   <label for="customerName">Customer Name:</label>
-  <input type="text" id="customerName" [(ngModel)]="billingData.customerName" (change)="addCustomerName(billingData)">
+  <div class="wapper">
+    <input type="text" id="customerName" [(ngModel)]="billingData.customerName" >
+    <button class="savebtn" (click)="addCustomerName(billingData)"><img src="../../../assets/savebtn.png" alt="" srcset="" width="100%" height="100%"></button>
+  </div>
 </div>
 <div class="tabelNO-NoOrder">
   <p>Table No.:{{tableNo}}</p>

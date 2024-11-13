@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, interval, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, debounceTime, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -54,9 +54,33 @@ export class SocketService {
   private getAllUsers = new BehaviorSubject<any[]>([]);
   private getReservationData = new BehaviorSubject<any[]>([]);
 
+  private updateTablesSubject = new Subject<any>();
+  private updategetAllOrderSubject = new Subject<any>();
+
   constructor(private http: HttpClient) {
     this.socket = io(`${this.Base_URL}`);
     // this.initializeDiningTables();
+
+    this.updateTablesSubject.pipe(
+      debounceTime(900), // Wait for 9000ms after the last event
+      switchMap(() => {
+        // Wrap the fetchDiningTables() call in 'of' to return an observable
+        this.fetchDiningTables();
+        return of(null); // Return an observable (of a dummy value, as fetchDiningTables doesn't return anything)
+      })
+    ).subscribe();
+    this.updategetAllOrderSubject.pipe(
+      debounceTime(900), // Wait for 9000ms after the last event
+      switchMap(() => {
+        // Wrap the fetchDiningTables() call in 'of' to return an observable
+        this.fetchAllOrders();
+        this.fetchAllOrdersAdmin();
+        this.fetchAllOrdersAdminGraph();
+        return of(null); // Return an observable (of a dummy value, as fetchDiningTables doesn't return anything)
+      })
+    ).subscribe();
+
+    this.setupSocketListeners();
   }
 
   public initializeDiningTables(): void {
@@ -171,10 +195,16 @@ export class SocketService {
   }
 
   private setupSocketListeners(): void {
-    this.socket.on('updateTables', (data: any[]) => { this.fetchDiningTables()});
+    this.socket.on('updateTables', (data: any[]) => { console.log(data,'data updatetables');
+      // setTimeout(() => {
+      //   this.fetchDiningTables();
+      // }, 9000);
+      this.updateTablesSubject.next(data);
+      }
+    );
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
     this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
-    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.fetchAllOrders(),  this.fetchAllOrdersAdmin(),this.fetchAllOrdersAdminGraph() });
+    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.updategetAllOrderSubject.next(data); });
     // this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
     this.socket.on('reservation', (data: any[]) => { this.fetchReservation() });
