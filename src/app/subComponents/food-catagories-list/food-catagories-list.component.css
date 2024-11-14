@@ -13,6 +13,7 @@
     margin-right: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 13px;
+    overflow: hidden;
 }
 
 .food-list-item:hover {
@@ -26,8 +27,11 @@
 }
 .catagory-name{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 36px;
     color: #313131;
+    text-wrap: auto;
+    z-index: 2;
+    position: relative;
 }
 .items{
     color: #636363;
@@ -35,4 +39,11 @@
 }
 .active{
     background-color: #e67c1b;
+}
+.img{
+    position: absolute;
+    top: 0;
+    width: 132px;
+    right: -53px;
+    z-index: 0;
 }
