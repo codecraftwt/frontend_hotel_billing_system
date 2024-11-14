@@ -19,6 +19,8 @@ export class BillingSystemComponent implements OnInit {
   totalAmount: number = 0;
   tableNo: any
   tableDetails:any
+  customerNameRequired:boolean=false
+
   constructor(private socketService: SocketService, private route: ActivatedRoute,private toastr: ToastrService,private sound:SoundService) {
     // this.updateTotal();
   }
@@ -31,8 +33,6 @@ export class BillingSystemComponent implements OnInit {
   resId:any;
 
   initialmethod(){
-    console.log('hiiii');
-    
     this.route.params.subscribe(params => {
       this.tableNo = params['id']
       this.socketService.fetchOrders(params['id'])
@@ -65,6 +65,7 @@ export class BillingSystemComponent implements OnInit {
   addNote(data: any) {
     this.sound.playSound()
     this.socketService.updateOrderNote(this.tableNo, data.foodItemId, data.orderNote,data.createdAt).subscribe(res => {
+      this.toastr.success('The food note has been successfully added!', 'Success');
       this.initialmethod()
     })
   }
@@ -74,11 +75,13 @@ export class BillingSystemComponent implements OnInit {
       this.initialmethod()
     })
   }
-  customerNameRequired:boolean=false
   addCustomerName(data:any){
     this.socketService.addCustomerName(this.tableNo, data.customerName).subscribe(res => {
-      this.customerNameRequired=true
-      this.initialmethod()
+      if(res){
+        this.customerNameRequired=true
+        this.toastr.success('The name has been successfully added!', 'Success');
+        this.initialmethod()
+      }
     })
   }
   addCustomerNumber(data:any){

@@ -39,7 +39,7 @@
 
 
 /* billing */
-.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;font-family: 'Arial, sans-serif';overflow: hidden; background: #27293d;
+.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;overflow: hidden; background: #27293d;
   border-radius: 10px;}
 .billing-header {text-align: center;margin-bottom: 20px;}
 .customer-name {margin-bottom: 20px;display: flex;flex-direction: column;align-items: flex-start;}
@@ -89,8 +89,8 @@
     border-radius: 50px;
     background-color: #a6ace1;
     color: #605656;}
-  .color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;width: 300px;}
-  .codor-code-list{display: flex;}
+  .color_code{display: flex;justify-content: space-evenly;color: white;list-style: none;}
+  .codor-code-list{display: flex;margin-right: 9px;}
   .color-code-symbole-veg{width: 20px;background-color: #48eb48;border-radius: 50px;margin-right: 5px;}
   .color-code-symbole-non-veg{width: 20px;background-color:#ff2f2f;border-radius: 50px;margin-right: 5px;}
   .color-code-symbole-soup{width: 20px;background-color: orange;border-radius: 50px;margin-right: 5px;}

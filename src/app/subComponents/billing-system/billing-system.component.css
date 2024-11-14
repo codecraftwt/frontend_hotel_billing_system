@@ -1,10 +1,16 @@
 /* billing */
-.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;/* border-radius: 8px; */box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-color: #ffffff;font-family: 'Arial, sans-serif';overflow: hidden;}
+.billing-container {position: relative;width: 100%;max-width: 800px;margin: 0 auto;padding: 20px;/* border-radius: 8px; */box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-color: #ffffff;overflow: hidden;}
 .billing-header {text-align: center;margin-bottom: 20px;}
 .customer-name {margin-bottom: 10px;display: flex;flex-direction: column;align-items: flex-start;}
 .customer-name label {margin-bottom: 5px;font-weight: bold;color: #D1D5DB;}
 .wapper{display: flex;flex-direction: row;justify-content: space-between;width: 100%;}
-.savebtn{width: 33px;}
+.savebtn{width: 33px;background: #5bc45b;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;}
+.savebtn:hover{
+    background-color: #24d824;
+}
 .customer-name input {width: 90%;padding: 10px;border: 1px solid #D0D0D0;border-radius: 8px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);background-color: #666984;color: white;}
 .tabelNO-NoOrder {display: flex;flex-direction: row;margin: 2px;justify-content: space-between;color: white;}
 .card-header {display: flex;width: 100%;/* border-bottom: 2px solid #e0e0e0; */justify-content: space-between;padding: 10px 10px;/* background-color: #f8f9fa; */font-weight: bold;font-size: 1.1em;/* color: #333; */box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);border-radius: 8px 8px 0 0;background-color: #5d64a8;color: #D1D5DB;}
@@ -29,7 +35,7 @@
 .qty {width: 60px;padding: 5px;border-radius: 4px;text-align: center;box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);background: transparent;/*background-color: #2D2D2D;*/color: #DBDBDB;border: 1px solid #D0D0D0;margin: 0px 5px;}
 .price {font-size: 1.2em;font-weight: bold;/* color: #DBDBDB; */display: flex;align-items: center;}
 .bottom {display: flex;justify-content: space-between;align-items: center;margin-top: 10px;}
-.note {flex-grow: 1;padding: 10px;border-radius: 4px;box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);background-color: transparent;color: #DBDBDB;border: 1px solid #D0D0D0;}
+.note {flex-grow: 1;padding: 10px;border-radius: 4px;box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);background-color: transparent;color: #DBDBDB;border: 1px solid #D0D0D0;margin-right: 5px;}
 .delete-button {/*padding: 10px 20px;*/background-color: #ff4d4d;color: white;border: none;border-radius: 4px;cursor: pointer;transition: background-color 0.3s ease;margin-left: 10px;width: 33px;}
 .delete-button:hover {background-color: #e60000;}
 .billing-total {/* text-align: right; */font-size: 1.2em;font-weight: bold;margin-bottom: 20px;display: flex;justify-content: space-between;}
@@ -50,7 +56,7 @@
 .pay-field {display: block;}
 .input-amount {width: 100px;/* height: 50px; */border: none;border-radius: 10px;padding: 10px 20px;}
 .pay-field-lable {margin-bottom: 5px;}
-.food-list-item {color: #2D2D2D;width: 200px;border: 2px solid #ddd;/* Slightly thicker border for a more defined look */height: 60px;/* Increased height for better visual balance */display: flex;justify-content: center;align-items: center;background-color: #f9f9f9;/* Light gray background for a modern look */cursor: pointer;position: relative;border-radius: 12px;/* More rounded corners */transition: background-color 0.3s ease, transform 0.3s ease;/* Smooth transitions */margin-right: 16px;/* Increased spacing between items */box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);/* Subtle shadow for depth */padding: 5px;}
+.food-list-item {color: #2D2D2D;width: 200px;border: 2px solid #ddd;height: 40px;display: flex;justify-content: center;align-items: center;background-color: #afb1d1;cursor: pointer;position: relative;border-radius: 12px;transition: background-color 0.3s ease, transform 0.3s ease;margin-right: 16px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);padding: 5px;}
 .food-list-item:hover {background-color: #e0e0e0;/* Light gray background on hover */transform: scale(1.05);/* Slightly enlarge on hover for emphasis */}
 .food-list-item:active {background-color: #d0d0d0;/* Darker gray background on click */transform: scale(0.98);/* Slightly shrink on click */}
 .pointer {cursor: pointer;}
@@ -68,11 +74,13 @@
     background-color: #6464f8;
     color: white;
 }
-.NOP-container{display: flex;padding: 20px;justify-content: space-around;}
+.NOP-container{display: flex;padding: 20px;align-items: center;}
 .mb{
     margin-bottom: 20px;
 }
 input::placeholder {
     color: #ffffff; /* Replace with your desired color */
   }
-  
+.label{
+    margin-right: 5px;
+}

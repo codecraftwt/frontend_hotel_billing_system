@@ -51,7 +51,8 @@
       </div>
     </div>
     <div class="bottom">
-      <input type="text" class="note" [(ngModel)]="data.orderNote" placeholder="Add a note..." (change)="addNote(data)">
+      <input type="text" class="note" [(ngModel)]="data.orderNote" placeholder="Add a note..." >
+      <button class="savebtn" (click)="addNote(data)"><img src="../../../assets/savebtn.png" alt="" srcset="" width="100%" height="100%"></button>
       <button class="delete-button" (click)="removeItem(data)"><img src="../../../assets/delete.png" alt="" title="delete" srcset="" width="100%" height="100%"></button>
     </div>
   </div>
@@ -111,9 +112,10 @@
   </div>
   <hr>
   <div class="NOP-container">
-    <label for="#">No. of Peoples</label>
+    <label for="#" class="label">No. of Peoples</label>
     <input class="input-amount" type="number"  [(ngModel)]="billingData.customerNo" (change)="addCustomerNumber(billingData)">
   </div>
+  <hr>
   <div class="billing-pay">
     <button (click)="printPage()">Print</button>
     <button [ngClass]="billingData.paymentType==null?'orderDisable':''" (click)="changeOrderStatus()">Order Finished </button>
