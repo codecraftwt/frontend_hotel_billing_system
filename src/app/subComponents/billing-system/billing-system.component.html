@@ -16,15 +16,15 @@
 </div>
 <div class="color-code-container">
   <ul class="color_code">
-    <li class="codor-code-list">
+    <li class="codor-code-list btnpointer" [ngClass]="{'active-status': typestatus == 'ready'}" (click)="sortingData('ready')">
       <div class="color-code-symbole-veg"></div>
       <p>Order Ready</p>
     </li>
-    <li class="codor-code-list">
+    <li class="codor-code-list btnpointer" [ngClass]="{'active-status': typestatus == 'working'}" (click)="sortingData('working')">
       <div class="color-code-symbole-non-veg"></div>
       <p>Cooking</p>
     </li>
-    <li class="codor-code-list">
+    <li class="codor-code-list btnpointer" [ngClass]="{'active-status': typestatus == 'on hold'}" (click)="sortingData('on hold')">
       <div class="color-code-symbole-soup"></div>
       <p>On Hold</p>
     </li>

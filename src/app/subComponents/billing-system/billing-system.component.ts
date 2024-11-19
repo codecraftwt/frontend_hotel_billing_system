@@ -16,10 +16,13 @@ export class BillingSystemComponent implements OnInit {
   customerAmmount: any;
   remaingAmmount:any
   billingData: any
+  storeBillingData: any[]=[]
   totalAmount: number = 0;
   tableNo: any
   tableDetails:any
   customerNameRequired:boolean=false
+  typestatus:any=''
+
 
   constructor(private socketService: SocketService, private route: ActivatedRoute,private toastr: ToastrService,private sound:SoundService) {
     // this.updateTotal();
@@ -41,6 +44,7 @@ export class BillingSystemComponent implements OnInit {
     });
     this.socketService.getOrdersItems().subscribe((res: any) => {
       this.billingData = res
+      this.storeBillingData = res.ordersList
       console.log(res,'res===billing data');
       this.resTableNo=res?.tableNo;
       this.resId=res?._id;
@@ -193,6 +197,27 @@ export class BillingSystemComponent implements OnInit {
         return '8px solid orange'; // Orange color
       default:
         return '8px solid black'; // Default border color
+    }
+  }
+  sortingData(type:any){
+    if(this.typestatus!=type){
+      this.typestatus=type
+      switch (type) {
+        case 'on hold':
+          this.billingData.ordersList=this.storeBillingData.filter((data:any)=>data.status==type)
+          break; 
+        case 'working':
+          this.billingData.ordersList=this.storeBillingData.filter((data:any)=>data.status==type)
+          break
+        case 'ready':
+          this.billingData.ordersList=this.storeBillingData.filter((data:any)=>data.status==type)
+          break;
+        default:this.billingData.ordersList=this.storeBillingData
+          break
+      }
+    }else{
+      this.typestatus=''
+      this.billingData.ordersList=this.storeBillingData
     }
   }
 }
