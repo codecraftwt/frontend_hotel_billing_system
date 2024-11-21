@@ -1,18 +1,80 @@
-<!-- <div>
-    <button (click)="toggleWebcam()">Toggle Webcam</button>
-    <button (click)="captureImage('signup')">Sign Up</button>
-    <button (click)="captureImage('login')">Login</button>
-    <button (click)="captureImage('logout')">Logout</button>
-  </div>
-  <input type="text" [(ngModel)]="user">
-  <ngx-webcam [height]="500" [width]="500"  *ngIf="showWebcam" [trigger]="trigger" (imageCapture)="handleImage($event)"></ngx-webcam>
+<!-- <div class="card">
+  <h1>Add Staff Information</h1>
+  <form>
+    <div class="form-group name">
+      <label>Name</label>
+      <input class="user-input" type="text" placeholder="Enter user name">
+    </div>
+    <div class="form-group pass">
+      <label >Password</label>
+      <input class="user-input" type="text" placeholder="Enter 4 digit Password">
+    </div>
+    <div class="form-group role">
+      <label >Role</label>
+      <select class="user-input" >
+        <option value="">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="counter">Counter</option>
+        <option value="kds">Kds</option>
+      </select>
+    </div>
+    <button class="submit">submit</button>
+  </form>
+</div> -->
 
-  <webcam [height]="500" [width]="500" [trigger]="trigger" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
-		 [allowCameraSwitch]="true"  [videoOptions]="videoOptions" 
-		 ></webcam>
+<div class="card">
+  <h1>Add Staff Information</h1>
+  <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+    <div class="form-group name">
+      <label for="name">Name</label>
+      <input 
+        id="name"
+        formControlName="username" 
+        class="user-input" 
+        type="text" 
+        placeholder="Enter user name">
+      <div *ngIf="name?.invalid && name?.touched" class="error-message">
+        Name is required .
+      </div>
+    </div>
 
-  <div *ngIf="webcamImage">
-    <h2>Captured Image:</h2>
-    <img [src]="webcamImage.imageAsDataUrl" />
-  </div>
-   -->
+    <div class="form-group pass">
+      <label for="password">Password</label>
+      <input 
+        id="password"
+        formControlName="usePass" 
+        class="user-input" 
+        type="text" 
+        maxlength="4" 
+        placeholder="Enter 4 digit Password"
+        (change)="checkPassword()"
+        >
+      <div *ngIf="password?.invalid && password?.touched" class="error-message">
+        Password is required.
+      </div>
+      <div *ngIf="checkPassStatus" >
+        <ng-container *ngIf="passSucc" >
+          <p class="success-message">{{passMessage}}</p>
+        </ng-container>
+        <ng-container *ngIf="passErr" >
+          <p class="error-message">{{passMessage}}</p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="form-group role">
+      <label for="role">Role</label>
+      <select id="role" formControlName="role" class="user-input">
+        <option value="">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="counter">Counter</option>
+        <option value="kds">KDS</option>
+      </select>
+      <div *ngIf="role?.invalid && role?.touched" class="error-message">
+        Role is required.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="staffForm.invalid" class="submit">Submit</button>
+  </form>
+</div>
