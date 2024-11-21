@@ -66,6 +66,7 @@
     <div class="card">
       <div class="card-header">
         <h2 class="card-title">Staff Management</h2>
+        <button class="add-staff" (click)="openUserModule()">Add Staff</button>
       </div>
       <div class="card-content">
         <table>
@@ -75,17 +76,35 @@
               <th>Position</th>
               <th>Shift</th>
               <th>Status</th>
+              <th style="text-align: center;">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let staff of staffList">
-              <td class="font-medium">{{ staff.username}}</td>
-              <td>{{ staff.role }}</td>
+              <td class="font-medium">{{ staff.username }}</td>
+              <td>
+                <ng-container *ngIf="!staff.editMode; else editModeRole">
+                  {{ staff.role }}
+                </ng-container>
+                <ng-template #editModeRole>
+                  <select [(ngModel)]="staff.newRole" class="form-control select">
+                    <option *ngFor="let role of roles" [value]="role" [selected]="staff.role === role">
+                      {{ role }}
+                    </option>
+                  </select>
+                </ng-template>
+              </td>
               <td>{{ convertToIST(staff.todayTimesheet[0].checkInTime) }} - {{ convertToIST(staff.todayTimesheet[0].checkOutTime) || null }}</td>
               <td>
                 <span class="badge" [ngClass]="{'badge-default': staff.todayTimesheet[0].status === 'on duty', 'badge-secondary': staff.todayTimesheet[0].status !== 'on duty'}">
-                  {{ staff.todayTimesheet[0].status}}
+                  {{ staff.todayTimesheet[0].status }}
                 </span>
+              </td>
+              <td style="display: flex; justify-content: space-evenly;">
+                <button class="btn" *ngIf="!staff.editMode" (click)="editRow(staff)"><div style="width: 20px;"><img src="./../../../assets/edit.png" width="100%" height="100%" alt="" srcset=""></div></button>
+                <button class="btn" *ngIf="staff.editMode" (click)="updateRow(staff)"><div style="width: 20px;"><img src="./../../../assets/update.png" width="100%" height="100%" alt="" srcset=""></div></button>
+                <button class="btn" *ngIf="staff.editMode" (click)="cancelEdit(staff)"><div style="width: 20px;"><img src="./../../../assets/close.png" width="100%" height="100%" alt="" srcset=""></div></button>
+                <button class="btn" *ngIf="!staff.editMode" (click)="deleteRow(staff)"><div style="width: 20px;"><img src="./../../../assets/delete.png" width="100%" height="100%" alt="" srcset=""></div></button>
               </td>
             </tr>
           </tbody>
@@ -132,8 +151,8 @@
           </tbody>
         </table>
       </div>
-    </div>
   </div>
+  
 
   <div class="grid-3-col">
     <div class="card">
@@ -231,3 +250,6 @@
     </div>
   </div>
 </div>
+<app-custom-modal *ngIf="userFormModule" [title]="'My Custom Modal'" (closeModal)="closeUserModule()">
+  <p><app-user></app-user></p>
+</app-custom-modal>

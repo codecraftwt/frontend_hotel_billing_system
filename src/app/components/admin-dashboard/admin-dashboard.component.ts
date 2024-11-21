@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 // import { GridOptions } from 'ag-grid-community';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 interface Order {
   id: string;
   customerName: string;
@@ -68,7 +69,7 @@ export class AdminDashboardComponent implements OnInit {
     { headerName: 'Customer Name', field: 'customerName', sortable: true, filter: true },
   ];
   staffList:any[]=[]
-
+  userFormModule:boolean=false
   rowData: any;
   graphData:any;
   // gridOptions: GridOptions = {
@@ -90,12 +91,15 @@ export class AdminDashboardComponent implements OnInit {
   //   }
   // };
 
-  constructor(private socketService: SocketService,private datePipe: DatePipe) { }
+  constructor(private socketService: SocketService,private datePipe: DatePipe,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.socketService.getAllUser().subscribe(res=>{
       console.log(res,'user=====');
-      this.staffList=res
+      // this.staffList=res.map((d:any)=>({...d,editMode: false}))
+      this.staffList = res.map((d: any) => ({ ...d, editMode: false,newRole:d.role }));
+      console.log(this.staffList,'staffList');
+      
     })
     this.socketService.getAllOrdersAdminGraphItems().subscribe(res => {
       this.graphData = res
@@ -218,6 +222,41 @@ export class AdminDashboardComponent implements OnInit {
     }
     const date = new Date(utcDate);
     return this.datePipe.transform(date, 'medium', 'UTC+5:30') || '--'; // Return '--' for invalid date
+  }
+  openUserModule(){
+    this.userFormModule=true
+  }
+  closeUserModule(){
+    this.userFormModule=false
+  }
+  roles = ['admin', 'counter', 'kds']; // Available roles
+
+  editRow(staff: any) {
+    staff.editMode = true;
+    staff.newRole = staff.role; // Set current role as selected
+  }
+
+  updateRow(staff: any) {
+    if (staff.newRole) {
+      staff.role = staff.newRole; // Update role with new value
+      this.socketService.updateRoleStaff(staff._id,staff.newRole).subscribe(res=>{
+        console.log(res,'new role ');
+        this.toastr.success(res.message, 'Success');
+      })
+    }
+    staff.editMode = false; // Exit edit mode
+  }
+
+  cancelEdit(staff: any) {
+    staff.editMode = false; // Cancel editing
+  }
+
+  deleteRow(staff: any) {
+    this.socketService.staffUserRemove(staff._id).subscribe(res=>{
+      console.log(res,'delete');
+      this.toastr.success(res.message, 'Success');
+    })
+    // this.staffList = this.staffList.filter((item) => item !== staff);
   }
 
 }

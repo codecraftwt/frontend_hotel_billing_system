@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TablesComponent } from './components/table/tables/tables.component';
 import { MenusComponent } from './components/menus/menus.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KdsComponent } from './components/kds/kds.component';
 import { VoiceRecognitionComponent } from './voice-recognition/voice-recognition.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +32,7 @@ import { UtcToIstPipe } from './pipes/utc-to-ist.pipe';
 import { AuthService } from './services/auth.service';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { SplineAreaComponent } from './subComponents/spline-area/spline-area.component';
+import { UserComponent } from './subComponents/user/user.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SplineAreaComponent } from './subComponents/spline-area/spline-area.com
     ReservationTableComponent,
     SortByDatePipe,
     UtcToIstPipe,
-    SplineAreaComponent
+    SplineAreaComponent,
+    UserComponent
   ],
   imports: [
     // AgGridModule,
@@ -69,7 +71,8 @@ import { SplineAreaComponent } from './subComponents/spline-area/spline-area.com
     }),
     WebcamModule,
     FormsModule ,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    ReactiveFormsModule
   ],
   providers: [TableService,MenuService,DatePipe,SoundService ,AuthService],
   bootstrap: [AppComponent],

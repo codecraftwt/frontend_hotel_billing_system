@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
+import { SocketService } from 'src/app/services/socket.service';
 import { UserService } from 'src/app/services/user.service';
 // import { UserService } from './user.service'; // Ensure this path is correct
 
@@ -10,102 +13,83 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  user:any=''
-  public showWebcam = true;
-  public webcamImage: WebcamImage | null = null; 
-  public trigger: Subject<void> = new Subject<void>(); 
-  public videoOptions: MediaTrackConstraints = {
-  };
-  constructor(private userService: UserService) {
+  staffForm!: FormGroup; // Reactive form group
+
+  constructor(private fb: FormBuilder, private socketService:SocketService,private toastr:ToastrService) {}
+
+  ngOnInit(): void {
+    // Initialize the form with default values and validation rules
+    this.staffForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(3)]], // Name is required and must have min length of 3
+      usePass: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]], // Password must be exactly 4 digits
+      role: ['', Validators.required] // Role is required
+    });
   }
 
-  convertBase64ToBlob(base64: string, contentType: string): Blob {
-    const sliceSize = 512;
-    const byteCharacters = atob(base64);
-    const byteArrays = [];
+  // Handle form submission
+  onSubmit(): void {
+    if (this.staffForm.valid) {
+      console.log('Staff Data:', this.staffForm.value);
+      const { username, usePass, role } = this.staffForm.value;
+      this.socketService.signUp(username, usePass, role).subscribe(res=>{
+        console.log(res);
+        this.toastr.success(res.message, 'Success');
+      })
+      this.staffForm.reset();
+      // Make an API call to save the staff data or any other logic
+      // For example, you can call a service method like:
+      // this.staffService.addStaff(this.staffForm.value).subscribe(response => { ... });
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
+  // Getter methods to simplify form control access in the template
+  get name() {
+    return this.staffForm.get('username');
+  }
 
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
+  get password() {
+    return this.staffForm.get('usePass');
+  }
+
+  get role() {
+    return this.staffForm.get('role');
+  }
+  checkPassStatus:boolean=false
+  passMessage:any=''
+  passErr:boolean=false
+  passSucc:boolean=false
+  checkPassword(){
+    console.log(this.staffForm.value.usePass);
+    let pass= this.staffForm.value.usePass
+    console.log(pass.length);
+    if(pass.length==4){
+      this.socketService.checkUserPass(pass).subscribe(
+        res=>{
+        console.log(res,'check pass');
+        if(res.message){
+          this.checkPassStatus=true
+          this.passErr=false
+          this.passSucc=true
+          this.passMessage=res.message
+        }
+      },
+    
+      err =>{
+        console.log(err.error.error,'error');
+        this.checkPassStatus=true
+        this.passSucc=false
+        this.passErr=true
+        this.passMessage=err.error.error
       }
-
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
+    )
+    }else{
+      this.checkPassStatus=false
+      this.passMessage=''
+      this.passSucc=false
+      this.passErr=false
     }
-
-    return new Blob(byteArrays, { type: contentType });
-  }
-
-
-  handleImage(image: any): void {
-    console.log(image._imageAsDataUrl,'image');
-    console.log(this.user,'this.user');
-    
-    this.userService.post(image._imageAsDataUrl,image._imageAsDataUrl).subscribe(res=>{
-      console.log(res,'res');
       
-    })
-    // this.userService.compared(image._imageAsDataUrl).subscribe(res=>{
-    //   console.log(res,'res');
-      
-    // })
-    // this.userService.upload(this.user,image._imageAsDataUrl).subscribe(res=>{
-    //   console.log(res,'res');
-      
-    // })
-    // this.userService.post(image._imageAsDataUrl,image._imageAsDataUrl).subscribe(res=>{
-    //   console.log(res,'res');
-      
-    // })
-    
-    this.webcamImage = image as WebcamImage; // Type assertion
-    console.log(this.webcamImage,'webcamImage');
-    
-    const base64Image = this.webcamImage.imageAsDataUrl.split(',')[1];
-    console.log('Captured Image:', base64Image);
-    const contentType = 'image/jpeg'; // Or the appropriate MIME type for your image
-    // Convert Base64 to Blob
-    const imageBlob = this.convertBase64ToBlob(base64Image, contentType);
-
-    // Create an object URL for the Blob
-    const imageObjectUrl = URL.createObjectURL(imageBlob);
-    console.log(imageObjectUrl, 'imageObjectUrl');
-
-    // console.log('Captured Image JSON:', JSON.parse(base64Image));
   }
-
-  triggerSnapshot(): void {
-    this.trigger.next(); // Correct usage of Subject
-  }
-
-  toggleWebcam() {
-    this.showWebcam = !this.showWebcam;
-  }
-
-  captureImage(action: 'signup' | 'login' | 'logout') {
-    this.triggerSnapshot();
-    if (this.webcamImage) {
-      const base64Image = this.webcamImage.imageAsDataUrl.split(',')[1];
-      console.log(base64Image, 'base64Image');
-
-      // if (action === 'signup') {
-      //   this.userService.signup('testuser', base64Image).subscribe(response => {
-      //     console.log('Signup Response:', response);
-      //   });
-      // } else if (action === 'login') {
-      //   this.userService.login(base64Image).subscribe(response => {
-      //     console.log('Login Response:', response);
-      //   });
-      // } else if (action === 'logout') {
-      //   this.userService.logout(base64Image).subscribe(response => {
-      //     console.log('Logout Response:', response);
-      //   });
-      // }
-    }
-  }
-
-  
 }

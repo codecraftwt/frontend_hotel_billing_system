@@ -39,6 +39,9 @@ export class SocketService {
   // private allUserTimeSheet = `${this.Base_URL}/api/alluser-timeSheet`
   private signup = `${this.Base_URL}/api/signup`
   private login = `${this.Base_URL}/api/login`
+  private updateRole = `${this.Base_URL}/api/update-role`
+  private deleteUser = `${this.Base_URL}/api/users`
+  private checkPass = `${this.Base_URL}/api/check-pass`
   private reservation=`${this.Base_URL}/api/create-reservation`
   private getReservation=`${this.Base_URL}/api/get-reservations`
   private reservationStatus=`${this.Base_URL}/api/reservation-status`
@@ -253,10 +256,11 @@ export class SocketService {
       data
     })
   }
-  signUp(username: any, usePass: any): Observable<any> {
+  signUp(username: any, usePass: any,role:any): Observable<any> {
     return this.http.post<any>(this.signup, {
       username,
-      usePass
+      usePass,
+      role
     })
   }
   logIn(usePass: any): Observable<any> {
@@ -348,6 +352,12 @@ export class SocketService {
       status
     })
   }
+  updateRoleStaff(_id: any, newRole: any): Observable<any> {
+    return this.http.patch<any>(this.updateRole , {
+      _id,
+      newRole
+    })
+  }
 
   // Search data based on the search term
   searchData(data: any[], searchTerm: string): any[] {
@@ -363,6 +373,13 @@ export class SocketService {
   reservationCancel(id: any): Observable<any> {
     return this.http.delete<any>(`${this.reservationRemove}/${id}`);
   }
-  
+  staffUserRemove(_id: any): Observable<any> {
+    return this.http.delete<any>(`${this.deleteUser}/${_id}`);
+  }
+  checkUserPass(usePass: any): Observable<any> {
+    return this.http.post<any>(this.checkPass, {
+      usePass
+    })
+  }
 
 }

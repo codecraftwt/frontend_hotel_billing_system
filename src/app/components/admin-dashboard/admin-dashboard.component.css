@@ -67,3 +67,26 @@ th, td {padding: 0.75rem;text-align: left;border-bottom: 1px solid #e5e7eb;}
 :host ::ng-deep .canvasjs-chart-credit{
   display: none;
 }
+.add-staff{
+  border: none;
+  padding: 9px 15px;
+  border-radius: 5px;
+  background: #d4d7f3;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn{
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #3b3d4f;
+  color: white;
+  cursor: pointer;
+}
+.select{
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: none;
+  background: #3b3d4f;
+  color: white;
+}
