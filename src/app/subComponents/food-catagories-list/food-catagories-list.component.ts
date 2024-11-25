@@ -9,7 +9,7 @@ export class FoodCatagoriesListComponent implements OnInit {
   @Input()active!:boolean;
   @Input() data: any;
   @Output() itemClick = new EventEmitter<any>();
-
+  @Input() key: number=-1; 
   onClick() {
     this.itemClick.emit(this.data);
   }

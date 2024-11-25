@@ -61,12 +61,12 @@ export class SplineAreaComponent {
     }
   }
   updateChartOptions() {
-    console.log(this.totalOrders,'totalOrders');
+    // console.log(this.totalOrders,'totalOrders');
      this.dataPoints = this.totalOrders.map(order => ({
       x: new Date(order.x),  // Parse the x value as a Date object
       y: order.y
     }));
-    console.log(this.dataPoints,'dataPoints');
+    // console.log(this.dataPoints,'dataPoints');
     // console.log(JSON.stringify(this.dataPoints),'dataPoints');
     
   this.chartOptions = {
@@ -121,7 +121,7 @@ export class SplineAreaComponent {
 }
 
   getDataPoints() {
-    console.log({ x: new Date("2024-08-31T18:30:00.000Z"), y: 2506000 });
+    // console.log({ x: new Date("2024-08-31T18:30:00.000Z"), y: 2506000 });
     
     // return [
     //   // { x: new Date("2024-08-31T18:30:00.000Z"), y: 2506000 },

@@ -24,14 +24,14 @@
       </div>
     </div>
     <div class="food-items"  *ngIf="filteredData.length!==0">
-      <app-food-items-list 
+      <app-food-items-list [@flyInOut]="'in'"
       *ngFor="let data of filteredData" 
       [data]="data" 
       (itemClick)="getFoodItem($event)"
       ></app-food-items-list>
     </div>
     <div class="food-items" *ngIf="foodCatagoriesId!==null && filteredData.length==0">
-      <app-food-items-list 
+      <app-food-items-list [@flyInOut]="'in'"
       *ngFor="let data of foodItems" 
       [data]="data" 
       (itemClick)="getFoodItem($event)"

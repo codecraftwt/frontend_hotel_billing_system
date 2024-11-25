@@ -42,10 +42,10 @@ export class SocketService {
   private updateRole = `${this.Base_URL}/api/update-role`
   private deleteUser = `${this.Base_URL}/api/users`
   private checkPass = `${this.Base_URL}/api/check-pass`
-  private reservation=`${this.Base_URL}/api/create-reservation`
-  private getReservation=`${this.Base_URL}/api/get-reservations`
-  private reservationStatus=`${this.Base_URL}/api/reservation-status`
-  private reservationRemove=`${this.Base_URL}/api/reservation`
+  private reservation = `${this.Base_URL}/api/create-reservation`
+  private getReservation = `${this.Base_URL}/api/get-reservations`
+  private reservationStatus = `${this.Base_URL}/api/reservation-status`
+  private reservationRemove = `${this.Base_URL}/api/reservation`
 
   private diningTablesSubject = new BehaviorSubject<any[]>([]);
   private foodCategorySubject = new BehaviorSubject<any[]>([]);
@@ -190,24 +190,25 @@ export class SocketService {
           return []; // Return an empty array in case of error
         })
       )
-      .subscribe(data => 
+      .subscribe(data =>
         // console.log(data)
-        
+
         this.getAllordersAdminGraphSubject.next(data)
       );
   }
 
   private setupSocketListeners(): void {
-    this.socket.on('updateTables', (data: any[]) => { console.log(data,'data updatetables');
+    this.socket.on('updateTables', (data: any[]) => {
+      console.log(data, 'data updatetables');
       // setTimeout(() => {
       //   this.fetchDiningTables();
       // }, 9000);
       this.updateTablesSubject.next(data);
-      }
+    }
     );
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
-    this.socket.on('newFoodItem', (data: any[]) => { this.foodItemsSubject.next(data) });
-    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data) ,this.updategetAllOrderSubject.next(data); });
+    this.socket.on('newFoodItem', (data: any[]) => { this.fetchFoodItems() });
+    this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data), this.updategetAllOrderSubject.next(data); });
     // this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
     this.socket.on('reservation', (data: any[]) => { this.fetchReservation() });
@@ -239,7 +240,7 @@ export class SocketService {
   }
   getAllOrdersAdminGraphItems(): Observable<any[]> {
     // console.log(this.getAllordersAdminGraphSubject.asObservable());
-    
+
     return this.getAllordersAdminGraphSubject.asObservable();
   }
   getFoodItemsByCategoryId(categoryId: string): Observable<any[]> {
@@ -251,12 +252,12 @@ export class SocketService {
       foodItemId
     })
   }
-  createReservation(data:any): Observable<any> {
+  createReservation(data: any): Observable<any> {
     return this.http.post<any>(this.reservation, {
       data
     })
   }
-  signUp(username: any, usePass: any,role:any): Observable<any> {
+  signUp(username: any, usePass: any, role: any): Observable<any> {
     return this.http.post<any>(this.signup, {
       username,
       usePass,
@@ -305,11 +306,11 @@ export class SocketService {
       newKotStatus
     })
   }
-  updateReservationStatus(tableNumber: any,privesStatus:any, status : any): Observable<any> {
+  updateReservationStatus(tableNumber: any, privesStatus: any, status: any): Observable<any> {
     return this.http.patch<any>(this.reservationStatus, {
       tableNumber,
       privesStatus,
-      status 
+      status
     })
   }
   updatePaymentType(tableNo: any, paymentType: any): Observable<any> {
@@ -318,7 +319,7 @@ export class SocketService {
       paymentType
     })
   }
-  updateTableWithOrder(tableNo: any, orderId: any):Observable<any> {
+  updateTableWithOrder(tableNo: any, orderId: any): Observable<any> {
     return this.http.put<any>(this.updateTableWithOrderapiUrl + tableNo, {
       orderId
     })
@@ -353,7 +354,7 @@ export class SocketService {
     })
   }
   updateRoleStaff(_id: any, newRole: any): Observable<any> {
-    return this.http.patch<any>(this.updateRole , {
+    return this.http.patch<any>(this.updateRole, {
       _id,
       newRole
     })
@@ -380,6 +381,12 @@ export class SocketService {
     return this.http.post<any>(this.checkPass, {
       usePass
     })
+  }
+  updateFoodItems(formData: any, requestBody: any): Observable<any> {
+    console.log(formData, '<=== formData')
+    return this.http.post<any>(this.foodItemsapiUrl, formData
+      // requestBodys
+    )
   }
 
 }

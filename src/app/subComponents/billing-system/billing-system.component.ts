@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +8,19 @@ import { SoundService } from 'src/app/services/sound.service';
 @Component({
   selector: 'app-billing-system',
   templateUrl: './billing-system.component.html',
-  styleUrls: ['./billing-system.component.css']
+  styleUrls: ['./billing-system.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0%)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(600)
+      ]),
+      transition('* => void', [
+        animate(600, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class BillingSystemComponent implements OnInit {
 

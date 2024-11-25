@@ -18,7 +18,7 @@ import { BillingSystemComponent } from './subComponents/billing-system/billing-s
 import { PrintPageComponent } from './print-page/print-page.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 // import { AgGridModule } from 'ag-grid-angular';
 import { WebcamModule } from 'ngx-webcam';
 // import { UserComponent } from './subComponents/user/user.component';
@@ -33,6 +33,7 @@ import { AuthService } from './services/auth.service';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { SplineAreaComponent } from './subComponents/spline-area/spline-area.component';
 import { UserComponent } from './subComponents/user/user.component';
+import { EditMenusComponent } from './subComponents/edit-menus/edit-menus.component';
 
 @NgModule({
   declarations: [
@@ -55,10 +56,12 @@ import { UserComponent } from './subComponents/user/user.component';
     SortByDatePipe,
     UtcToIstPipe,
     SplineAreaComponent,
-    UserComponent
+    UserComponent,
+    EditMenusComponent
   ],
   imports: [
     // AgGridModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
