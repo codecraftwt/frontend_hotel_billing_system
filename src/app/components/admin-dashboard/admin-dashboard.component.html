@@ -61,6 +61,14 @@
       </div>
     </div>
   </div>
+  <!-- <div [@popOverState]="show">
+    <p>Hello! I'm a helpful message.</p>
+  </div> -->
+  <div class="grid-2-col d-flex">
+    <button class="add-staff" (click)="toggle()">Edit Menus</button>
+  </div>
+
+  <app-edit-menus  [@popOverState]="show"></app-edit-menus>
 
   <div class="grid-2-col">
     <div class="card">

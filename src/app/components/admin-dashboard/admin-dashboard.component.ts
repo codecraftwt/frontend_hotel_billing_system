@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 // import { GridOptions } from 'ag-grid-community';
 import { DatePipe } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+import { Overlay, ToastrService } from 'ngx-toastr';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 interface Order {
   id: string;
   customerName: string;
@@ -54,10 +55,36 @@ interface CustomerFeedback {
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.css'],
+  animations: [
+    trigger('popOverState', [
+      state('show', style({
+        opacity: 1,
+        visibility: 'visible',
+        display: 'block', 
+      })),
+      state('hide', style({
+        opacity: 0,
+        visibility: 'hidden',
+        display: 'none',
+      })),
+      transition('show => hide', [
+        animate('900ms 300ms ease-in-out', style({
+          opacity: 0,
+          visibility: 'hidden',
+        }))
+      ]),
+      transition('hide => show', [
+        animate('300ms 300ms ease-in-out', style({
+          opacity: 1,
+          visibility: 'visible',
+        }))
+      ])
+    ])
+  ]
 })
 export class AdminDashboardComponent implements OnInit {
-
+  show : string = 'hide'; // Initial state
   columnDefs = [
     { headerName: 'Order ID', field: '_id', sortable: true, filter: true },
     { headerName: 'Table No', field: 'tableNo', sortable: true, filter: true },
@@ -92,6 +119,19 @@ export class AdminDashboardComponent implements OnInit {
   // };
 
   constructor(private socketService: SocketService,private datePipe: DatePipe,private toastr:ToastrService) { }
+
+  get stateName() {
+    return this.show ? 'show' : 'hide'
+  }
+
+
+  toggle() {
+    console.log('hiiii');
+    
+    // this.show = !this.show;
+    this.show = this.show === 'hide' ? 'show' : 'hide';
+  }
+
 
   ngOnInit(): void {
     this.socketService.getAllUser().subscribe(res=>{

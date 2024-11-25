@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
@@ -7,7 +8,19 @@ import { SoundService } from 'src/app/services/sound.service';
 @Component({
   selector: 'app-menus',
   templateUrl: './menus.component.html',
-  styleUrls: ['./menus.component.css']
+  styleUrls: ['./menus.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0%)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(600)
+      ]),
+      transition('* => void', [
+        animate(600, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class MenusComponent implements OnInit {
   foodCatagoriesData:any=[]
@@ -47,7 +60,7 @@ export class MenusComponent implements OnInit {
     setTimeout(() => {
         this.socketService.getFoodCategory().subscribe(res => {
           res.forEach(category => {
-            if(this.foodCatagoriesData.length<=5){
+            if(this.foodCatagoriesData.length<=res.length-1){
             this.foodCatagoriesData.push({
               _id:category._id,
               name: category.name,
@@ -55,6 +68,8 @@ export class MenusComponent implements OnInit {
             });
           }
           });
+          console.log(this.foodCatagoriesData,'foodCatagoriesData');
+          
         });
     }, 5);
 

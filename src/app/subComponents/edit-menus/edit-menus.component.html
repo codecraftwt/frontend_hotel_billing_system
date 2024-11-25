@@ -1,0 +1,212 @@
+<div class="edit-menu-wapper">
+    <div class="category-section">
+        <h5 class="title">category</h5>
+        <ul class="all-list">
+            <!-- <li class="add-category"> -->
+            <!-- <div>
+                Add category
+            </div> -->
+            <!-- </li> -->
+            <!-- <ng-contener *ngFor="let data of foodCatagoriesData">
+
+            <li>{{data.name}}</li>
+        </ng-contener> -->
+            <!-- <li class="catg-list"> -->
+            <app-food-catagories-list  *ngFor="let data of foodCatagoriesData;let i = index" [data]="data"
+               [key]="i" [active]="data._id==foodCatagoriesIdandName?._id" (itemClick)="getFoodList($event)">
+            </app-food-catagories-list>
+            <!-- </li> -->
+            <!-- <li>category2</li>
+        <li>category3</li>
+        <li>category4</li>
+        <li>category5</li> -->
+        </ul>
+    </div>
+    <div class="menus-section">
+        <h5 class="title">menus</h5>
+        <ul class="all-list">
+            <li *ngFor="let d of foodeItemsDataFilterData; let i = index" class="list" [@flyInOut]="'in'" [attr.data-key]="i" (click)="functionItem(d)">
+                <div class="menu-wapper">
+                    <div class="img-wapper"><img
+                            src="{{d.img}}"
+                            width="100%" height="100%" alt="" srcset=""></div>
+                    <div class="menu-details">
+                        <p>{{d.name}}</p>
+                        <p>{{d.price}}</p>
+                        <p>{{d.type}}</p>
+                        <p>{{d.shortcode}}</p>
+                    </div>
+                </div>
+            </li>
+            <!-- <li>
+                <div class="menu-wapper">
+                    <div class="img-wapper"><img
+                            src="https://res.cloudinary.com/dwwykeft2/image/upload/v1725287462/zds9tvjhq8j3q1m1l6xr.jpg"
+                            width="100%" height="100%" alt="" srcset=""></div>
+                    <div class="menu-details">
+                        <p>name</p>
+                        <p>price</p>
+                        <p>type</p>
+                        <p>short code</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="menu-wapper">
+                    <div class="img-wapper"><img
+                            src="https://res.cloudinary.com/dwwykeft2/image/upload/v1725287462/zds9tvjhq8j3q1m1l6xr.jpg"
+                            width="100%" height="100%" alt="" srcset=""></div>
+                    <div class="menu-details">
+                        <p>name</p>
+                        <p>price</p>
+                        <p>type</p>
+                        <p>short code</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="menu-wapper">
+                    <div class="img-wapper"><img
+                            src="https://res.cloudinary.com/dwwykeft2/image/upload/v1725287462/zds9tvjhq8j3q1m1l6xr.jpg"
+                            width="100%" height="100%" alt="" srcset=""></div>
+                    <div class="menu-details">
+                        <p>name</p>
+                        <p>price</p>
+                        <p>type</p>
+                        <p>short code</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="menu-wapper">
+                    <div class="img-wapper"><img
+                            src="https://res.cloudinary.com/dwwykeft2/image/upload/v1725287462/zds9tvjhq8j3q1m1l6xr.jpg"
+                            width="100%" height="100%" alt="" srcset=""></div>
+                    <div class="menu-details">
+                        <p>name</p>
+                        <p>price</p>
+                        <p>type</p>
+                        <p>short code</p>
+                    </div>
+                </div>
+            </li> -->
+
+        </ul>
+    </div>
+    <div class="form-section" *ngIf="userFormDataStatu" [@flyInOut]="'in'">
+        <h5 class="title">Form</h5>
+      
+        <div class="top-section-wapper">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input class="name" type="text" [(ngModel)]="userformData.categoryName" name="categoryName">
+          </div>
+          <div class="form-group">
+            <label>Category Id</label>
+            <input type="text" [(ngModel)]="userformData.categoryId" name="categoryId">
+          </div>
+        </div>
+        
+        <div class="botton-section-wapper">
+          <!-- File input (hidden, triggered programmatically) -->
+          <div class="add-img" style="position: absolute; display: none;">
+            <label for="imageInput">Add Image</label>
+            <input type="file" id="imageInput" #imageInput (change)="updateImage($event)" style="display: none;">
+          </div>
+      
+          <!-- Image Preview (clickable to update) -->
+          <div class="add-img" *ngIf="imagePreview" (click)="onImageClick()">
+            <!-- <h6>Selected Image Preview:</h6> -->
+            <img [src]="imagePreview" alt="Image Preview" width="200" height="200">
+          </div>
+          <div class="add-img" *ngIf="!imagePreview" (click)="onImageClick()">
+            <p>Add Image</p>
+            <!-- <h6>Selected Image Preview:</h6> -->
+            <!-- <img [src]="imagePreview" alt="Image Preview" width="200" height="200"> -->
+          </div>
+      
+          <div class="details-section">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" [(ngModel)]="userformData.name" name="name">
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input type="number" [(ngModel)]="userformData.price" name="price">
+            </div>
+            <div class="form-group">
+              <label>Type</label>
+              <input type="text" [(ngModel)]="userformData.type" name="type">
+            </div>
+            <div class="form-group">
+              <label>Short Code</label>
+              <input type="text" [(ngModel)]="userformData.shortcode" name="shortcode">
+            </div>
+          </div>
+        </div>
+      
+        <div class="btn-wapper">
+          <button class="btns" (click)="submitForm()">Submit</button>
+          <button class="btns">Cancel</button>
+        </div>
+    </div>
+    <div class="form-section" *ngIf="!userFormDataStatu" [@flyInOut]="'in'">
+        <h5 class="title">Form</h5>
+      
+        <div class="top-section-wapper">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input class="name" type="text" [(ngModel)]="userformData.categoryName" name="categoryName">
+          </div>
+          <div class="form-group">
+            <label>Category Id</label>
+            <input type="text" [(ngModel)]="userformData.categoryId" name="categoryId">
+          </div>
+        </div>
+        
+        <div class="botton-section-wapper">
+          <!-- File input (hidden, triggered programmatically) -->
+          <div class="add-img" style="position: absolute; display: none;">
+            <label for="imageInput">Add Image</label>
+            <input type="file" id="imageInput" #imageInput (change)="updateImage($event)" style="display: none;">
+          </div>
+      
+          <!-- Image Preview (clickable to update) -->
+          <div class="add-img" *ngIf="imagePreview" (click)="onImageClick()">
+            <!-- <h6>Selected Image Preview:</h6> -->
+            <img [src]="imagePreview" alt="Image Preview" width="200" height="200">
+          </div>
+          <div class="add-img" *ngIf="!imagePreview" (click)="onImageClick()">
+            <p>Add Image</p>
+            <!-- <h6>Selected Image Preview:</h6> -->
+            <!-- <img [src]="imagePreview" alt="Image Preview" width="200" height="200"> -->
+          </div>
+      
+          <div class="details-section">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" [(ngModel)]="userformData.name" name="name">
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input type="number" [(ngModel)]="userformData.price" name="price">
+            </div>
+            <div class="form-group">
+              <label>Type</label>
+              <input type="text" [(ngModel)]="userformData.type" name="type">
+            </div>
+            <div class="form-group">
+              <label>Short Code</label>
+              <input type="text" [(ngModel)]="userformData.shortcode" name="shortcode">
+            </div>
+          </div>
+        </div>
+      
+        <div class="btn-wapper">
+          <button class="btns" (click)="submitForm()">Submit</button>
+          <button class="btns">Cancel</button>
+        </div>
+    </div>
+      
+      
+</div>
