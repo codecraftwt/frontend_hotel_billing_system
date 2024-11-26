@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { distinctUntilChanged, map, tap } from 'rxjs';
 import { SocketService } from 'src/app/services/socket.service';
 
@@ -25,7 +26,7 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
   foodCatagoriesIdandName: any
   foodeItemsData: any = []
   foodeItemsDataFilterData: any = []
-
+  checkFoodItemId:any=null
   userformData = {
     name: '',
     categoryId: '',
@@ -40,7 +41,7 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
 
   imagePreview: string | null = null;
   @ViewChild('imageInput', { static: false }) imageInputRef: ElementRef | undefined;
-  constructor(private socketSevice: SocketService, private cdRef: ChangeDetectorRef) { }
+  constructor(private socketSevice: SocketService, private cdRef: ChangeDetectorRef,private toastr:ToastrService) { }
 
   // ngAfterViewInit(): void {
   //   if (this.imageInputRef) {
@@ -115,6 +116,7 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
     this.userFormDataStatu=!this.userFormDataStatu
 
     if (d._id == 1) {
+      this.checkFoodItemId=d._id
       if(this.foodCatagoriesIdandName?._id){
         this.userformData = {
           name: '',
@@ -140,6 +142,7 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
         alert('select category first')
       }
     } else {
+      this.checkFoodItemId=d._id
       this.userformData = {
         name: d.name,
         categoryId: d.category._id,
@@ -151,7 +154,9 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
       };
       this.imagePreview = this.userformData.image;
     }
-    console.log(d);
+    // console.log(d);
+    // console.log(this.checkFoodItemId,'checkFoodItemId');
+    
   }
   submitForm() {
     if (!this.userformData.name || !this.userformData.categoryId || !this.userformData.price) {
@@ -160,13 +165,13 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
     }
 
     const formDataToSend = new FormData();
-    const requestBody = {
-      name: this.userformData.name,
-      category: this.userformData.categoryId,
-      price: this.userformData.price,
-      type: this.userformData.type,
-      shortcode: this.userformData.shortcode,
-    };
+    // const requestBody = {
+    //   name: this.userformData.name,
+    //   category: this.userformData.categoryId,
+    //   price: this.userformData.price,
+    //   type: this.userformData.type,
+    //   shortcode: this.userformData.shortcode,
+    // };
     if (this.userformData.image) {
       formDataToSend.append('image', this.userformData.image);
       formDataToSend.append('name', this.userformData.name);
@@ -179,15 +184,24 @@ export class EditMenusComponent implements OnInit,  AfterViewChecked {
       return;
     }
     // console.log('click submit ');
+    if(this.checkFoodItemId!=1){
+      this.socketSevice.updateFoodItems(formDataToSend,this.checkFoodItemId).subscribe(res=>{
+        console.log(res,'res======>>>>>');
+        this.toastr.success('Successfully update food item', 'Success');
+      })
+    }else{
+      this.socketSevice.editFoodItems(formDataToSend).subscribe(
+        res => {
+          console.log('Successfully added food item:', res);
+          this.toastr.success('Successfully added food item', 'Success');
+        },
+        err => {
+          console.error('Error occurred:', err);
+        }
+      );
+    }
     
-    this.socketSevice.updateFoodItems(formDataToSend, requestBody).subscribe(
-      res => {
-        console.log('Successfully added food item:', res);
-      },
-      err => {
-        console.error('Error occurred:', err);
-      }
-    );
+
   }
 
   // Method to handle image change (editable image)

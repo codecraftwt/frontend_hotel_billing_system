@@ -146,7 +146,10 @@
         </div>
       
         <div class="btn-wapper">
-          <button class="btns" (click)="submitForm()">Submit</button>
+          <button class="btns" (click)="submitForm()">
+            <p *ngIf="this.checkFoodItemId==1">Submit</p>
+            <p *ngIf="this.checkFoodItemId!=1">Update</p>
+          </button>
           <button class="btns">Cancel</button>
         </div>
     </div>
@@ -203,7 +206,10 @@
         </div>
       
         <div class="btn-wapper">
-          <button class="btns" (click)="submitForm()">Submit</button>
+          <button class="btns" (click)="submitForm()">
+            <p *ngIf="this.checkFoodItemId==1">Submit</p>
+            <p *ngIf="this.checkFoodItemId!=1">Update</p>
+          </button>
           <button class="btns">Cancel</button>
         </div>
     </div>

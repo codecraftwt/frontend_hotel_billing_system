@@ -208,6 +208,7 @@ export class SocketService {
     );
     this.socket.on('newCategory', (data: any[]) => { this.foodCategorySubject.next(data) });
     this.socket.on('newFoodItem', (data: any[]) => { this.fetchFoodItems() });
+    this.socket.on('updatedFoodItem', (data: any[]) => { this.fetchFoodItems() });
     this.socket.on('orderUpdated', (data: any[]) => { this.ordersSubject.next(data), this.updategetAllOrderSubject.next(data); });
     // this.socket.on('orderUpdated', (data: any[]) => { this.fetchAllOrders(), this.fetchDiningTables(), this.fetchAllOrdersAdmin() });
     this.socket.on('user', (data: any[]) => { this.fetchAllUser() });
@@ -382,11 +383,13 @@ export class SocketService {
       usePass
     })
   }
-  updateFoodItems(formData: any, requestBody: any): Observable<any> {
+  editFoodItems(formData: any): Observable<any> {
     console.log(formData, '<=== formData')
-    return this.http.post<any>(this.foodItemsapiUrl, formData
-      // requestBodys
-    )
+    return this.http.post<any>(this.foodItemsapiUrl, formData)
   }
+  updateFoodItems(formData:any,id:any){
+    return this.http.put<any>(this.foodItemsapiUrl+'/'+id,formData)
+  }
+  
 
 }
